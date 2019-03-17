@@ -13,9 +13,9 @@
     </properties>
 
     <modules>
-        <module>wzh-webcrawler-interface</module>
-        <module>wzh-webcrawler-server</module>
-        <module>wzh-webcrawler-web</module>
+        <module>webcrawler-interface</module>
+        <module>webcrawler-server</module>
+        <module>webcrawler-web</module>
     </modules>
 
     <dependencies>
