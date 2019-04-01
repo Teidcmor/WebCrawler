@@ -6,7 +6,7 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <!--<context:property-placeholder location="classpath:/common/jdbc_config.properties"/>-->
+    <context:property-placeholder location="classpath:common/jdbc_config.properties"/>
 
 <!--    <bean id="refProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="fileEncoding" value="urf-8"/>
@@ -14,23 +14,25 @@
     </bean>-->
 
     <!-- dataSource -->
-<!--    <bean id="dataSource" class="${jdbc_driver}" >
-        <property name="url" value="${jdbc_url}"/>
-        <property name="username" value="${jdbc_userName}"/>
-        <property name="password" value="${jdbc_password}"/>
-    </bean>-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+        <!--<property name="driverClass" value="${jdbc.driverClass}"/>-->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.userName}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+ <!--   <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/spider"/>
         <property name="username" value="wzh@localhost"/>
         <property name="password" value="123456"/>
-    </bean>
+    </bean>-->
 
     <!-- SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:/common/mybaties-config.xml"/>
+        <property name="typeAliasesPackage" value="/common/pojo"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

@@ -1,6 +1,6 @@
 package common.pojo;
 
-public class initialUrl {
+public class InitialUrl {
 
     /**
      * 主键id
