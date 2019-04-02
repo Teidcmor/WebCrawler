@@ -1,5 +1,7 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<form id="form" action="/root/get" method="post">
+    <button value="查询" type="submit"/>
+</form>
 </body>
 </html>

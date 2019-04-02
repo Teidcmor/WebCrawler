@@ -1,5 +1,8 @@
 package common.pojo;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class InitialUrl {
 
     /**

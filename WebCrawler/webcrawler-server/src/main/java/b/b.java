@@ -1,14 +1,35 @@
 package b;
-import a.a;
-import a.c;
-import common.utils.BeanUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+
 
 public class b {
+
+    public static String addMonth(String date, int months) {
+        if (date.length() != 6) {
+            return "";
+        } else {
+            int year = Integer.parseInt(date.substring(0, 4));
+            int month = Integer.parseInt(date.substring(4, 6));
+
+            for(month += months; month <= 0; month += 12) {
+                --year;
+            }
+
+            while(month > 12) {
+                ++year;
+                month -= 12;
+            }
+
+            String ret = "" + year;
+            if (month >= 10) {
+                ret = ret + month;
+            } else {
+                ret = ret + "0" + month;
+            }
+
+            return ret;
+        }
+    }
     public static void main(String[] args) throws Exception {
-        ApplicationContext applicationContext = new FileSystemXmlApplicationContext("E:\\workSpace\\idea\\WebCrawler\\WebCrawler\\webcrawler-web\\src\\main\\resources\\common\\applicationContext.xml");
-        System.out.println(applicationContext);
+        System.out.println(addMonth("201901",-2));
     }
 }
