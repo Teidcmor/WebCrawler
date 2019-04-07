@@ -10,7 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>webcrawler</artifactId>
+    <artifactId>webcrawler-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
 
@@ -28,11 +29,6 @@
     <dependencies>
         <dependency>
             <groupId>ncu.wzh.com</groupId>
-            <artifactId>webcrawler-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>ncu.wzh.com</groupId>
             <artifactId>webcrawler-server</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -43,12 +39,6 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
-        <dependency>
-            <groupId>commons-pool</groupId>
-            <artifactId>commons-pool</artifactId>
-            <version>1.6</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
         <dependency>
@@ -56,7 +46,6 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2.2</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
@@ -105,12 +94,12 @@
             <plugins>
 
                 <plugin>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>9.4.15.v20190215</version>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>maven-jetty-plugin</artifactId>
+                    <version>6.1.6</version>
                     <configuration>
                         <connectors>
-                            <connector implementation="org.eclipse.jetty.nio.SelectChannelConnector">
+                            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                                 <port>8090</port>
                                 <maxIdleTime>60000</maxIdleTime>
                             </connector>

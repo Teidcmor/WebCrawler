@@ -13,7 +13,10 @@ public class InitialUrlControllerImpl {
     @Autowired
     private InitialUrlService initialUrlService;
 
-    @RequestMapping(value = "/get")
+    public InitialUrlControllerImpl() {
+    }
+
+    @RequestMapping(value = "/get.do")
     public ModelAndView get(){
         ModelAndView modelAndView = new ModelAndView("info");
         String info = this.initialUrlService.getUrl();

@@ -7,13 +7,6 @@
                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 开启注解 -->
-    <mvc:annotation-driven/>
-    <context:component-scan base-package="*.controller" />
-    <context:component-scan base-package="*.service"/>
-    <context:component-scan base-package="common.pojo"/>
-
-
     <!-- 配置视图解析器: 如何把 handler 方法返回值解析为实际的物理视图 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
