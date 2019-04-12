@@ -18,12 +18,11 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="**.controller" />
     <context:component-scan base-package="**.service"/>
-    <context:component-scan base-package="common.pojo"/>
+    <context:component-scan base-package="common.mapper"/>
 
     <!-- dataSource -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
-        <!--<property name="driverClass" value="${jdbc.driverClass}"/>-->
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <bean id="dataSource" class="${jdbc.driver}" destroy-method="close" >
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.userName}"/>
         <property name="password" value="${jdbc.password}"/>
@@ -39,13 +38,15 @@
     <!-- SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="/common/pojo"/>
+        <property name="typeAliasesPackage" value="classpath*:/common/pojo"/>
+        <property name="mapperLocations" value="classpath*:/mapper"/>
+        <property name="configLocation" value="classpath:common/mybaties-config.xml"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="/common/mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+        <property name="basePackage" value="classpath*:/common/mapper"/>
     </bean>
 
     <!-- 4.事务管理：DataSourceTransactionManager dataSource 引用上面定义好的数据源 -->
@@ -58,5 +59,10 @@
         annotation-driven 这种是注解方式管理事物 第一种方式，需要在spring配置文件配置一些参数 第二种方式，需要在 类里 加一些注解进行事物管理
         用一种就行，没必须都用 -->
     <tx:annotation-driven transaction-manager="txManager" />
+
+    <!--启用spring的一些annotation -->
+    <context:annotation-config/>
+
+
 
 </beans>

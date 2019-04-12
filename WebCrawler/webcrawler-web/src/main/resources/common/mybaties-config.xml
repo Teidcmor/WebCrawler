@@ -10,9 +10,4 @@
         <setting name="defaultStatementTimeout" value="25000"/>
     </settings>
 
-    <!--别名配置-->
-    <typeAliases>
-        <typeAlias type="/common/pojo/InitialUrl" alias="InitialUrl"/>
-    </typeAliases>
-
 </configuration>

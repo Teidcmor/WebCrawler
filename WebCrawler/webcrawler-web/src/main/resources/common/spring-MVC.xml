@@ -15,11 +15,4 @@
     </bean>
     <!-- 处理静态资源 -->
     <mvc:default-servlet-handler/>
-
-    <!--启用spring的一些annotation -->
-    <context:annotation-config/>
-
-    <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
-    <mvc:annotation-driven/>
-
 </beans>

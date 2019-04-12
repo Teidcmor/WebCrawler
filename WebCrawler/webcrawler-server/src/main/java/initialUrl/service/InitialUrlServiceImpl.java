@@ -1,5 +1,4 @@
 package initialUrl.service;
-
 import common.mapper.InitialUrlMapper;
 import common.pojo.InitialUrl;
 import initialUrl.service.interfaces.InitialUrlService;
