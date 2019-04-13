@@ -1,6 +1,10 @@
 package b;
 
 
+import initialUrl.controller.InitialUrlControllerImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class b {
 
     public static String addMonth(String date, int months) {
@@ -29,7 +33,9 @@ public class b {
             return ret;
         }
     }
-    public static void main(String[] args) throws Exception {
-        System.out.println(addMonth("201901",-2));
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        InitialUrlControllerImpl initialUrlController = applicationContext.getBean(InitialUrlControllerImpl.class);
+        System.out.println(initialUrlController.get().toString());
     }
 }

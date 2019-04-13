@@ -12,6 +12,6 @@
 </head>
 <body>
 <p>结果:</p>
-${info.url}
+${url}
 </body>
 </html>

@@ -17,7 +17,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
 
 
     public String getUrl() {
-        ArrayList<InitialUrl> list = this.initialUrlMapper.getInitialUrl();
-        return list.get(0).getUrl();
+        InitialUrl initialUrl = this.initialUrlMapper.getInitialUrl(1L);
+        return initialUrl.getUrl();
     }
 }

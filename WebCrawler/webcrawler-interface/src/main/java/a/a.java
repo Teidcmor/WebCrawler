@@ -1,5 +1,8 @@
 package a;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class a {
     private boolean flag;
     private int num;
@@ -37,4 +40,8 @@ public class a {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
+
+
 }

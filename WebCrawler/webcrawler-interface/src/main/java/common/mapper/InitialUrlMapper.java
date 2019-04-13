@@ -10,5 +10,5 @@ public interface InitialUrlMapper {
      * 查询全部初始url列表
      * @return
      */
-    ArrayList<InitialUrl> getInitialUrl();
+    InitialUrl getInitialUrl(long id);
 }

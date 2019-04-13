@@ -46,17 +46,17 @@
     </servlet-mapping>
 
     <!--由Spring载入的Log4j配置文件位置-->
-    <context-param>
+<!--    <context-param>
         <param-name>log4jConfigLocation</param-name>
         <param-value>classpath*:common/log4j.properties</param-value>
     </context-param>
-    <!--Spring log4j Config loader-->
-<!--    <listener>
+    &lt;!&ndash;Spring log4j Config loader&ndash;&gt;
+    <listener>
         <listener-class>
             org.springframework.web.util.Log4jConfigListener
         </listener-class>
     </listener>-->
-    <listener>
+<!--    <listener>
         <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
-    </listener>
+    </listener>-->
 </web-app>

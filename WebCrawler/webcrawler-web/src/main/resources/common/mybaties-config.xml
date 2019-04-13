@@ -6,8 +6,17 @@
     <settings>
         <!---->
         <setting name="cacheEnabled" value="true"/>
-        <setting name="defaultExecutorType" value="true"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
         <setting name="defaultStatementTimeout" value="25000"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
     </settings>
+
+    <typeAliases>
+        <package name="common.pojo"/>
+    </typeAliases>
+
+    <mappers>
+        <package name="**.common/mapper"/>
+    </mappers>
 
 </configuration>

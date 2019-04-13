@@ -22,7 +22,7 @@ public class InitialUrlControllerImpl {
         ModelAndView modelAndView = new ModelAndView("info");
         String info = this.initialUrlService.getUrl();
         modelAndView.addObject("url",info);
-        modelAndView.setViewName("redirect:login");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 }
