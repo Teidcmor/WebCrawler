@@ -1,16 +1,11 @@
 package common.pojo;
 
-
-public class HisUrl {
+public class CoreData {
 
     /**
      * 主键id
      */
     private long id;
-    /**
-     * 网页地址url
-     */
-    private String url;
     /**
      * 网页地址内容归属城市
      */
@@ -24,19 +19,37 @@ public class HisUrl {
      */
     private String community;
     /**
-     * 超时时长
+     * 面积
      */
-    private int timeout;
+    private String area;
     /**
-     *上次查询日期
+     * 楼层
      */
-    private String lastDT;
+    private String floor;
     /**
-     * 是否可以重复查询标志
-     * 0 ： 不允许再次查询此URL的内容
-     * 1 ： 允许再次查询
+     * 朝向
      */
-    private String flag;
+    private String toward;
+    /**
+     * 户型
+     */
+    private String houseModel;
+    /**
+     * 价格
+     */
+    private String price;
+    /**
+     * 其他优惠信息
+     */
+    private String preference;
+    /**
+     * 图片地址
+     */
+    private String pictureUrl;
+    /**
+     * 其他信息
+     */
+    private String otherDetails;
     /**
      * 更新时间
      */
@@ -66,14 +79,6 @@ public class HisUrl {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getCity() {
         return city;
     }
@@ -98,28 +103,68 @@ public class HisUrl {
         this.community = community;
     }
 
-    public int getTimeout() {
-        return timeout;
+    public String getArea() {
+        return area;
     }
 
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    public String getLastDT() {
-        return lastDT;
+    public String getFloor() {
+        return floor;
     }
 
-    public void setLastDT(String lastDT) {
-        this.lastDT = lastDT;
+    public void setFloor(String floor) {
+        this.floor = floor;
     }
 
-    public String getFlag() {
-        return flag;
+    public String getToward() {
+        return toward;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setToward(String toward) {
+        this.toward = toward;
+    }
+
+    public String getHouseModel() {
+        return houseModel;
+    }
+
+    public void setHouseModel(String houseModel) {
+        this.houseModel = houseModel;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getPreference() {
+        return preference;
+    }
+
+    public void setPreference(String preference) {
+        this.preference = preference;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public String getOtherDetails() {
+        return otherDetails;
+    }
+
+    public void setOtherDetails(String otherDetails) {
+        this.otherDetails = otherDetails;
     }
 
     public String getUpdateDT() {

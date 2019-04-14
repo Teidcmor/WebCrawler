@@ -1,16 +1,11 @@
 package common.pojo;
 
-
-public class HisUrl {
+public class BasicData {
 
     /**
      * 主键id
      */
     private long id;
-    /**
-     * 网页地址url
-     */
-    private String url;
     /**
      * 网页地址内容归属城市
      */
@@ -24,19 +19,15 @@ public class HisUrl {
      */
     private String community;
     /**
-     * 超时时长
-     */
-    private int timeout;
-    /**
-     *上次查询日期
-     */
-    private String lastDT;
-    /**
-     * 是否可以重复查询标志
-     * 0 ： 不允许再次查询此URL的内容
-     * 1 ： 允许再次查询
+     * 已处理标志
+     * 0 ： 尚未处理
+     * 1 ： 已经处理
      */
     private String flag;
+    /**
+     * 基础信息体，网页初步提取的内容
+     */
+    private String basicData;
     /**
      * 更新时间
      */
@@ -66,14 +57,6 @@ public class HisUrl {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getCity() {
         return city;
     }
@@ -98,28 +81,20 @@ public class HisUrl {
         this.community = community;
     }
 
-    public int getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
-    }
-
-    public String getLastDT() {
-        return lastDT;
-    }
-
-    public void setLastDT(String lastDT) {
-        this.lastDT = lastDT;
-    }
-
     public String getFlag() {
         return flag;
     }
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public String getBasicData() {
+        return basicData;
+    }
+
+    public void setBasicData(String basicData) {
+        this.basicData = basicData;
     }
 
     public String getUpdateDT() {

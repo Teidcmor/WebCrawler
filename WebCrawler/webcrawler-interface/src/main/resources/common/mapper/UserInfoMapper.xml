@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common.mapper.UserInfoMapper">
+
+    <resultMap id="userInfoResultMap" type="common.pojo.UserInfo">
+        <id property="id" column="ID"/>
+        <result property="type" column="TYPE"/>
+        <result property="enabled" column="ENABLED"/>
+        <result property="updateDT" column="UPDATE_DT"/>
+        <result property="updateTM" column="UPDATE_TM"/>
+        <result property="reserve1" column="RESERVE1"/>
+        <result property="reserve2" column="RESERVE2"/>
+        <result property="reserve3" column="RESERVE3"/>
+    </resultMap>
+
+
+
+    <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
+            select * from t_initial_url where id =#{id}
+        </select>-->
+</mapper>

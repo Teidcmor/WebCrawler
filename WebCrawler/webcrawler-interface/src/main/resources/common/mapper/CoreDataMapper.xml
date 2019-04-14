@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common.mapper.CoreDataMapper">
+
+    <resultMap id="coreDataResultMap" type="common.pojo.CoreData">
+        <id property="id" column="ID"/>
+        <result property="city" column="CITY"/>
+        <result property="district" column="DISTRICT"/>
+        <result property="community" column="COMMUNITY"/>
+        <result property="area" column="AREA"/>
+        <result property="floor" column="FLOOR"/>
+        <result property="toward" column="TOWARD"/>
+        <result property="houseModel" column="HOUSE_MODEL"/>
+        <result property="price" column="PRICE"/>
+        <result property="preference" column="PREFERENCE"/>
+        <result property="pictureUrl" column="PICTURE_URL"/>
+        <result property="otherDetails" column="OTHER_DETAILS"/>
+        <result property="updateDT" column="UPDATE_DT"/>
+        <result property="updateTM" column="UPDATE_TM"/>
+        <result property="reserve1" column="RESERVE1"/>
+        <result property="reserve2" column="RESERVE2"/>
+        <result property="reserve3" column="RESERVE3"/>
+    </resultMap>
+
+
+
+    <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
+            select * from t_initial_url where id =#{id}
+        </select>-->
+</mapper>
