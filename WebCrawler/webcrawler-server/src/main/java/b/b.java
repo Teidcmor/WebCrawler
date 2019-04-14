@@ -1,7 +1,10 @@
 package b;
 
 
+import common.utils.CommonUtils;
 import initialUrl.controller.InitialUrlControllerImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -34,8 +37,16 @@ public class b {
         }
     }
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-        InitialUrlControllerImpl initialUrlController = applicationContext.getBean(InitialUrlControllerImpl.class);
-        System.out.println(initialUrlController.get().toString());
+        Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+        logger.trace("trace level");
+        logger.debug("debug level");
+        logger.info("info level");
+        logger.warn("warn level");
+        logger.error("error level");
+        logger.fatal("fatal level");
+        System.out.println(CommonUtils.getCurrentDate());
+        System.out.println(CommonUtils.getCurrentDateAndTime());
+        System.out.println(CommonUtils.getCurrentTime());
+        logger.info("info","level","error");
     }
 }

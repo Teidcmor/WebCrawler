@@ -1,7 +1,7 @@
 package common.pojo;
 
 
-public class InitialUrl {
+public class HisUrl {
 
     /**
      * 主键id
@@ -27,6 +27,14 @@ public class InitialUrl {
      * 超时时长
      */
     private int timeout;
+    /**
+     *上次查询日期
+     */
+    private String lastDT;
+    /**
+     * 是否可以重复查询标志
+     */
+    private String flag;
     /**
      * 更新时间
      */
@@ -94,6 +102,22 @@ public class InitialUrl {
 
     public void setTimeout(int timeout) {
         this.timeout = timeout;
+    }
+
+    public String getLastDT() {
+        return lastDT;
+    }
+
+    public void setLastDT(String lastDT) {
+        this.lastDT = lastDT;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
     public String getUpdateDT() {
