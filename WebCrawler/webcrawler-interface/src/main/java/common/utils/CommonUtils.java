@@ -38,4 +38,14 @@ public class CommonUtils {
         return target;
     }
 
+    /**
+     * 判断字符串是否相等
+     * @param source
+     * @param target
+     * @return
+     */
+    public static boolean stringEquals(String source,String target){
+        return source == null ? target == null : source.equals(target);
+    }
+
 }

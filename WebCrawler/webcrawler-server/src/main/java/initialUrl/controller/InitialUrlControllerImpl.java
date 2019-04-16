@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/root")
+@RequestMapping(value = "/initialUrl")
 public class InitialUrlControllerImpl {
 
     Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
@@ -27,7 +27,7 @@ public class InitialUrlControllerImpl {
         ModelAndView modelAndView = new ModelAndView("info");
         String info = this.initialUrlService.getUrl();
         modelAndView.addObject("url",info);
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("userInfo/login");
         return modelAndView;
     }
 }

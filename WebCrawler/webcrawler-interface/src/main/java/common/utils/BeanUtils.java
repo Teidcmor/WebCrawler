@@ -4,8 +4,8 @@ public class BeanUtils {
 
     /**
      * 属性拷贝
-     * @param source
-     * @param type
+     * @param source 数据源
+     * @param type 目标对象数据类型
      * @param <T>
      * @param <S>
      * @return

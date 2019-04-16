@@ -6,6 +6,8 @@
 
     <resultMap id="userInfoResultMap" type="common.pojo.UserInfo">
         <id property="id" column="ID"/>
+        <result property="userName" column="USERNAME"/>
+        <result property="password" column="PASSWORD"/>
         <result property="type" column="TYPE"/>
         <result property="enabled" column="ENABLED"/>
         <result property="updateDT" column="UPDATE_DT"/>
@@ -15,9 +17,11 @@
         <result property="reserve3" column="RESERVE3"/>
     </resultMap>
 
+    <select id="getUserInfoByUserName" parameterType="String" resultType="UserInfo">
+        select * from t_user where userName =#{username}
+    </select>
 
-
-    <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
-            select * from t_initial_url where id =#{id}
-        </select>-->
+    <insert id="addUser" parameterType="UserInfo">
+        insert into t_user(userName,password) values (#{userName},#{password})
+    </insert>
 </mapper>
