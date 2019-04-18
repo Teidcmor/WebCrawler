@@ -28,5 +28,24 @@
 
     <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
             select * from t_initial_url where id =#{id}
+        <![CDATA[
+
+        ]]>
         </select>-->
+    <insert id="insertCoreData" parameterType="CoreData">
+        <![CDATA[
+        insert into t_core_data (city,district,community,area,floor,toward,houseModel,price,preference,pictureUrl,otherDetails)
+        values (#{city},#{district},#{community},#{area},#{floor},#{toward},#{houseModel},#{price},#{preference},#{pictureUrl},#{otherDetails})
+        ]]>
+    </insert>
+
+    <delete id="deleteCoreData" parameterType="long">
+        <![CDATA[
+        delete from t_core_data where id =#{id}
+        ]]>
+    </delete>
+
+    <select id="getAllCoreData" resultType="CoreData">
+        select * from t_core_data
+    </select>
 </mapper>

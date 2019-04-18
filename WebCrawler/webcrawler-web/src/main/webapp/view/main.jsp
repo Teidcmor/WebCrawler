@@ -11,7 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<% UserInfoDTO user = (UserInfoDTO) session.getAttribute("currentUser");
-out.print(user.getUserName());%>
+<p>${info}</p>
 </body>
 </html>

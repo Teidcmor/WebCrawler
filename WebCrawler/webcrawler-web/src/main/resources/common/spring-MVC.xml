@@ -20,9 +20,21 @@
         用一种就行，没必须都用 -->
     <tx:annotation-driven transaction-manager="txManager" />
 
+    <mvc:annotation-driven/>
+
     <!-- 处理静态资源 -->
      <mvc:default-servlet-handler/>
 
+    <!-- 开启注解 -->
+    <context:component-scan base-package="**.controller" />
+    <context:component-scan base-package="**.service"/>
+    <context:component-scan base-package="**.common.mapper"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="common.interceptor.RootInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

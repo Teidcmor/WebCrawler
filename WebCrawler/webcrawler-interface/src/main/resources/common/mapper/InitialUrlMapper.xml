@@ -19,8 +19,41 @@
     </resultMap>
 
 
+    <!--通过id查询记录-->
+    <select id="getInitialUrlById" parameterType="long" resultType="InitialUrl">
+        <![CDATA[
+            select * from t_initial_url where id =#{id}
+         ]]>
 
-    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
-        select * from t_initial_url where id =#{id}
     </select>
+    <!--查询所有需要爬取的记录-->
+    <select id="getAllInitialUrl" parameterType="string" resultType="InitialUrl">
+        <![CDATA[
+        select * from t_initial_url where reserve1 !=#{1}
+        ]]>
+    </select>
+    <!--查询所有初始url-->
+    <select id="getInitialUrl" parameterType="string" resultType="InitialUrl">
+        <![CDATA[
+        select * from t_initial_url where reserve1 =#{1}
+        ]]>
+    </select>
+    <!--通过url匹配记录-->
+    <select id="getInitialUrlByName" parameterType="string" resultType="InitialUrl">
+        <![CDATA[
+           select * from t_initial_url where url =#{url}
+        ]]>
+    </select>
+    <!--通过id删除记录-->
+    <delete id="deleteUrlById" parameterType="long">
+        <![CDATA[
+           delete from t_initial_url where id =#{id}
+        ]]>
+    </delete>
+    <!--新增url-->
+    <insert id="insertUrl" parameterType="InitialUrl">
+        <![CDATA[
+            insert into t_initial_url(url,city,district,community) values (#{url},#{city},#{district},#{community})
+        ]]>
+    </insert>
 </mapper>

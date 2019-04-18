@@ -22,5 +22,39 @@
 
     <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
             select * from t_initial_url where id =#{id}
+        <![CDATA[
+
+        ]]>
         </select>-->
+    <!--新增基础信息记录-->
+    <insert id="insertBasicData" parameterType="BasicData">
+        <![CDATA[
+        insert into t_basic_data(city,district,community,basicData) values (#{city},#{district},#{community},#{basicData})
+        ]]>
+    </insert>
+    <!--删除基础信息-->
+    <delete id="deleteBasicDataById" parameterType="long">
+        <![CDATA[
+        delete from t_basic_data where id =#{id}
+        ]]>
+    </delete>
+    <!--获取所有基础信息-->
+    <select id="getAllBasicData" resultType="BasicData">
+        <![CDATA[
+        select * from t_basic_data
+        ]]>
+    </select>
+    <!--获取所有未处理过的基础信息-->
+    <select id="getBasicData" resultType="BasicData">
+        <![CDATA[
+        select * from t_basic_data where flag =#{0}
+        ]]>
+    </select>
+    <!--更新已使用过的基础信息-->
+    <update id="setBasicDataUnEnable" parameterType="long">
+        <![CDATA[
+        update t_basic_data set flag = #{1} where id =#{id}
+        ]]>
+    </update>
+
 </mapper>

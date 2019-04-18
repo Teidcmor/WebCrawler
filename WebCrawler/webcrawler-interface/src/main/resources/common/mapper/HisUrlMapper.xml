@@ -24,5 +24,33 @@
 
 <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
         select * from t_initial_url where id =#{id}
+        <![CDATA[
+
+        ]]>
     </select>-->
+
+    <!--新增历史url信息-->
+    <insert id="insertHisUrl" parameterType="HisUrl">
+        <![CDATA[
+        insert into t_his_url(url,city,district,community,timeout,lastDT) values (#{url},#{city},#{district},#{community},#{timeout},#{lastDT})
+        ]]>
+    </insert>
+    <!--根据id查询指定历史url信息-->
+    <delete id="deleteHisUrlById" parameterType="long">
+        <![CDATA[
+        delete from t_his_url where id =#{id}
+        ]]>
+    </delete>
+    <!--查询所有历史url信息-->
+    <select id="getAllHisUrl" resultType="HisUrl">
+        <![CDATA[
+        select * from  t_his_url
+        ]]>
+    </select>
+    <!--获取指定url的信息-->
+    <select id="getHisUrlByName" resultType="HisUrl">
+        <![CDATA[
+        select * from t_his_url where url =#{url}
+        ]]>
+    </select>
 </mapper>

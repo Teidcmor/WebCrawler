@@ -18,10 +18,14 @@
     </resultMap>
 
     <select id="getUserInfoByUserName" parameterType="String" resultType="UserInfo">
-        select * from t_user where userName =#{username}
+        <![CDATA[
+          select * from t_user where userName =#{username}
+        ]]>
     </select>
 
     <insert id="addUser" parameterType="UserInfo">
-        insert into t_user(userName,password) values (#{userName},#{password})
+        <![CDATA[
+          insert into t_user(userName,password) values (#{userName},#{password})
+        ]]>
     </insert>
 </mapper>

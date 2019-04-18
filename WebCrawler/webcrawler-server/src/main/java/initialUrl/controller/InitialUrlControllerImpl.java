@@ -23,11 +23,11 @@ public class InitialUrlControllerImpl {
 
     @RequestMapping(value = "/get.do" ,method = RequestMethod.POST)
     public ModelAndView get(){
-        logger.info("info level");
+//        logger.info("info level");
         ModelAndView modelAndView = new ModelAndView("info");
-        String info = this.initialUrlService.getUrl();
-        modelAndView.addObject("url",info);
-        modelAndView.setViewName("userInfo/login");
+////        String info = this.initialUrlService.getUrl();
+//        modelAndView.addObject("url",info);
+//        modelAndView.setViewName("userInfo/login");
         return modelAndView;
     }
 }

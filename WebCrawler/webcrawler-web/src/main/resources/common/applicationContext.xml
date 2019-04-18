@@ -15,13 +15,6 @@
         <property name="location" value="classpath:/common/jdbc_config.properties"/>
     </bean>-->
 
-    <mvc:annotation-driven/>
-
-    <!-- 开启注解 -->
-    <context:component-scan base-package="**.controller" />
-    <context:component-scan base-package="**.service"/>
-    <context:component-scan base-package="**.common.mapper"/>
-
     <!-- dataSource -->
     <bean id="dataSource" class="${jdbc.driver}" destroy-method="close" >
         <property name="driverClassName" value="${jdbc.driverClass}"/>
@@ -29,6 +22,13 @@
         <property name="username" value="${jdbc.userName}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
+
+<!--    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/spider?useUnicode=true&characterEncoding=utf8"/>
+        <property name="username" value="wzh"/>
+        <property name="password" value="123456"/>
+    </bean>-->
 
     <!-- SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -49,5 +49,8 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
+
+
+    <import resource="classpath*:/threadPool/thread-pool-config.xml"/>
 
 </beans>
