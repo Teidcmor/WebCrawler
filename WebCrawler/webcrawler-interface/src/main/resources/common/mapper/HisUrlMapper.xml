@@ -53,4 +53,10 @@
         select * from t_his_url where url =#{url}
         ]]>
     </select>
+
+    <select id="getHusUrlBuId" parameterType="long" resultType="HisUrl">
+        <![CDATA[
+        select * from t_his_url where id = #{id}
+        ]]>
+    </select>
 </mapper>

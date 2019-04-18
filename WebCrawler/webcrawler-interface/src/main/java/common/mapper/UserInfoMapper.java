@@ -2,8 +2,11 @@ package common.mapper;
 
 import common.pojo.UserInfo;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional(propagation = Propagation.REQUIRED)
 public interface UserInfoMapper {
 
     /**

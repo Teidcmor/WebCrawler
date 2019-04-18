@@ -48,4 +48,13 @@ public class CommonUtils {
         return source == null ? target == null : source.equals(target);
     }
 
+    /**
+     * 判断字符串是否为空，为空返回true
+     * @param target
+     * @return
+     */
+    public static boolean isNull(String target){
+        return target == null ? true : target == "";
+    }
+
 }

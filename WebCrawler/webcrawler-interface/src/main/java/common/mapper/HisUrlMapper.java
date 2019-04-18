@@ -1,9 +1,14 @@
 package common.mapper;
 
 import common.pojo.HisUrl;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
+@Transactional(propagation = Propagation.REQUIRED)
 public interface HisUrlMapper {
 
     /**
@@ -31,6 +36,11 @@ public interface HisUrlMapper {
      */
     public HisUrl getHisUrlByName(String url);
 
-
+    /**
+     * 通过id查询历史url信息
+     * @param id
+     * @return
+     */
+    HisUrl getHusUrlBuId(long id);
 
 }

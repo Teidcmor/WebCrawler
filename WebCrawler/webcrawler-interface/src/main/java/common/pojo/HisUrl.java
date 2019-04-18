@@ -161,4 +161,11 @@ public class HisUrl {
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
     }
+
+    public boolean isNull(){
+        if(this.url!=null&&this.city!=null&&this.district!=null&&this.community!=null&&this.lastDT!=null)
+            return false;
+        return true;
+    }
+
 }

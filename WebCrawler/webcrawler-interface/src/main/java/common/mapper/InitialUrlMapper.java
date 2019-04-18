@@ -2,10 +2,13 @@ package common.mapper;
 
 import common.pojo.InitialUrl;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional(propagation = Propagation.REQUIRED)
 public interface InitialUrlMapper {
     /**
      * 通过id查询初始url
