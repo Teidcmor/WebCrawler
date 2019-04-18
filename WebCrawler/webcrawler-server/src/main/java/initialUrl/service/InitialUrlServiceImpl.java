@@ -29,7 +29,8 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @return
      */
     public InitialUrl getInitialUrlById(long id) {
-        return null;
+        InitialUrl target = this.initialUrlMapper.getInitialUrlById(id);
+        return target;
     }
 
     /**
@@ -38,7 +39,8 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @return
      */
     public List<InitialUrl> getAllInitialUrl() {
-        return null;
+        List<InitialUrl> list = this.initialUrlMapper.getAllInitialUrl();
+        return list;
     }
 
     /**
@@ -48,7 +50,8 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @return
      */
     public InitialUrl getInitialUrlByName(String url) {
-        return null;
+        InitialUrl target = this.initialUrlMapper.getInitialUrlByName(url);
+        return target;
     }
 
     /**
@@ -57,7 +60,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @param id
      */
     public void deleteUrlById(long id) {
-
+        this.initialUrlMapper.deleteUrlById(id);
     }
 
     /**
@@ -66,11 +69,18 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @param initialUrl
      */
     public void insertUrl(InitialUrl initialUrl) {
-
+        this.initialUrlMapper.insertUrl(initialUrl);
     }
 
-    public List<InitialUrl> getInitialUrl(){
-        return null;
+    /**
+     * 获取最初默认的几个url。reserve1字段为1的记录
+     * 后续获取的url的reserve1字段为空
+     * 这几个url一般为手动添加
+     *
+     * @return
+     */
+    public List<InitialUrl> getInitialUrl() {
+        List<InitialUrl> list = this.initialUrlMapper.getInitialUrl();
+        return list;
     }
-
 }
