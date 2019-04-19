@@ -8,6 +8,7 @@
         <id property="id" column="ID"/>
         <result property="city" column="CITY"/>
         <result property="district" column="DISTRICT"/>
+        <result property="region" column="REGION"/>
         <result property="community" column="COMMUNITY"/>
         <result property="area" column="AREA"/>
         <result property="floor" column="FLOOR"/>

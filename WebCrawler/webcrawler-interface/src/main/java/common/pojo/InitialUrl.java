@@ -19,6 +19,12 @@ public class InitialUrl {
      * 网页地址内容归属行政区
      */
     private String district;
+
+    /**
+     * 网页地址内容所属地区
+     */
+    private String region;
+
     /**
      * 网页地址内容归属社(小)区
      */
@@ -27,6 +33,15 @@ public class InitialUrl {
      * 超时时长
      */
     private int timeout;
+
+    /**
+     * 当前状态
+     * 包含B则标识已经完成初始url分析，已经获取了链接页面中所有需要的新的链接
+     * 包含C则标识已经完成了基础内容的提取。
+     * 包含B和C标识该链接已经处理完成，可以提交到历史表中
+     */
+    private String status;
+
     /**
      * 更新时间
      */

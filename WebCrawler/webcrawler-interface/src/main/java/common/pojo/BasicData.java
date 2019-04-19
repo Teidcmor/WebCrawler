@@ -14,6 +14,12 @@ public class BasicData {
      * 网页地址内容归属行政区
      */
     private String district;
+
+    /**
+     * 网页地址内容所属地区
+     */
+    private String region;
+
     /**
      * 网页地址内容归属社(小)区
      */

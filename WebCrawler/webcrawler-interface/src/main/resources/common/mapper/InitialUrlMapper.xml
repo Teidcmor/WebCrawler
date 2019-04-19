@@ -9,8 +9,10 @@
         <result property="url" column="URL"/>
         <result property="city" column="CITY"/>
         <result property="district" column="DISTRICT"/>
+        <result property="region" column="REGION"/>
         <result property="community" column="COMMUNITY"/>
         <result property="timeout" column="TIMEOUT"/>
+        <result property="status" column="STATUS"/>
         <result property="updateDT" column="UPDATE_DT"/>
         <result property="updateTM" column="UPDATE_TM"/>
         <result property="reserve1" column="reserve1"/>

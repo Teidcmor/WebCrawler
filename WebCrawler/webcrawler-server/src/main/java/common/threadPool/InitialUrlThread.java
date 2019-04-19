@@ -109,7 +109,7 @@ public class InitialUrlThread implements Runnable {
             this.hisUrlService.insertHisUrl(hisUrl);
         }catch (Exception e){
             e.printStackTrace();
-
+            throw new RuntimeException();
         }
     }
 
