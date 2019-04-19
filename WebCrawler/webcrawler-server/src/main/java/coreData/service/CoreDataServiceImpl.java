@@ -2,14 +2,14 @@ package coreData.service;
 
 import common.mapper.CoreDataMapper;
 import common.pojo.CoreData;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 public class CoreDataServiceImpl implements CoreDataService {
 
 
-    @Resource
+    @Autowired
     private CoreDataMapper coreDataMapper;
 
     /**
@@ -17,7 +17,7 @@ public class CoreDataServiceImpl implements CoreDataService {
      *
      * @param coreData
      */
-    public void insertCoreData(CoreData coreData) {
+    public void insertCoreData(CoreData coreData) throws Exception{
         this.coreDataMapper.insertCoreData(coreData);
     }
 
@@ -26,7 +26,7 @@ public class CoreDataServiceImpl implements CoreDataService {
      *
      * @param id
      */
-    public void deleteCoreData(long id) {
+    public void deleteCoreData(long id) throws Exception {
         this.coreDataMapper.deleteCoreData(id);
     }
 
@@ -35,7 +35,7 @@ public class CoreDataServiceImpl implements CoreDataService {
      *
      * @return
      */
-    public List<CoreData> getAllCoreData() {
+    public List<CoreData> getAllCoreData() throws Exception{
         List<CoreData> list = this.coreDataMapper.getAllCoreData();
         return list;
     }

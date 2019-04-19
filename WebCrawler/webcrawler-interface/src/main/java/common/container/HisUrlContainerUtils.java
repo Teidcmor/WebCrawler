@@ -1,7 +1,9 @@
-package common.utils;
+package common.container;
 
 import common.mapper.HisUrlMapper;
 import common.pojo.HisUrl;
+import common.utils.CommonUtils;
+import common.utils.SpringContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -21,7 +23,7 @@ public class HisUrlContainerUtils  implements ApplicationListener {
     private static final HashMap<String ,String> hisUrlContainer = new HashMap<String, String>();
 
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
-        if (((applicationEvent instanceof ContextRefreshedEvent)) && (null == ((ContextRefreshedEvent)applicationEvent).getApplicationContext().getParent())) {
+        if (((applicationEvent instanceof ContextRefreshedEvent))/* && (null == ((ContextRefreshedEvent)applicationEvent).getApplicationContext().getParent())*/ ){
             initHisUrlContainer();
         }
     }
@@ -64,7 +66,7 @@ public class HisUrlContainerUtils  implements ApplicationListener {
      * @param hisUrl
      * @throws Exception
      */
-    public void addHisUrl(HisUrl hisUrl) throws Exception{
+    public static void addHisUrl(HisUrl hisUrl) throws Exception{
         hisUrlContainer.put(hisUrl.getUrl(),hisUrl.getFlag());
     }
 
@@ -73,7 +75,7 @@ public class HisUrlContainerUtils  implements ApplicationListener {
      * @param hisUrl
      * @throws Exception
      */
-    public void deleteHisUrl(HisUrl hisUrl) throws Exception{
+    public static  void deleteHisUrl(HisUrl hisUrl) throws Exception{
         hisUrlContainer.remove(hisUrl);
     }
 

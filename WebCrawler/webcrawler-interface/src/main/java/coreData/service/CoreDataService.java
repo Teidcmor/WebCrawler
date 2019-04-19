@@ -10,18 +10,18 @@ public interface CoreDataService {
      * 新增有效信息
      * @param coreData
      */
-    void insertCoreData(CoreData coreData);
+    void insertCoreData(CoreData coreData) throws Exception;
 
     /**
      * 通过id删除指定有效信息记录
      * @param id
      */
-    void deleteCoreData(long id);
+    void deleteCoreData(long id)  throws Exception;
 
     /**
      * 获取所有有效信息
      * @return
      */
-    List<CoreData> getAllCoreData();
+    List<CoreData> getAllCoreData()  throws Exception;
 
 }

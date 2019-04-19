@@ -24,7 +24,7 @@ public class UserInfoControllerImpl {
     private UserInfoService userInfoService;
 
     @RequestMapping(value = "register.do",method = RequestMethod.POST)
-    public ModelAndView register(UserInfoQueryDTO queryDTO){
+    public ModelAndView register(UserInfoQueryDTO queryDTO) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         //调用注册方法，获取返回值
         String result = this.userInfoService.resister(queryDTO);

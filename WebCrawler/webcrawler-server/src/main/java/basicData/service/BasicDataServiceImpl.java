@@ -2,13 +2,13 @@ package basicData.service;
 
 import common.mapper.BasicDataMapper;
 import common.pojo.BasicData;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 public class BasicDataServiceImpl implements BasicDataService {
 
-    @Resource
+    @Autowired
     private BasicDataMapper basicDataMapper;
 
     /**
@@ -16,7 +16,7 @@ public class BasicDataServiceImpl implements BasicDataService {
      *
      * @param basicData
      */
-    public void insertBasicData(BasicData basicData) {
+    public void insertBasicData(BasicData basicData) throws Exception {
         this.basicDataMapper.insertBasicData(basicData);
     }
 
@@ -25,7 +25,7 @@ public class BasicDataServiceImpl implements BasicDataService {
      *
      * @param id
      */
-    public void deleteBasicDataById(long id) {
+    public void deleteBasicDataById(long id) throws Exception {
         this.basicDataMapper.deleteBasicDataById(id);
     }
 
@@ -34,7 +34,7 @@ public class BasicDataServiceImpl implements BasicDataService {
      *
      * @return
      */
-    public List<BasicData> getAllBasicData() {
+    public List<BasicData> getAllBasicData() throws Exception {
         List<BasicData> list = this.basicDataMapper.getAllBasicData();
         return list;
     }
@@ -44,7 +44,7 @@ public class BasicDataServiceImpl implements BasicDataService {
      *
      * @return
      */
-    public List<BasicData> getBasicData() {
+    public List<BasicData> getBasicData() throws Exception {
         List<BasicData> list = this.basicDataMapper.getBasicData();
         return list;
     }
@@ -54,7 +54,7 @@ public class BasicDataServiceImpl implements BasicDataService {
      *
      * @param id
      */
-    public void setBasicDataUnEnable(long id) {
+    public void setBasicDataUnEnable(long id) throws Exception {
         this.basicDataMapper.setBasicDataUnEnable(id);
     }
 }

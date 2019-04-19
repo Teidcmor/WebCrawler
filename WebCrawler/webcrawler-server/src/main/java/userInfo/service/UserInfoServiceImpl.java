@@ -29,7 +29,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @param queryDTO
      * @return 成功：true 失败 false
      */
-    public boolean login(UserInfoQueryDTO queryDTO) {
+    public boolean login(UserInfoQueryDTO queryDTO) throws Exception {
         if(queryDTO != null){
             UserInfo target = this.userInfoMapper.getUserInfoByUserName(queryDTO.getUserName());
             if(CommonUtils.stringEquals(target.getPassword(),queryDTO.getPassword()))
@@ -45,7 +45,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @return 成功：ConstantUtils.SUCCESS
      *          失败：ConstantUtils.REGISTER_FAILED
      */
-    public String resister(UserInfoQueryDTO queryDTO) {
+    public String resister(UserInfoQueryDTO queryDTO) throws Exception {
         if(queryDTO != null){
             try{
                 UserInfo userInfo = BeanUtils.copyObject(queryDTO,UserInfo.class);
@@ -66,7 +66,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @param userName
      * @return
      */
-    public UserInfo getUserInfoByUserName(String userName) {
+    public UserInfo getUserInfoByUserName(String userName) throws Exception {
         return this.userInfoMapper.getUserInfoByUserName(userName);
     }
 }

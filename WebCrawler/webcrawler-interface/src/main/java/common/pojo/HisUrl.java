@@ -163,7 +163,7 @@ public class HisUrl {
     }
 
     public boolean isNull(){
-        if(this.url!=null&&this.city!=null&&this.district!=null&&this.community!=null&&this.lastDT!=null)
+        if(this.url!=null)
             return false;
         return true;
     }

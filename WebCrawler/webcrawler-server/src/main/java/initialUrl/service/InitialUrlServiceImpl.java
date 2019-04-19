@@ -28,7 +28,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @param id
      * @return
      */
-    public InitialUrl getInitialUrlById(long id) {
+    public InitialUrl getInitialUrlById(long id)  throws Exception{
         InitialUrl target = this.initialUrlMapper.getInitialUrlById(id);
         return target;
     }
@@ -38,7 +38,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      *
      * @return
      */
-    public List<InitialUrl> getAllInitialUrl() {
+    public List<InitialUrl> getAllInitialUrl()  throws Exception{
         List<InitialUrl> list = this.initialUrlMapper.getAllInitialUrl();
         return list;
     }
@@ -49,7 +49,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @param url
      * @return
      */
-    public InitialUrl getInitialUrlByName(String url) {
+    public InitialUrl getInitialUrlByName(String url)  throws Exception {
         InitialUrl target = this.initialUrlMapper.getInitialUrlByName(url);
         return target;
     }
@@ -59,7 +59,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      *
      * @param id
      */
-    public void deleteUrlById(long id) {
+    public void deleteUrlById(long id)  throws Exception{
         this.initialUrlMapper.deleteUrlById(id);
     }
 
@@ -68,7 +68,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      *
      * @param initialUrl
      */
-    public void insertUrl(InitialUrl initialUrl) {
+    public void insertUrl(InitialUrl initialUrl) throws Exception {
         this.initialUrlMapper.insertUrl(initialUrl);
     }
 
@@ -79,7 +79,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      *
      * @return
      */
-    public List<InitialUrl> getInitialUrl() {
+    public List<InitialUrl> getInitialUrl() throws Exception {
         List<InitialUrl> list = this.initialUrlMapper.getInitialUrl();
         return list;
     }

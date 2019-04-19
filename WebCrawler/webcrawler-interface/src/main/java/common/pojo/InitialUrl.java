@@ -135,4 +135,11 @@ public class InitialUrl {
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
     }
+
+    public boolean isNull(){
+        if(this.city!=null&&this.district!=null&&this.community!=null&&this.url!=null)
+            return false;
+        return true;
+    }
+
 }

@@ -2,33 +2,37 @@ package hisUrl.service;
 
 import common.mapper.HisUrlMapper;
 import common.pojo.HisUrl;
-import common.utils.HisUrlContainerUtils;
-import common.utils.SpringContextUtils;
+import common.container.HisUrlContainerUtils;
+import common.utils.CommonUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 public class HisUrlServiceImpl implements HisUrlService {
 
     Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-    @Resource
+    @Autowired
     private HisUrlMapper hisUrlMapper;
     /**
      * 新增历史url信息
      * 先更新数据库，再更新缓存
      * @param hisUrl
      */
-    public void insertHisUrl(HisUrl hisUrl) {
+    public void insertHisUrl(HisUrl hisUrl) throws Exception {
         if(hisUrl!=null&&!hisUrl.isNull()){
             try{
+                //设置爬取时间，这个字段是初始url表中没有的，所以必须手动设置
+                hisUrl.setLastDT(CommonUtils.getCurrentDate());
+                //更新数据库
                 this.hisUrlMapper.insertHisUrl(hisUrl);
-                HisUrlContainerUtils hisUrlContainerUtils = SpringContextUtils.getAppContext().getBean(HisUrlContainerUtils.class);
-                hisUrlContainerUtils.addHisUrl(hisUrl);
+                //更新缓存
+                HisUrlContainerUtils.addHisUrl(hisUrl);
             }catch (Exception e){
                 e.printStackTrace();
                 logger.error("新增历史url失败！！！",hisUrl.getUrl());
+                throw new RuntimeException();
             }
         }
 
@@ -39,16 +43,16 @@ public class HisUrlServiceImpl implements HisUrlService {
      * 先更新数据库，再更新缓存
      * @param id
      */
-    public void deleteHisUrlById(long id) {
+    public void deleteHisUrlById(long id) throws Exception{
         HisUrl hisUrl = this.hisUrlMapper.getHusUrlBuId(id);
         if(hisUrl != null){
             try{
                 this.hisUrlMapper.deleteHisUrlById(id);
-                HisUrlContainerUtils hisUrlContainerUtils = SpringContextUtils.getAppContext().getBean(HisUrlContainerUtils.class);
-                hisUrlContainerUtils.deleteHisUrl(hisUrl);
+                HisUrlContainerUtils.deleteHisUrl(hisUrl);
             }catch (Exception e){
                 e.printStackTrace();
                 logger.error("删除历史URL失败!!!",hisUrl.getUrl());
+                throw new RuntimeException();
             }
         }
     }
@@ -58,7 +62,7 @@ public class HisUrlServiceImpl implements HisUrlService {
      *
      * @return
      */
-    public List<HisUrl> getAllHisUrl() {
+    public List<HisUrl> getAllHisUrl() throws Exception {
         List<HisUrl> list = this.hisUrlMapper.getAllHisUrl();
         return list;
     }
@@ -69,7 +73,7 @@ public class HisUrlServiceImpl implements HisUrlService {
      * @param url
      * @return
      */
-    public HisUrl getHisUrlByName(String url) {
+    public HisUrl getHisUrlByName(String url) throws Exception{
         HisUrl hisUrl = this.hisUrlMapper.getHisUrlByName(url);
         return hisUrl;
     }
