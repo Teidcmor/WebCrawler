@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("initialUrlService")
 @Transactional
 public class InitialUrlServiceImpl implements InitialUrlService {
 

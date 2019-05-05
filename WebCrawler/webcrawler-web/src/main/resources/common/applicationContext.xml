@@ -54,6 +54,15 @@
             用一种就行，没必须都用 -->
     <tx:annotation-driven transaction-manager="txManager" />
 
-    <import resource="classpath*:/threadPool/thread-pool-config.xml"/>
+    <!--<import resource="classpath*:/threadPool/thread-pool-config.xml"/>-->
+    <!--spring工具类注册-->
+    <bean class="common.utils.SpringContextUtils" id="springContextUtils"/>
+
+    <!-- 开启注解 -->
+
+    <context:component-scan base-package="**.service"/>
+    <context:component-scan base-package="**.common.mapper"/>
+    <context:component-scan base-package="**.common.container"/>
+
 
 </beans>

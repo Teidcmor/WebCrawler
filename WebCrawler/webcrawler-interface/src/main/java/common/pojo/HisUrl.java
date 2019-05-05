@@ -95,6 +95,14 @@ public class HisUrl {
         this.district = district;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
     public String getCommunity() {
         return community;
     }
@@ -166,6 +174,9 @@ public class HisUrl {
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
     }
+
+
+
 
     public boolean isNull(){
         if(this.url!=null)

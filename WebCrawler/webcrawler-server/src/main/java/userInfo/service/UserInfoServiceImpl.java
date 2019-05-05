@@ -14,7 +14,7 @@ import userInfo.dto.UserInfoQueryDTO;
 import javax.annotation.Resource;
 
 
-@Service
+@Service("userInfoService")
 @Transactional
 public class UserInfoServiceImpl implements UserInfoService {
 
@@ -32,6 +32,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     public boolean login(UserInfoQueryDTO queryDTO) throws Exception {
         if(queryDTO != null){
             UserInfo target = this.userInfoMapper.getUserInfoByUserName(queryDTO.getUserName());
+            if(target == null)
+                return false;
             if(CommonUtils.stringEquals(target.getPassword(),queryDTO.getPassword()))
                 return true;
         }

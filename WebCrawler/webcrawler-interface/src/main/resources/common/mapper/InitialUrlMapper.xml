@@ -31,7 +31,7 @@
     <!--查询所有需要爬取的记录-->
     <select id="getAllInitialUrl" parameterType="string" resultType="InitialUrl">
         <![CDATA[
-        select * from t_initial_url where reserve1 !=#{1}
+        select * from t_initial_url
         ]]>
     </select>
     <!--查询所有初始url-->
@@ -55,7 +55,7 @@
     <!--新增url-->
     <insert id="insertUrl" parameterType="InitialUrl">
         <![CDATA[
-            insert into t_initial_url(url,city,district,community) values (#{url},#{city},#{district},#{community})
+            insert into t_initial_url(url,city,region,district,community,reserve1,reserve2,reserve3) values (#{url},#{city},#{region},#{district},#{community},#{reserve1},#{reserve2},#{reserve3})
         ]]>
     </insert>
 </mapper>

@@ -11,6 +11,10 @@
     <title>Title</title>
 </head>
 <body>
-<p>${info}</p>
+<p>${currentUser.userName}</p>
+
+<form method="get" action="/initialUrl/spiderBegin.do">
+    <button type="submit" value="开启爬虫"/>
+</form>
 </body>
 </html>

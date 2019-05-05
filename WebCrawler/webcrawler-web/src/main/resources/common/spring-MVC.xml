@@ -19,11 +19,7 @@
     <!-- 处理静态资源 -->
      <mvc:default-servlet-handler/>
 
-    <!-- 开启注解 -->
     <context:component-scan base-package="**.controller" />
-    <context:component-scan base-package="**.service"/>
-    <context:component-scan base-package="**.common.mapper"/>
-    <context:component-scan base-package="**.common.container"/>
 
     <mvc:interceptors>
         <mvc:interceptor>

@@ -79,6 +79,14 @@ public class BasicData {
         this.district = district;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
     public String getCommunity() {
         return community;
     }

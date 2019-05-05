@@ -8,7 +8,6 @@
         <setting name="cacheEnabled" value="true"/>
         <setting name="defaultExecutorType" value="SIMPLE"/>
         <setting name="defaultStatementTimeout" value="25000"/>
-        <setting name="autoMappingBehavior" value="PARTIAL"/>
     </settings>
 
     <typeAliases>
