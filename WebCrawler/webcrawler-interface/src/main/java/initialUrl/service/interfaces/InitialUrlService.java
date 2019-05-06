@@ -37,9 +37,9 @@ public interface InitialUrlService {
 
     /**
      * 通过id删除指定记录
-     * @param id
+     * @param initialUrl
      */
-    void deleteUrlById(long id) throws Exception;
+    void deleteUrlById(InitialUrl initialUrl) throws Exception;
 
     /**
      * 新增url

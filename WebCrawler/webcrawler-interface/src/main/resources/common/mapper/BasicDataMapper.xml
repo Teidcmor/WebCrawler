@@ -30,7 +30,7 @@
     <!--新增基础信息记录-->
     <insert id="insertBasicData" parameterType="BasicData">
         <![CDATA[
-        insert into t_basic_data(city,district,community,basicData) values (#{city},#{district},#{community},#{basicData})
+        insert into t_basic_data(city,district,region,community,basic_Data,reserve1,reserve2,reserve3) values (#{city},#{district},#{region},#{community},#{basicData},#{reserve1},#{reserve2},#{reserve3})
         ]]>
     </insert>
     <!--删除基础信息-->

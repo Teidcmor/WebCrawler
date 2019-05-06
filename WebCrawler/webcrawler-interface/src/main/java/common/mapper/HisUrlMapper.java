@@ -41,6 +41,5 @@ public interface HisUrlMapper {
      * @param id
      * @return
      */
-    HisUrl getHusUrlBuId(long id);
-
+    HisUrl getHisUrlBuId(long id);
 }

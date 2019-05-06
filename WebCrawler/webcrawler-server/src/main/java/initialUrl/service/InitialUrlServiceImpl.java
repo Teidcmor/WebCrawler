@@ -1,4 +1,6 @@
 package initialUrl.service;
+import common.container.HisUrlContainerUtils;
+import common.container.InitialUrlContainerUtils;
 import common.mapper.InitialUrlMapper;
 import common.pojo.InitialUrl;
 import initialUrl.service.interfaces.InitialUrlService;
@@ -57,10 +59,11 @@ public class InitialUrlServiceImpl implements InitialUrlService {
     /**
      * 通过id删除指定记录
      *
-     * @param id
+     * @param initialUrl
      */
-    public void deleteUrlById(long id)  throws Exception{
-        this.initialUrlMapper.deleteUrlById(id);
+    public void deleteUrlById(InitialUrl initialUrl)  throws Exception{
+        this.initialUrlMapper.deleteUrlById(initialUrl.getId());
+        InitialUrlContainerUtils.deleteInitialUrl(initialUrl);
     }
 
     /**
@@ -69,7 +72,11 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @param initialUrl
      */
     public void insertUrl(InitialUrl initialUrl) throws Exception {
-        this.initialUrlMapper.insertUrl(initialUrl);
+        if(initialUrl!=null && !initialUrl.isNull() && !InitialUrlContainerUtils.contains(initialUrl.getUrl())&& !HisUrlContainerUtils.isContains(initialUrl.getUrl())){
+            this.initialUrlMapper.insertUrl(initialUrl);
+            InitialUrlContainerUtils.addInitialUrl(initialUrl);
+        }
+
     }
 
     /**

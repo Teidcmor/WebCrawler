@@ -29,4 +29,11 @@ public interface HisUrlService {
      * @return
      */
     public HisUrl getHisUrlByName(String url) throws Exception;
+
+    /**
+     * 根据url删除历史表中指定记录
+     * @param url
+     * @throws Exception
+     */
+    public void deleteHisUrlBuUrl(String url) throws Exception;
 }

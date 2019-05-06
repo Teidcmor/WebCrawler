@@ -25,10 +25,12 @@ public class HisUrlServiceImpl implements HisUrlService {
      * @param hisUrl
      */
     public void insertHisUrl(HisUrl hisUrl) throws Exception {
-        if(hisUrl!=null&&!hisUrl.isNull()){
+        if(hisUrl!=null&&!hisUrl.isNull()&&!HisUrlContainerUtils.isContains(hisUrl.getUrl())){
             try{
                 //设置爬取时间，这个字段是初始url表中没有的，所以必须手动设置
                 hisUrl.setLastDT(CommonUtils.getCurrentDate());
+                //新增的URL必须设置默认flag值，不然可能导致重复查询。
+                hisUrl.setFlag("0");
                 //更新数据库
                 this.hisUrlMapper.insertHisUrl(hisUrl);
                 //更新缓存
@@ -48,7 +50,7 @@ public class HisUrlServiceImpl implements HisUrlService {
      * @param id
      */
     public void deleteHisUrlById(long id) throws Exception{
-        HisUrl hisUrl = this.hisUrlMapper.getHusUrlBuId(id);
+        HisUrl hisUrl = this.hisUrlMapper.getHisUrlBuId(id);
         if(hisUrl != null){
             try{
                 this.hisUrlMapper.deleteHisUrlById(id);
@@ -80,5 +82,25 @@ public class HisUrlServiceImpl implements HisUrlService {
     public HisUrl getHisUrlByName(String url) throws Exception{
         HisUrl hisUrl = this.hisUrlMapper.getHisUrlByName(url);
         return hisUrl;
+    }
+
+    /**
+     * 根据url删除历史表中指定记录
+     *
+     * @param url
+     * @throws Exception
+     */
+    public void deleteHisUrlBuUrl(String url) throws Exception {
+        HisUrl hisUrl = this.hisUrlMapper.getHisUrlByName(url);
+        if(hisUrl != null){
+            try{
+                this.hisUrlMapper.deleteHisUrlById(hisUrl.getId());
+                HisUrlContainerUtils.deleteHisUrl(hisUrl);
+            }catch (Exception e){
+                e.printStackTrace();
+                logger.error("删除历史URL失败!!!",hisUrl.getUrl());
+                throw new RuntimeException();
+            }
+        }
     }
 }

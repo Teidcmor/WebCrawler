@@ -19,7 +19,7 @@ public class HisUrlContainerUtils  implements ApplicationListener {
 
     @Autowired
     private HisUrlMapper hisUrlMapper;
-    private static final HashMap<String ,String> hisUrlContainer = new HashMap<String, String>();
+    private static final HashMap<String ,HisUrl> hisUrlContainer = new HashMap<String, HisUrl>();
 
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if (((applicationEvent instanceof ContextRefreshedEvent))
@@ -41,22 +41,31 @@ public class HisUrlContainerUtils  implements ApplicationListener {
         while (iterator.hasNext()){
             HisUrl hisUrl = (HisUrl) iterator.next();
             String url = hisUrl.getUrl();
-            String flag = hisUrl.getFlag();
-            if(!CommonUtils.isNull(url)){
-                hisUrlContainer.put(url,flag);
-            }
+            hisUrlContainer.put(url,hisUrl);
         }
     }
     /**
-     * 判断历史url容器中是否包含目标url
+     * 判断历史url容器中是否包含目标url,并且盖URL为不可重复爬取的状态
      * @param url
      * @return 缓存容器中有目标URL而且标志为0则包含返回true
      */
     public static boolean contains(String url) throws Exception{
-        String target = hisUrlContainer.get(url);
-        //如果url不存在或者flag不为0.则不包含，返回false
-        boolean result = target == null ? false:"0".equals(target);
-        return result;
+        HisUrl hisUrl = hisUrlContainer.get(url);
+        if(hisUrl == null){
+            return false;
+        }else {
+            return "0".equals(hisUrl.getFlag())?true:false;
+        }
+    }
+
+    /**
+     * 判断缓存容器中是否包含目标URL，不管状态如何，包含则返回true
+     * @param url
+     * @return
+     * @throws Exception
+     */
+    public static boolean isContains(String url) throws Exception{
+        return hisUrlContainer.get(url) == null?false:true;
     }
     /**
      * 新增历史rul缓存内容
@@ -64,7 +73,7 @@ public class HisUrlContainerUtils  implements ApplicationListener {
      * @throws Exception
      */
     public static void addHisUrl(HisUrl hisUrl) throws Exception{
-        hisUrlContainer.put(hisUrl.getUrl(),hisUrl.getFlag());
+        hisUrlContainer.put(hisUrl.getUrl(),hisUrl);
     }
     /**
      * 去除指定url

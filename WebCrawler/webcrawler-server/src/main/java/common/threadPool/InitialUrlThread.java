@@ -9,7 +9,6 @@ import common.utils.BeanUtils;
 import common.utils.ConstantUtils;
 import common.utils.SpringContextUtils;
 import hisUrl.service.HisUrlService;
-import initialUrl.service.InitialUrlServiceImpl;
 import initialUrl.service.interfaces.InitialUrlService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -79,7 +78,7 @@ public class InitialUrlThread implements Runnable {
                 }else {
                     logger.error("url不合法！！跳过爬取！！ ID = "+ this.initialUrl.getId()+"URl = "+this.initialUrl.getUrl());
                     //删除异常url
-                    this.initialUrlService.deleteUrlById(this.initialUrl.getId());
+                    this.initialUrlService.deleteUrlById(this.initialUrl);
                 }
             }catch (Exception e){
                 logger.error("爬取异常！！！ ID = "+this.initialUrl.getId()+"URl = "+this.initialUrl.getUrl());
@@ -103,7 +102,7 @@ public class InitialUrlThread implements Runnable {
      * 爬虫程序体。爬取目标链接的内容，获取基本信息体
      * 创建链接，获取对象实体，将实体送入对应模块获取有效信息，将url置入历史表，初始表中删除
      */
-    private void getBasicData() throws IOException {
+    private void getBasicData() throws Exception {
         //如果没有设置超时，则使用默认超时时长
         int timeout = this.initialUrl.getTimeout()==0? ConstantUtils.TIMEOUT:this.initialUrl.getTimeout();
         RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(timeout).setConnectionRequestTimeout(timeout).setSocketTimeout(timeout).build();//超时设置
@@ -111,7 +110,6 @@ public class InitialUrlThread implements Runnable {
         HttpRequestRetryHandler retryHandler = new StandardHttpRequestRetryHandler(3,true);
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).setRetryHandler(retryHandler).build();//创建请求
         HttpGet httpGet = this.getHttpGet();
-        logger.info("HttpGet已创建 ID = "+this.initialUrl.getId()+"URl = "+this.initialUrl.getUrl());
         HttpResponse response = null;
         HttpEntity entity = null;
         String target = null;
@@ -126,20 +124,18 @@ public class InitialUrlThread implements Runnable {
                 //页面实体转string。这里已经成功拿到实体，连接可以释放。把String对象交给后续的模块处理
                 target = EntityUtils.toString(entity,"utf-8");
                 //开始获取网页中所有有效的链接，加入队列中，提供给后续爬取
-                UrlSpider.urlSpiderBegin(this.initialUrl,target);
+                new UrlSpider(this.initialUrl,target).urlSpiderBegin();
                 //如果不是手动加入的初始链接，则开始为T_BASIC_DATA表爬取基础信息
-                //并在爬取之后删除记录，如果是手动添加的进行删除
-                if(!"1".equals(this.initialUrl.getReserve1())){
-                    BasicDataSpider.basicDataSpiderBegin(this.initialUrl,target);
-                    this.initialUrlService.deleteUrlById(this.initialUrl.getId());
-                }
+                new BasicDataSpider(this.initialUrl,target).basicDataSpiderBegin();
+                //获取到返回的对象之后，先将当前url删除
+                this.initialUrlService.deleteUrlById(this.initialUrl);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error("爬虫连接创建失败！！！ID = "+this.initialUrl.getId()+"URl = "+this.initialUrl.getUrl());
-            throw new RuntimeException();
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("爬虫连接创建失败！！！ID = "+this.initialUrl.getId()+"URl = "+this.initialUrl.getUrl());
+            //如果URL网页实体获取失败，从历史表中删除
+            hisUrlService.deleteHisUrlBuUrl(initialUrl.getUrl());
+            throw new RuntimeException();
         } finally {//无论程序是否异常，释放所有连接
             EntityUtils.consume(entity);
             httpGet.releaseConnection();
@@ -153,7 +149,9 @@ public class InitialUrlThread implements Runnable {
     private void makeUrlUnEnable(){
         try{
             HisUrl hisUrl = BeanUtils.copyObject(this.initialUrl,HisUrl.class);
-            this.hisUrlService.insertHisUrl(hisUrl);
+            //如果不是分页类的链接，则置入历史表
+            if(!"1".equals(initialUrl.getReserve2()))
+                this.hisUrlService.insertHisUrl(hisUrl);
         }catch (Exception e){
             e.printStackTrace();
             throw new RuntimeException();

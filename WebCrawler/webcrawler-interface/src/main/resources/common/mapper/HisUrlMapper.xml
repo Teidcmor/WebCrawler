@@ -55,9 +55,10 @@
         ]]>
     </select>
 
-    <select id="getHusUrlBuId" parameterType="long" resultType="HisUrl">
+    <select id="getHisUrlBuId" parameterType="long" resultType="HisUrl">
         <![CDATA[
         select * from t_his_url where id = #{id}
         ]]>
     </select>
+
 </mapper>
