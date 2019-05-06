@@ -23,4 +23,18 @@ public class ConstantUtils {
      */
     public static String REGISTER_FAILED = "注册失败！用户名已存在！";
 
+    /**
+     * 爬虫程序开关参数
+     *  0 ： 爬虫程序关闭
+     *  1 ； 爬虫程序开启
+     */
+    public static String SPIDER_ENABLE = "spider_enable";
+
+    /**
+     * 有效信息定时任务开关，关闭时，定时任务失效
+     *  0 ： 关闭
+     *  1 ； 开启
+     */
+    public static String CORE_DATA_SPIDER = "core_data_spider";
+
 }

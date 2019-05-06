@@ -133,7 +133,7 @@ public class InitialUrlThread implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("爬虫连接创建失败！！！ID = "+this.initialUrl.getId()+"URl = "+this.initialUrl.getUrl());
-            //如果URL网页实体获取失败，从历史表中删除
+            //如果URL网页实体获取失败，因为前面代码中已经将当前的url置入了历史表，故而需要从历史表中删除
             hisUrlService.deleteHisUrlBuUrl(initialUrl.getUrl());
             throw new RuntimeException();
         } finally {//无论程序是否异常，释放所有连接
