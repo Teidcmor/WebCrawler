@@ -1,4 +1,4 @@
-package hisUrl.service;
+package hisUrl.service.interfaces;
 
 import common.pojo.HisUrl;
 

@@ -1,4 +1,4 @@
-package sysParam.service;
+package sysParam.service.interfaces;
 
 import common.pojo.SysParam;
 

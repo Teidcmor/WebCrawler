@@ -4,6 +4,7 @@ import common.mapper.HisUrlMapper;
 import common.pojo.HisUrl;
 import common.container.HisUrlContainerUtils;
 import common.utils.CommonUtils;
+import hisUrl.service.interfaces.HisUrlService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

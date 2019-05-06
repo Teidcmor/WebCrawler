@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import userInfo.dto.UserInfoDTO;
 import userInfo.dto.UserInfoQueryDTO;
-import userInfo.service.UserInfoService;
+import userInfo.service.interfaces.UserInfoService;
 
 
 @Controller

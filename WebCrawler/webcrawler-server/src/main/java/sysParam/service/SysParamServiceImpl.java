@@ -6,12 +6,13 @@ import common.utils.ConstantUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sysParam.service.interfaces.SysParamService;
 
 import java.util.ArrayList;
 
 @Service("sysParamService")
 @Transactional
-public class SysParamServiceImpl implements SysParamService{
+public class SysParamServiceImpl implements SysParamService {
 
     @Autowired
     private SysParamMapper sysParamMapper;

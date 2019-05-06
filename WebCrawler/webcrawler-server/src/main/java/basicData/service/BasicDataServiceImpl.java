@@ -1,5 +1,6 @@
 package basicData.service;
 
+import basicData.service.interfaces.BasicDataService;
 import common.mapper.BasicDataMapper;
 import common.pojo.BasicData;
 import org.springframework.beans.factory.annotation.Autowired;

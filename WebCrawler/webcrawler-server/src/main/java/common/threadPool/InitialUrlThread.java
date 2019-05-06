@@ -8,7 +8,7 @@ import common.spider.UrlSpider;
 import common.utils.BeanUtils;
 import common.utils.ConstantUtils;
 import common.utils.SpringContextUtils;
-import hisUrl.service.HisUrlService;
+import hisUrl.service.interfaces.HisUrlService;
 import initialUrl.service.interfaces.InitialUrlService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,8 +24,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
 
 
 public class InitialUrlThread implements Runnable {

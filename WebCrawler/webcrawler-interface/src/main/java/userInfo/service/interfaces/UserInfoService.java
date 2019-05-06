@@ -1,4 +1,4 @@
-package userInfo.service;
+package userInfo.service.interfaces;
 
 import common.pojo.UserInfo;
 import userInfo.dto.UserInfoQueryDTO;

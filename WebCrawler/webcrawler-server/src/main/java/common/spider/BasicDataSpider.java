@@ -1,6 +1,6 @@
 package common.spider;
 
-import basicData.service.BasicDataService;
+import basicData.service.interfaces.BasicDataService;
 import common.pojo.BasicData;
 import common.pojo.InitialUrl;
 import common.utils.SpringContextUtils;
@@ -9,10 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.context.ApplicationContext;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class BasicDataSpider {
 

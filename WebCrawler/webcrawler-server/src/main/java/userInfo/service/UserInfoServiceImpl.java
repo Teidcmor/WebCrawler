@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import userInfo.dto.UserInfoQueryDTO;
+import userInfo.service.interfaces.UserInfoService;
 
 import javax.annotation.Resource;
 

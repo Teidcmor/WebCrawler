@@ -1,4 +1,4 @@
-package basicData.service;
+package basicData.service.interfaces;
 
 import common.pojo.BasicData;
 

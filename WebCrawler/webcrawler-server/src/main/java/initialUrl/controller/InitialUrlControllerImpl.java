@@ -2,9 +2,7 @@ package initialUrl.controller;
 
 import common.pojo.InitialUrl;
 import common.threadPool.InitialUrlThread;
-import common.utils.SpringContextUtils;
 import common.utils.ThreadPoolUtils;
-import hisUrl.service.HisUrlService;
 import initialUrl.service.interfaces.InitialUrlService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
