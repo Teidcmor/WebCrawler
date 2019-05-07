@@ -57,26 +57,28 @@ public class UrlSpider {
         //提取有意义的链接部分
         ArrayList<Element> topDiv = document.getElementsByAttributeValue("class","dl_lst list area");
         //提取目标信息所在的外层div
-        ArrayList<Element> district = topDiv.get(0).select("div.area-ls-wp");
-        Iterator districtIterator = district.iterator();
-        while (districtIterator.hasNext()){
-            Element districtElement = (Element)districtIterator.next();
-            //获取districtName
-            String districtName = districtElement.select("a[href]").first().text();
-            Element element = districtElement.select("div.sub_option_list").first();
-            ArrayList<Element>linkList = element.select("a[href]");
-            Iterator link = linkList.iterator();
-            while (link.hasNext()){
-                Element regionElement = (Element) link.next();
-                String region = regionElement.text();
-                String targetUrl = regionElement.attr("href");
-                InitialUrl target = new InitialUrl();
-                target.setUrl(targetUrl);
-                target.setCity(initialUrl.getCity());
-                target.setDistrict(districtName);
-                target.setRegion(region);
-                initialUrlService.insertUrl(target);
-                logger.info("新目录链接保存成功！！！ 位置信息：cityName=+"+initialUrl.getCity()+"districtName="+districtName +"regionName:"+region+"URL="+targetUrl);
+        if(topDiv!=null) {
+            ArrayList<Element> district = topDiv.get(0).select("div.area-ls-wp");
+            Iterator districtIterator = district.iterator();
+            while (districtIterator.hasNext()) {
+                Element districtElement = (Element) districtIterator.next();
+                //获取districtName
+                String districtName = districtElement.select("a[href]").first().text();
+                Element element = districtElement.select("div.sub_option_list").first();
+                ArrayList<Element> linkList = element.select("a[href]");
+                Iterator link = linkList.iterator();
+                while (link.hasNext()) {
+                    Element regionElement = (Element) link.next();
+                    String region = regionElement.text();
+                    String targetUrl = regionElement.attr("href");
+                    InitialUrl target = new InitialUrl();
+                    target.setUrl(targetUrl);
+                    target.setCity(initialUrl.getCity());
+                    target.setDistrict(districtName);
+                    target.setRegion(region);
+                    initialUrlService.insertUrl(target);
+                    logger.info("新目录链接保存成功！！！ 位置信息：cityName=+" + initialUrl.getCity() + "districtName=" + districtName + "regionName:" + region + "URL=" + targetUrl);
+                }
             }
         }
     }
@@ -88,16 +90,18 @@ public class UrlSpider {
      */
     private void pageUrlSpider() throws Exception {
         Element topDiv = document.select("div.page").first();
-        ArrayList<Element> links = topDiv.select("a[href]");
-        Iterator iterator = links.iterator();
-        while (iterator.hasNext()){
-            Element link = (Element) iterator.next();
-            String targetUrl = link.attr("href");
-            InitialUrl target = this.addNewUrl(targetUrl);
-            //标记reserve2字段为1标识该链接为分页链接，爬取内容后删除但不置入历史表
-            target.setReserve2("1");
-            initialUrlService.insertUrl(target);
-            logger.info("新分页链接保存成功！！！ 位置信息：cityName=+"+initialUrl.getCity()+"districtName="+initialUrl.getDistrict() +"regionName:"+initialUrl.getRegion()+"URL="+targetUrl);
+        if(topDiv!=null) {
+            ArrayList<Element> links = topDiv.select("a[href]");
+            Iterator iterator = links.iterator();
+            while (iterator.hasNext()) {
+                Element link = (Element) iterator.next();
+                String targetUrl = link.attr("href");
+                InitialUrl target = this.addNewUrl(targetUrl);
+                //标记reserve2字段为1标识该链接为分页链接，爬取内容后删除但不置入历史表
+                target.setReserve2("1");
+                initialUrlService.insertUrl(target);
+                logger.info("新分页链接保存成功！！！ 位置信息：cityName=+" + initialUrl.getCity() + "districtName=" + initialUrl.getDistrict() + "regionName:" + initialUrl.getRegion() + "URL=" + targetUrl);
+            }
         }
     }
 

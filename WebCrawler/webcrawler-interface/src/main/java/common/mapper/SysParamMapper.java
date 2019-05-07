@@ -1,9 +1,13 @@
 package common.mapper;
 
 import common.pojo.SysParam;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-
+@Repository
+@Transactional(propagation = Propagation.REQUIRED)
 public interface SysParamMapper {
 
     /**
