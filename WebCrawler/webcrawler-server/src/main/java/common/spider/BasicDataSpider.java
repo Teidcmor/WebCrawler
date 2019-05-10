@@ -32,10 +32,9 @@ public class BasicDataSpider {
 
     public void basicDataSpiderBegin() throws Exception {
         //获取租房信息所在的外层div
-        Element imgDiv = document.select("div.carousel-inner").first();
-        Element detailsDic = document.select("div.room-list-box").first();
-        if(imgDiv!=null&&detailsDic!=null) {
-            String Data = new StringBuilder(imgDiv.toString()).append(detailsDic.toString()).toString();
+        Element targetDiv = document.select("div.room-detail").first();
+        if(targetDiv!=null) {
+            String Data = targetDiv.toString();
             BasicData basicData = new BasicData();
             basicData.setCity(initialUrl.getCity());
             basicData.setDistrict(initialUrl.getDistrict());

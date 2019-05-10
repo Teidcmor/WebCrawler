@@ -40,13 +40,13 @@
         ]]>
     </delete>
     <!--获取所有基础信息-->
-    <select id="getAllBasicData" resultType="BasicData">
+    <select id="getAllBasicData" resultMap="basicDataResultMap">
         <![CDATA[
         select * from t_basic_data
         ]]>
     </select>
     <!--获取所有未处理过的基础信息-->
-    <select id="getBasicData" resultType="BasicData">
+    <select id="getBasicData" resultMap="basicDataResultMap">
         <![CDATA[
         select * from t_basic_data where flag =#{0}
         ]]>
