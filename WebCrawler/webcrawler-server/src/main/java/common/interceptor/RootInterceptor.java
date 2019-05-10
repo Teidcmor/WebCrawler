@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 public class RootInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        HttpSession session = httpServletRequest.getSession();
+        /*HttpSession session = httpServletRequest.getSession();
         String requestUrl = httpServletRequest.getRequestURI();
         if(requestUrl.contains("/user/login.do")||requestUrl.contains("/user/register.do"))
             return true;
@@ -19,7 +19,7 @@ public class RootInterceptor implements HandlerInterceptor {
         if(currentUser==null) {
             httpServletResponse.sendRedirect("/view/userInfo/login.jsp");
             return false;
-        }
+        }*/
         return true;
     }
 

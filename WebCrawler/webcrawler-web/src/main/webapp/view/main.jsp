@@ -13,7 +13,7 @@
 <body>
 <p>${currentUser.userName}</p>
 
-<form method="get" action="/initialUrl/spiderBegin.do">
+<form method="get" action="/index.html">
     <button type="submit" value="开启爬虫"/>
 </form>
 </body>
