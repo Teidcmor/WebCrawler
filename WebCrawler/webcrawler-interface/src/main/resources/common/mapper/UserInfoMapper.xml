@@ -17,7 +17,7 @@
         <result property="reserve3" column="RESERVE3"/>
     </resultMap>
 
-    <select id="getUserInfoByUserName" parameterType="String" resultType="UserInfo">
+    <select id="getUserInfoByUserName" parameterType="String" resultMap="userInfoResultMap">
         <![CDATA[
           select * from t_user where userName =#{username}
         ]]>

@@ -16,13 +16,13 @@
     </resultMap>
 
     <!--获取所有基础信息-->
-    <select id="getAllSysParam" resultType="SysParam">
+    <select id="getAllSysParam" resultMap="sysParamResultMap">
         <![CDATA[
         select * from T_SYS_PARAMTER
         ]]>
     </select>
     <!--获取所有未处理过的基础信息-->
-    <select id="getSysParamByName" resultType="SysParam">
+    <select id="getSysParamByName" resultMap="sysParamResultMap">
         <![CDATA[
         select * from T_SYS_PARAMTER where PARAM_NAME =#{name}
         ]]>

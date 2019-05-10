@@ -1,5 +1,6 @@
 package sysParam.service;
 
+import common.container.SysParamContainerUtils;
 import common.mapper.SysParamMapper;
 import common.pojo.SysParam;
 import common.utils.ConstantUtils;
@@ -46,6 +47,7 @@ public class SysParamServiceImpl implements SysParamService {
         sysParam.setParamName(ConstantUtils.SPIDER_ENABLE);
         sysParam.setParamValue("1");
         sysParamMapper.updateSysParamByName(sysParam);
+        SysParamContainerUtils.editSysParam(sysParam);
     }
 
     /**
@@ -56,6 +58,7 @@ public class SysParamServiceImpl implements SysParamService {
         sysParam.setParamName(ConstantUtils.SPIDER_ENABLE);
         sysParam.setParamValue("0");
         sysParamMapper.updateSysParamByName(sysParam);
+        SysParamContainerUtils.editSysParam(sysParam);
     }
 
     /**
@@ -66,6 +69,7 @@ public class SysParamServiceImpl implements SysParamService {
         sysParam.setParamName(ConstantUtils.CORE_DATA_SPIDER);
         sysParam.setParamValue("1");
         sysParamMapper.updateSysParamByName(sysParam);
+        SysParamContainerUtils.editSysParam(sysParam);
     }
 
     /**
@@ -76,5 +80,6 @@ public class SysParamServiceImpl implements SysParamService {
         sysParam.setParamName(ConstantUtils.CORE_DATA_SPIDER);
         sysParam.setParamValue("0");
         sysParamMapper.updateSysParamByName(sysParam);
+        SysParamContainerUtils.editSysParam(sysParam);
     }
 }

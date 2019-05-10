@@ -49,7 +49,7 @@ public class SysParamContainerUtils implements ApplicationListener {
      * @param name
      * @return
      */
-    public static String getParamValueByParamName(String name) throws Exception {
+    public static String getParamValueByParamName(String name) {
         String target = sysParamContainer.get(name);
         return target;
     }
