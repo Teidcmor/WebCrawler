@@ -22,26 +22,26 @@
 
 
     <!--通过id查询记录-->
-    <select id="getInitialUrlById" parameterType="long" resultType="InitialUrl">
+    <select id="getInitialUrlById" parameterType="long" resultMap="initialUrlResultMap">
         <![CDATA[
             select * from t_initial_url where id =#{id}
          ]]>
 
     </select>
     <!--查询所有需要爬取的记录-->
-    <select id="getAllInitialUrl" parameterType="string" resultType="InitialUrl">
+    <select id="getAllInitialUrl" parameterType="string" resultMap="initialUrlResultMap">
         <![CDATA[
         select * from t_initial_url
         ]]>
     </select>
     <!--查询所有初始url-->
-    <select id="getInitialUrl" parameterType="string" resultType="InitialUrl">
+    <select id="getInitialUrl" parameterType="string" resultMap="initialUrlResultMap">
         <![CDATA[
         select * from t_initial_url where reserve1 =#{1}
         ]]>
     </select>
     <!--通过url匹配记录-->
-    <select id="getInitialUrlByName" parameterType="string" resultType="InitialUrl">
+    <select id="getInitialUrlByName" parameterType="string" resultMap="initialUrlResultMap">
         <![CDATA[
            select * from t_initial_url where url =#{url}
         ]]>

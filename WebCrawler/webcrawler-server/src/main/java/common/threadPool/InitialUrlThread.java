@@ -103,10 +103,16 @@ public class InitialUrlThread implements Runnable {
     private void getBasicData() throws Exception {
         //如果没有设置超时，则使用默认超时时长
         int timeout = this.initialUrl.getTimeout()==0? ConstantUtils.TIMEOUT:this.initialUrl.getTimeout();
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(timeout).setConnectionRequestTimeout(timeout).setSocketTimeout(timeout).build();//超时设置
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(timeout)
+                .setConnectionRequestTimeout(timeout)
+                .setSocketTimeout(timeout).build();//超时设置
         //设置重试，如果是可重试的链接失败，最对重试三次
         HttpRequestRetryHandler retryHandler = new StandardHttpRequestRetryHandler(3,true);
-        CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).setRetryHandler(retryHandler).build();//创建请求
+        CloseableHttpClient httpClient = HttpClientBuilder.create()
+                .setDefaultRequestConfig(requestConfig)
+                .setRetryHandler(retryHandler)
+                .build();//创建请求
         HttpGet httpGet = this.getHttpGet();
         HttpResponse response = null;
         HttpEntity entity = null;

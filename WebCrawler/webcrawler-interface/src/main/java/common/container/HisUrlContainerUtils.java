@@ -16,11 +16,9 @@ import java.util.Iterator;
 
 @Component
 public class HisUrlContainerUtils  implements ApplicationListener {
-
     @Autowired
     private HisUrlMapper hisUrlMapper;
     private static final HashMap<String ,HisUrl> hisUrlContainer = new HashMap<String, HisUrl>();
-
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if (((applicationEvent instanceof ContextRefreshedEvent))
             /* && (null == ((ContextRefreshedEvent)applicationEvent).getApplicationContext().getParent())*/ ){
@@ -57,7 +55,6 @@ public class HisUrlContainerUtils  implements ApplicationListener {
             return "0".equals(hisUrl.getFlag())?true:false;
         }
     }
-
     /**
      * 判断缓存容器中是否包含目标URL，不管状态如何，包含则返回true
      * @param url

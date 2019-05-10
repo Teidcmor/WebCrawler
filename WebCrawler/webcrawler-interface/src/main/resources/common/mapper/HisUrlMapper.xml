@@ -43,19 +43,19 @@
         ]]>
     </delete>
     <!--查询所有历史url信息-->
-    <select id="getAllHisUrl" resultType="HisUrl">
+    <select id="getAllHisUrl" resultMap="hisUrlResultMap">
         <![CDATA[
         select * from  t_his_url
         ]]>
     </select>
     <!--获取指定url的信息-->
-    <select id="getHisUrlByName" resultType="HisUrl">
+    <select id="getHisUrlByName"  resultMap="hisUrlResultMap">
         <![CDATA[
         select * from t_his_url where url =#{url}
         ]]>
     </select>
 
-    <select id="getHisUrlBuId" parameterType="long" resultType="HisUrl">
+    <select id="getHisUrlBuId" parameterType="long"  resultMap="hisUrlResultMap">
         <![CDATA[
         select * from t_his_url where id = #{id}
         ]]>

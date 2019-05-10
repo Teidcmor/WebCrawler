@@ -16,18 +16,12 @@ import java.util.Iterator;
 
 @Component
 public class InitialUrlContainerUtils implements ApplicationListener {
-
     @Autowired
     private InitialUrlMapper initialUrlMapper;
-
     private static  HashMap<String,InitialUrl> initialUrlContainer = new HashMap<String, InitialUrl>();
-
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
-        if (((applicationEvent instanceof ContextRefreshedEvent))/* && (null == ((ContextRefreshedEvent)applicationEvent).getApplicationContext().getParent())*/ ){
-            this.initInitialUrlContainer();
-        }
-    }
-
+        if (((applicationEvent instanceof ContextRefreshedEvent)) ){
+            this.initInitialUrlContainer(); } }
     /**
      * 初始化缓存容器
      */
@@ -40,18 +34,13 @@ public class InitialUrlContainerUtils implements ApplicationListener {
             InitialUrl target = (InitialUrl) iterator.next();
             String url = target.getUrl();
             if(!CommonUtils.isNull(url)){
-                initialUrlContainer.put(url,target);
-            }
-        }
-    }
-
+                initialUrlContainer.put(url,target); } } }
     /**
      * 新增初始URL到缓存
      * @param initialUrl
      */
     public static void addInitialUrl(InitialUrl initialUrl){
-        initialUrlContainer.put(initialUrl.getUrl(),initialUrl);
-    }
+        initialUrlContainer.put(initialUrl.getUrl(),initialUrl); }
 
     /**
      * 删除某条URL记录
@@ -60,7 +49,6 @@ public class InitialUrlContainerUtils implements ApplicationListener {
     public static void deleteInitialUrl(InitialUrl initialUrl){
         initialUrlContainer.remove(initialUrl.getUrl());
     }
-
     /**
      * 判断目标URL是否在缓存容器中存在，若存在则返回true
      * @param url
@@ -68,8 +56,5 @@ public class InitialUrlContainerUtils implements ApplicationListener {
      */
     public static boolean contains(String url){
         InitialUrl target = initialUrlContainer.get(url);
-        return target == null?false:true;
-    }
-
-
+        return target == null?false:true; }
 }
