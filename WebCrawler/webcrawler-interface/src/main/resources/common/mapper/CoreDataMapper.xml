@@ -35,8 +35,8 @@
         </select>-->
     <insert id="insertCoreData" parameterType="CoreData">
         <![CDATA[
-        insert into t_core_data (city,district,community,area,floor,toward,house_Model,price,preference,picture_Url,other_Details)
-        values (#{city},#{district},#{community},#{area},#{floor},#{toward},#{houseModel},#{price},#{preference},#{pictureUrl},#{otherDetails})
+        insert into t_core_data (city,district,region,community,area,floor,toward,house_Model,price,preference,picture_Url,other_Details)
+        values (#{city},#{district},#{region},#{community},#{area},#{floor},#{toward},#{houseModel},#{price},#{preference},#{pictureUrl},#{otherDetails})
         ]]>
     </insert>
 
@@ -46,7 +46,7 @@
         ]]>
     </delete>
 
-    <select id="getAllCoreData" resultType="CoreData">
+    <select id="getAllCoreData" resultMap="coreDataResultMap">
         select * from t_core_data
     </select>
 </mapper>
