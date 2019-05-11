@@ -44,54 +44,60 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
 					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
+						<!--<img src="images/logo.png" alt="">-->
+						租房信息爬取平台
 					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-					</button>
+					<!--<button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>-->
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="index.html">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="dashboard.html">Dashboard</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="category.html">Category</a>
-									<a class="dropdown-item" href="single.html">Single Page</a>
-									<a class="dropdown-item" href="store-single.html">Store Single</a>
-									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-									<a class="dropdown-item" href="submit-coupon.html">Submit Coupon</a>
-									<a class="dropdown-item" href="blog.html">Blog</a>
-									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Action</a>
-									<a class="dropdown-item" href="#">Another action</a>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</div>
-							</li>
-						</ul>
+						<!--<ul class="navbar-nav ml-auto main-nav ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="dashboard.html">Dashboard</a>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    Pages <span><i class="fa fa-angle-down"></i></span>
+                                </a>
+                                &lt;!&ndash; Dropdown list &ndash;&gt;
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="category.html">Category</a>
+                                    <a class="dropdown-item" href="single.html">Single Page</a>
+                                    <a class="dropdown-item" href="store-single.html">Store Single</a>
+                                    <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                    <a class="dropdown-item" href="user-profile.html">User Profile</a>
+                                    <a class="dropdown-item" href="submit-coupon.html">Submit Coupon</a>
+                                    <a class="dropdown-item" href="blog.html">Blog</a>
+                                    <a class="dropdown-item" href="single-blog.html">Single Post</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-slide">
+                                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    Listing <span><i class="fa fa-angle-down"></i></span>
+                                </a>
+                                &lt;!&ndash; Dropdown list &ndash;&gt;
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>-->
 						<ul class="navbar-nav ml-auto mt-10">
 							<li class="nav-item">
-								<a class="nav-link login-button" href="index.html">Login</a>
+								<a class="nav-link login-button" href="index.html">个人中心</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> Add Listing</a>
-							</li>
+							<!--<li class="nav-item">
+                                <a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> Add
+                                    Listing</a>
+                            </li>-->
 						</ul>
 					</div>
 				</nav>
@@ -108,17 +114,18 @@
 					<form>
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<input type="text" class="form-control" id="inputtext4" placeholder="What are you looking for">
+								<input type="text" class="form-control" id="inputtext4"
+									   placeholder="市：例如 杭州">
 							</div>
 							<div class="form-group col-md-3">
-								<input type="text" class="form-control" id="inputCategory4" placeholder="Category">
+								<input type="text" class="form-control" id="inputCategory4" placeholder="行政区：例如 滨江区">
 							</div>
 							<div class="form-group col-md-3">
-								<input type="text" class="form-control" id="inputLocation4" placeholder="Location">
+								<input type="text" class="form-control" id="inputLocation4" placeholder="街道：例如 浦沿">
 							</div>
 							<div class="form-group col-md-2">
-								
-								<button type="submit" class="btn btn-primary">Search Now</button>
+
+								<button type="submit" class="btn btn-primary">搜索</button>
 							</div>
 						</div>
 					</form>
@@ -171,7 +178,7 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
-					<div class="content">
+					<!--<div class="content">
 						<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Product Details</a>
@@ -236,10 +243,10 @@
 								<h3 class="tab-title">Product Review</h3>
 								<div class="product-review">
 							  		<div class="media">
-							  			<!-- Avater -->
+							  			&lt;!&ndash; Avater &ndash;&gt;
 							  			<img src="images/user/user-thumb.jpg" alt="avater">
 							  			<div class="media-body">
-							  				<!-- Ratings -->
+							  				&lt;!&ndash; Ratings &ndash;&gt;
 							  				<div class="ratings">
 							  					<ul class="list-inline">
 							  						<li class="list-inline-item">
@@ -274,7 +281,7 @@
 							  		</div>
 							  		<div class="review-submission">
 							  			<h3 class="tab-title">Submit your review</h3>
-						  				<!-- Rate -->
+						  				&lt;!&ndash; Rate &ndash;&gt;
 						  				<div class="rate">
 						  					<div class="starrr"></div>
 						  				</div>
@@ -298,16 +305,16 @@
 							  	</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="sidebar">
+				<!--<div class="sidebar">
 					<div class="widget price text-center">
 						<h4>Price</h4>
 						<p>$230</p>
 					</div>
-					<!-- User Profile widget -->
+					&lt;!&ndash; User Profile widget &ndash;&gt;
 					<div class="widget user">
 						<img class="rounded-circle" src="images/user/user-thumb.jpg" alt="">
 						<h4><a href="">Jonathon Andrew</a></h4>
@@ -318,12 +325,12 @@
 							<li class="list-inline-item"><a href="" class="btn btn-offer">Make an offer</a></li>
 						</ul>
 					</div>
-					<!-- Map Widget -->
+					&lt;!&ndash; Map Widget &ndash;&gt;
 					<div class="widget map">
 						<div class="map">
 							<div id="map"></div>
 						</div>
-					</div>
+					</div>-->
 					<!-- Rate Widget -->
 					<div class="widget rate">
 						<!-- Heading -->
@@ -363,61 +370,6 @@
 <!--============================
 =            Footer            =
 =============================-->
-
-<footer class="footer section section-sm">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0">
-        <!-- About -->
-        <div class="block about">
-          <!-- footer logo -->
-          <img src="images/logo-footer.png" alt="">
-          <!-- description -->
-          <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 offset-lg-1 col-md-3">
-        <div class="block">
-          <h4>Site Pages</h4>
-          <ul>
-            <li><a href="#">Boston</a></li>
-            <li><a href="#">How It works</a></li>
-            <li><a href="#">Deals & Coupons</a></li>
-            <li><a href="#">Articls & Tips</a></li>
-            <li><a href="#">Terms of Services</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
-        <div class="block">
-          <h4>Admin Pages</h4>
-          <ul>
-            <li><a href="#">Boston</a></li>
-            <li><a href="#">How It works</a></li>
-            <li><a href="#">Deals & Coupons</a></li>
-            <li><a href="#">Articls & Tips</a></li>
-            <li><a href="#">Terms of Services</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- Promotion -->
-      <div class="col-lg-4 col-md-7">
-        <!-- App promotion -->
-        <div class="block-2 app-promotion">
-          <a href="">
-            <!-- Icon -->
-            <img src="images/footer/phone-icon.png" alt="mobile-icon">
-          </a>
-          <p>Get the Dealsy Mobile App and Save more</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Container End -->
-</footer>
 <!-- Footer Bottom -->
 <footer class="footer-bottom">
     <!-- Container Start -->

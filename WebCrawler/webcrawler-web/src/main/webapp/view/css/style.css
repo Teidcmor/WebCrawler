@@ -1362,6 +1362,8 @@ ul.pagination .active a {
 
 .product-item .thumb-content {
   position: relative;
+  width: 255px;
+  height: 192px;
 }
 
 .product-item .thumb-content .price {
