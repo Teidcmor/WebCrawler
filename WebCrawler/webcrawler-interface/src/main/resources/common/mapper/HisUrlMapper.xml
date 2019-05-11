@@ -33,7 +33,7 @@
     <!--新增历史url信息-->
     <insert id="insertHisUrl" parameterType="HisUrl">
         <![CDATA[
-        insert into t_his_url(url,city,district,community,timeout,LAST_DT) values (#{url},#{city},#{district},#{community},#{timeout},#{lastDT})
+        insert into t_his_url(url,city,district,community,timeout,LAST_DT,reserve1,reserve2,reserve3) values (#{url},#{city},#{district},#{community},#{timeout},#{lastDT},#{reserve1},#{reserve2},#{reserve3})
         ]]>
     </insert>
     <!--根据id查询指定历史url信息-->

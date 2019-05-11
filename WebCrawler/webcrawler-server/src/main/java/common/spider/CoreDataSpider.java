@@ -13,6 +13,8 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CoreDataSpider {
 
@@ -35,6 +37,7 @@ public class CoreDataSpider {
         this.coreData.setCity(data.getCity());
         this.coreData.setDistrict(data.getDistrict());
         this.coreData.setRegion(data.getRegion());
+        this.coreData.setReserve1(data.getReserve1());
     }
 
     /**
@@ -70,6 +73,9 @@ public class CoreDataSpider {
      * 获取所有的价格信息
      */
     private void getPrice(){
+        //使用正则表达式匹配所有的数值，即可匹配房租的金额
+        String p = "\\d+";
+        Pattern pattern = Pattern.compile(p);
         String price ,preference;
         Element topDiv = document.getElementsByAttributeValue("class","room-price").first();
         if(topDiv==null)
@@ -78,12 +84,16 @@ public class CoreDataSpider {
             Element priceDiv = topDiv.select("div.room-price-num").first();
             if(priceDiv!=null){
                 price = priceDiv.text();
-                coreData.setPrice(price);
+                Matcher matcher = pattern.matcher(price);
+                matcher.find();
+                coreData.setPrice(matcher.group());
             }
             Element preferenceDiv = topDiv.select("div.room-price-sale").first();
             if(preferenceDiv!=null){
                 preference = preferenceDiv.text();
-                preference = preference.substring(0,preference.lastIndexOf(" "));
+                Matcher matcher = pattern.matcher(preference);
+                matcher.find();
+                preference = matcher.group();
                 if(coreData.getPrice()==null){
                     coreData.setPrice(preference);
                 }else
@@ -105,8 +115,11 @@ public class CoreDataSpider {
                 Element element = (Element) iterator.next();
                 String current = element.text();
                 if(current.startsWith("建筑面积：")){
-                    String area = current.substring(current.indexOf("：")+1);
-                    coreData.setArea(area);
+                    String p = "\\d+";
+                    Pattern pattern = Pattern.compile(p);
+                    Matcher matcher = pattern.matcher(current);
+                    matcher.find();
+                    coreData.setArea(matcher.group());
                 }else if(current.startsWith("户型：")) {
                     String houseModel = current.substring(current.indexOf("：")+1);
                     coreData.setHouseModel(houseModel);

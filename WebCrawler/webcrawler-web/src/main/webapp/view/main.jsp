@@ -6,18 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%String path = request.getContextPath();
+    String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <!-- SITE TITTLE -->
-    <%--<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">--%>
+    <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calssimax</title>
+    <title><%=basePath%></title>
 
     <!-- PLUGINS CSS STYLE -->
     <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
@@ -123,7 +121,7 @@
             <div class="col-md-12">
                 <!-- Advance Search -->
                 <div class="advance-search">
-                    <form>
+                    <form action="/initialUrl/spiderBegin.do" method="get">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <input type="text" class="form-control" id="inputtext4"

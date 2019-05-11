@@ -35,8 +35,8 @@
         </select>-->
     <insert id="insertCoreData" parameterType="CoreData">
         <![CDATA[
-        insert into t_core_data (city,district,region,community,area,floor,toward,house_Model,price,preference,picture_Url,other_Details)
-        values (#{city},#{district},#{region},#{community},#{area},#{floor},#{toward},#{houseModel},#{price},#{preference},#{pictureUrl},#{otherDetails})
+        insert into t_core_data (city,district,region,community,area,floor,toward,house_Model,price,preference,picture_Url,other_Details,reserve1,reserve2,reserve3)
+        values (#{city},#{district},#{region},#{community},#{area},#{floor},#{toward},#{houseModel},#{price},#{preference},#{pictureUrl},#{otherDetails},#{reserve1},#{reserve2},#{reserve3})
         ]]>
     </insert>
 

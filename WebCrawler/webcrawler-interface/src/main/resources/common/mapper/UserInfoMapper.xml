@@ -25,7 +25,7 @@
 
     <insert id="addUser" parameterType="UserInfo">
         <![CDATA[
-          insert into t_user(userName,password) values (#{userName},#{password})
+          insert into t_user(userName,password,reserve1,reserve2,reserve3) values (#{userName},#{password},#{reserve1},#{reserve2},#{reserve3})
         ]]>
     </insert>
 </mapper>

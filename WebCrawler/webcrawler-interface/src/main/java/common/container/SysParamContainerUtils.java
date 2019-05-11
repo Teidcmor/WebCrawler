@@ -9,9 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 @Component
 public class SysParamContainerUtils implements ApplicationListener {
@@ -19,7 +17,7 @@ public class SysParamContainerUtils implements ApplicationListener {
     @Autowired
     private SysParamMapper sysParamMapper;
 
-    private static HashMap<String,String> sysParamContainer = new HashMap<String,String>();
+    private static Map<String,String> sysParamContainer = new Hashtable<String, String>();
 
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if(applicationEvent instanceof ContextRefreshedEvent){

@@ -41,6 +41,7 @@ public class BasicDataSpider {
             basicData.setRegion(initialUrl.getRegion());
             basicData.setCommunity(initialUrl.getCommunity());
             basicData.setBasicData(Data);
+            basicData.setReserve1(initialUrl.getUrl());
             basicDataService.insertBasicData(basicData);
             logger.info("基础保存成功！！！ 位置信息：cityName=+" + initialUrl.getCity() + "districtName=" + initialUrl.getDistrict() + "regionName:" + initialUrl.getRegion());
         }

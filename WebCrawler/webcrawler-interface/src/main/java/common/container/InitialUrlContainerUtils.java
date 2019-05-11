@@ -10,15 +10,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 @Component
 public class InitialUrlContainerUtils implements ApplicationListener {
     @Autowired
     private InitialUrlMapper initialUrlMapper;
-    private static  HashMap<String,InitialUrl> initialUrlContainer = new HashMap<String, InitialUrl>();
+    private static Map<String,InitialUrl> initialUrlContainer = new Hashtable<String, InitialUrl>();
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if (((applicationEvent instanceof ContextRefreshedEvent)) ){
             this.initInitialUrlContainer(); } }
