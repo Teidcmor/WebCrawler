@@ -1,11 +1,15 @@
 package coreData.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import common.mapper.CoreDataMapper;
 import common.pojo.CoreData;
+import coreData.dto.CoreDataDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("coreDataService")
@@ -43,4 +47,17 @@ public class CoreDataServiceImpl implements CoreDataService {
         List<CoreData> list = this.coreDataMapper.getAllCoreData();
         return list;
     }
+
+    /**
+     * 获取分页有效信息
+     *
+     * @return
+     */
+    public PageInfo<CoreData> getCoreDataWithPaging() {
+        PageHelper.startPage(1,9);
+        ArrayList<CoreData> data = (ArrayList<CoreData>) coreDataMapper.getAllCoreData();
+        PageInfo<CoreData> pageInfo = new PageInfo<CoreData>(data);
+        return pageInfo;
+    }
+
 }

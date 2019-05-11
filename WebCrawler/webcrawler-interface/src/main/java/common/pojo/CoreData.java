@@ -1,5 +1,7 @@
 package common.pojo;
 
+import java.util.ArrayList;
+
 public class CoreData {
 
     /**
@@ -52,6 +54,11 @@ public class CoreData {
      * 图片地址
      */
     private String pictureUrl;
+
+    /**
+     * 图片链接
+     */
+    private ArrayList<String> pictures;
     /**
      * 其他信息
      */
@@ -170,7 +177,24 @@ public class CoreData {
     }
 
     public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+        this.pictureUrl = pictureUrl.split(",")[0];
+    }
+
+    public ArrayList<String> getPictures() {
+        return pictures;
+    }
+
+    /**
+     * 需要手动触发
+     * @param pictures
+     */
+    public void setPictures(String pictures) {
+        String[] target = pictures.split(",");
+        ArrayList<String > list = new ArrayList<String>();
+        for(String str:target){
+            list.add(str);
+        }
+        this.pictures = list;
     }
 
     public String getOtherDetails() {

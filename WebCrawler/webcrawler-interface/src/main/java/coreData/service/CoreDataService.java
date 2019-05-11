@@ -1,6 +1,8 @@
 package coreData.service;
 
+import com.github.pagehelper.PageInfo;
 import common.pojo.CoreData;
+import coreData.dto.CoreDataDTO;
 
 import java.util.List;
 
@@ -23,5 +25,11 @@ public interface CoreDataService {
      * @return
      */
     List<CoreData> getAllCoreData()  throws Exception;
+
+    /**
+     * 获取分页有效信息
+     * @return
+     */
+    PageInfo<CoreData> getCoreDataWithPaging();
 
 }

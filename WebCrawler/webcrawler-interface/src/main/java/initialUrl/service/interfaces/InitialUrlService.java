@@ -1,6 +1,7 @@
 package initialUrl.service.interfaces;
 
 import common.pojo.InitialUrl;
+import coreData.dto.CoreDataDTO;
 
 import java.util.List;
 
