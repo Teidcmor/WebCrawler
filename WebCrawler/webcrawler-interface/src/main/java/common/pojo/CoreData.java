@@ -29,7 +29,7 @@ public class CoreData {
     /**
      * 面积
      */
-    private String area;
+    private int area;
     /**
      * 楼层
      */
@@ -45,7 +45,7 @@ public class CoreData {
     /**
      * 价格
      */
-    private String price;
+    private int price;
     /**
      * 其他优惠信息
      */
@@ -124,13 +124,6 @@ public class CoreData {
         this.community = community;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
 
     public String getFloor() {
         return floor;
@@ -156,11 +149,19 @@ public class CoreData {
         this.houseModel = houseModel;
     }
 
-    public String getPrice() {
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -86,7 +86,8 @@ public class CoreDataSpider {
                 price = priceDiv.text();
                 Matcher matcher = pattern.matcher(price);
                 matcher.find();
-                coreData.setPrice(matcher.group());
+                price = matcher.group();
+                coreData.setPrice(Integer.valueOf(price));
             }
             Element preferenceDiv = topDiv.select("div.room-price-sale").first();
             if(preferenceDiv!=null){
@@ -94,8 +95,8 @@ public class CoreDataSpider {
                 Matcher matcher = pattern.matcher(preference);
                 matcher.find();
                 preference = matcher.group();
-                if(coreData.getPrice()==null){
-                    coreData.setPrice(preference);
+                if(coreData.getPrice()==0){
+                    coreData.setPrice(Integer.valueOf(preference));
                 }else
                     coreData.setPreference(preference);
             }
@@ -119,9 +120,9 @@ public class CoreDataSpider {
                     Pattern pattern = Pattern.compile(p);
                     Matcher matcher = pattern.matcher(current);
                     matcher.find();
-                    coreData.setArea(matcher.group());
+                    coreData.setArea(Integer.valueOf(matcher.group()));
                 }else if(current.startsWith("户型：")) {
-                    String houseModel = current.substring(current.indexOf("：")+1);
+                    String houseModel = current.substring(current.indexOf("：")+1,current.lastIndexOf(" ")).trim();
                     coreData.setHouseModel(houseModel);
                 }else if(current.startsWith("朝向：")) {
                     String toward = current.substring(current.indexOf("：")+1);

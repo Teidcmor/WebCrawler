@@ -3,6 +3,7 @@ package coreData.service;
 import com.github.pagehelper.PageInfo;
 import common.pojo.CoreData;
 import coreData.dto.CoreDataDTO;
+import coreData.dto.CoreDataQueryDTO;
 
 import java.util.List;
 
@@ -30,6 +31,6 @@ public interface CoreDataService {
      * 获取分页有效信息
      * @return
      */
-    PageInfo<CoreData> getCoreDataWithPaging();
+    PageInfo<CoreData> getCoreDataWithPaging(CoreDataQueryDTO queryDTO,int pageNum,String sort) throws Exception;
 
 }

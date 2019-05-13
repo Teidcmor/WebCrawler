@@ -30,7 +30,7 @@
     <!--    <select id="getInitialUrl" parameterType="long" resultType="InitialUrl">
             select * from t_initial_url where id =#{id}
         <![CDATA[
-
+"%${}%"
         ]]>
         </select>-->
     <insert id="insertCoreData" parameterType="CoreData">
@@ -47,6 +47,86 @@
     </delete>
 
     <select id="getAllCoreData" resultMap="coreDataResultMap">
+        <![CDATA[
         select * from t_core_data
+          ]]>
     </select>
+
+    <select id="getCoreDataByPosition" resultMap="coreDataResultMap" parameterType="CoreData">
+        select * from t_core_data
+        <where>
+            <if test="city!=null and city!=''">
+                city like "%${city}%"
+            </if>
+            <if test="district!=null and district!=''">
+                and district like "%${district}%"
+            </if>
+            <if test="region!=null and region!=''">
+                and region like "%${region}%"
+            </if>
+            <if test="toward!=null and toward!=''">
+                and toward like "%${toward}%"
+            </if>
+            <if test="price!=0">
+                and price <![CDATA[ <=  ]]> #{price}
+            </if>
+            <if test="area!=0">
+                and area <![CDATA[ >=  ]]> #{area}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCoreDataByPositionSort" resultMap="coreDataResultMap" parameterType="CoreData">
+
+       select * from t_core_data
+        <where>
+            <if test="city!=null and city!=''">
+                city like "%${city}%"
+            </if>
+            <if test="district!=null and district!=''">
+                and district like "%${district}%"
+            </if>
+            <if test="region!=null and region!=''">
+                and region like "%${region}%"
+            </if>
+            <if test="toward!=null and toward!=''">
+                and toward like "%${toward}%"
+            </if>
+            <if test="price!=0">
+                and price <![CDATA[ <=  ]]> #{price}
+            </if>
+            <if test="area!=0">
+                and area <![CDATA[ >=  ]]> #{area}
+            </if>
+        </where>
+        order by price
+
+    </select>
+
+    <select id="getCoreDataByPositionSortDesc" resultMap="coreDataResultMap" parameterType="CoreData">
+
+        select * from t_core_data
+        <where>
+            <if test="city!=null and city!=''">
+                city like "%${city}%"
+            </if>
+            <if test="district!=null and district!=''">
+                and district like "%${district}%"
+            </if>
+            <if test="region!=null and region!=''">
+                and region like "%${region}%"
+            </if>
+            <if test="toward!=null and toward!=''">
+                and toward like "%${toward}%"
+            </if>
+            <if test="price!=0">
+                and price <![CDATA[ <=  ]]> #{price}
+            </if>
+            <if test="area!=0">
+                and area <![CDATA[ >=  ]]> #{area}
+            </if>
+        </where>
+        order by price desc
+    </select>
+
 </mapper>

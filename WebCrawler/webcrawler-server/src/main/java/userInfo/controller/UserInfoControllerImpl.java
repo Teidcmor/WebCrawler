@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import userInfo.dto.UserInfoDTO;
@@ -43,7 +44,7 @@ public class UserInfoControllerImpl {
     public ModelAndView login(UserInfoQueryDTO queryDTO) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         if(this.userInfoService.login(queryDTO)){//登录成功
-            modelAndView.setViewName("main");
+            modelAndView.setViewName("redirect:/coreData/goMain.do");
             UserInfo target = this.userInfoService.getUserInfoByUserName(queryDTO.getUserName());
             //获取用户信息保存session中
             UserInfoDTO userInfoDTO = BeanUtils.copyObject(target,UserInfoDTO.class);

@@ -24,7 +24,7 @@ public class CoreDataQueryDTO {
     /**
      * 面积
      */
-    private String area;
+    private int area;
     /**
      * 朝向
      */
@@ -32,7 +32,19 @@ public class CoreDataQueryDTO {
     /**
      * 价格
      */
-    private String price;
+    private int price;
+    /**
+     * 排序
+     */
+    private String sort;
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 
     public String getCity() {
         return city;
@@ -66,13 +78,7 @@ public class CoreDataQueryDTO {
         this.community = community;
     }
 
-    public String getArea() {
-        return area;
-    }
 
-    public void setArea(String area) {
-        this.area = area;
-    }
 
     public String getToward() {
         return toward;
@@ -82,11 +88,19 @@ public class CoreDataQueryDTO {
         this.toward = toward;
     }
 
-    public String getPrice() {
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

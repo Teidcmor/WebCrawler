@@ -29,6 +29,25 @@ public interface CoreDataMapper {
      */
     List<CoreData> getAllCoreData();
 
+    /**
+     * 按数据库顺序查询所有记录
+     * @param coreData
+     * @return
+     */
+    List<CoreData> getCoreDataByPosition(CoreData coreData);
 
+    /**
+     * 按价格升序查询数据库记录
+     * @param coreData
+     * @return
+     */
+    List<CoreData> getCoreDataByPositionSort(CoreData coreData);
+
+    /**
+     * 按价格降序查询数据库记录
+     * @param coreData
+     * @return
+     */
+    List<CoreData> getCoreDataByPositionSortDesc(CoreData coreData);
 
 }

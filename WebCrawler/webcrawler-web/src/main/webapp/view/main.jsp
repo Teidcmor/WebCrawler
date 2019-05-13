@@ -1,4 +1,4 @@
-<%@ page import="userInfo.dto.UserInfoDTO" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: WZH
   Date: 2019/4/16
@@ -7,10 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%String path = request.getContextPath();
     String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 <!DOCTYPE html>
-<html lang="en">
+<html id="html" lang="en">
 <head>
     <base href="<%=basePath%>"/>
     <meta charset="utf-8">
@@ -22,20 +24,85 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
 
     <script >
 
-        $(document).ready(function(){
-            $(function () {
-                alert("test")
+
+        /*分页功能*/
+        function getCoreDataByPage(pageNum) {
+            var page = pageNum;
+            if(page <=0 )
+                page = 1;
+            $.post("/coreData/changePages.do",{
+                pageNum:page
+            },function (data,status) {
+                document.write(data);
+                document.close();
             });
+        }
+
+        /*根据价格分段搜索功能*/
+        function getCoreDataByPrice(price) {
+            var p = price;
+            $.post("/coreData/getCoreDataByPrice.do",{
+                price:p
+            },function (data,status) {
+                document.write(data);
+                document.close();
+            });
+        }
+
+        /*根据房间面积分段搜索功能*/
+        function getCoreDataByArea(area) {
+            var p = area;
+            $.post("/coreData/getCoreDataByArea.do",{
+                area:p
+            },function (data,status) {
+                document.write(data);
+                document.close();
+            });
+        }
+
+        /*根据朝向分段搜索功能*/
+        function getCoreDataByToward(toward) {
+            var p = toward;
+            $.post("/coreData/getCoreDataByToward.do",{
+                toward:p
+            },function (data,status) {
+                document.write(data);
+                document.close();
+            });
+        }
+
+        /*设置排序下拉框的当前值*/
+        $(function () {
+            $('#sort').val(${querySort});
+            $("a").css("color","grey");
+            $('#price${queryPrice}').css("color","#007bff");
+            $('#area${queryArea}').css("color","#007bff");
+            $('#toward${queryToward}').css("color","#007bff");
+
         });
+
+        /*排序下拉框功能*/
+       function sortOnChange() {
+           var value = $('#sort').val();
+           $.post("/coreData//getCoreDataSort.do",{
+               sort:value
+           },function (data,status) {
+               document.write(data);
+               document.close();
+           })
+       }
+
+
 
 
     </script>
-
 
 </head>
 
@@ -54,7 +121,7 @@
 
                         <ul class="navbar-nav ml-auto mt-10">
                             <li class="nav-item">
-                                <a class="nav-link login-button" id="personal">个人中心</a>
+                                <a class="nav-link login-button" id="personal" style="cursor: pointer">个人中心</a>
                             </li>
                         </ul>
                     </div>
@@ -69,21 +136,19 @@
             <div class="col-md-12">
                 <!-- Advance Search -->
                 <div class="advance-search">
-                    <form id="search" action="/coreData/getCoreDataPage.do" method="post">
+                    <form id="searchForm" action="/coreData/getCoreDataPage.do" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" id="inputtext4"
-                                       placeholder="市：例如 杭州">
+                                <input type="text" class="form-control" id="city" name="city" value="${queryCity}" placeholder="市：例如 杭州">
                             </div>
                             <div class="form-group col-md-3">
-                                <input type="text" class="form-control" id="inputCategory4" placeholder="行政区：例如 滨江区">
+                                <input type="text" class="form-control" id="district" name="district" value="${queryDistrict}" placeholder="行政区：例如 滨江区">
                             </div>
                             <div class="form-group col-md-3">
-                                <input type="text" class="form-control" id="inputLocation4" placeholder="街道：例如 浦沿">
+                                <input type="text" class="form-control" id="region"  name="region"  value="${queryRegion}" placeholder="街道：例如 浦沿">
                             </div>
                             <div class="form-group col-md-2">
-
-                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button id="search" type="submit" class="btn btn-primary">搜索</button>
                             </div>
                         </div>
                     </form>
@@ -92,7 +157,7 @@
         </div>
     </div>
 </section>
-<section class="section-sm">
+<section id="show" class="section-sm">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -100,41 +165,42 @@
                     <div class="widget category-list">
                         <h4 class="widget-header">价格区间：</h4>
                         <ul class="category-list">
-                            <li><a href="category.html"><1000元 <span>93</span></a></li>
-                            <li><a href="category.html"><2000元 <span>233</span></a></li>
-                            <li><a href="category.html"><3000元 <span>183</span></a></li>
-                            <li><a href="category.html">>3000元 <span>343</span></a></li>
+                            <li><a id="price1000" style="cursor: pointer" onclick="getCoreDataByPrice(1000)"><=1000元 </a></li>
+                            <li><a id="price2000" style="cursor: pointer" onclick="getCoreDataByPrice(2000)"><=2000元 </a></li>
+                            <li><a id="price3000" style="cursor: pointer" onclick="getCoreDataByPrice(3000)"><=3000元 </a></li>
+                            <li><a id="price0"style="cursor: pointer" onclick="getCoreDataByPrice(0)">不限 </a></li>
                         </ul>
                     </div>
 
+                    <%--<div class="widget category-list">
+                        <h4 class="widget-header">房间朝向：</h4>
+                        <ul class="category-list">
+                            <li><a id="toward1" style="cursor: pointer" onclick="getCoreDataByToward('1')">南 </a></li>
+                            <li><a id="toward2" style="cursor: pointer" onclick="getCoreDataByToward('2')">北 </a></li>
+                            <li><a id="toward3" style="cursor: pointer" onclick="getCoreDataByToward('3')">东 </a></li>
+                            <li><a id="toward4" style="cursor: pointer" onclick="getCoreDataByToward('4')">西 </a></li>
+                            <li><a id="toward" style="cursor: pointer" onclick="getCoreDataByToward(0)">不限 </a></li>
+                        </ul>
+                    </div>--%>
                     <div class="widget category-list">
                         <h4 class="widget-header">房间朝向：</h4>
                         <ul class="category-list">
-                            <li><a href="category.html">南 <span>93</span></a></li>
-                            <li><a href="category.html">北 <span>233</span></a></li>
-                            <li><a href="category.html">东 <span>183</span></a></li>
-                            <li><a href="category.html">西 <span>120</span></a></li>
+                            <li><a id="toward1" style="cursor: pointer" onclick="getCoreDataByToward(1)">南 </a></li>
+                            <li><a id="toward2" style="cursor: pointer" onclick="getCoreDataByToward(2)">北 </a></li>
+                            <li><a id="toward3" style="cursor: pointer" onclick="getCoreDataByToward(3)">东 </a></li>
+                            <li><a id="toward4" style="cursor: pointer" onclick="getCoreDataByToward(4)">西 </a></li>
+                            <li><a id="toward0" style="cursor: pointer" onclick="getCoreDataByToward(0)">不限 </a></li>
                         </ul>
                     </div>
 
                     <div class="widget category-list">
                         <h4 class="widget-header">房间面积：</h4>
                         <ul class="category-list">
-                            <li><a href="category.html"><10 <span>93</span></a></li>
-                            <li><a href="category.html"><20 <span>233</span></a></li>
-                            <li><a href="category.html"><30 <span>183</span></a></li>
-                            <li><a href="category.html">>30 <span>120</span></a></li>
+                            <li><a id="area10" style="cursor: pointer" onclick="getCoreDataByArea(10)">>=10 m²</a></li>
+                            <li><a id="area20" style="cursor: pointer" onclick="getCoreDataByArea(20)">>=20 m²</a></li>
+                            <li><a id="area30" style="cursor: pointer" onclick="getCoreDataByArea(30)">>=30 m²</a></li>
+                            <li><a id="area0" style="cursor: pointer" onclick="getCoreDataByArea(0)">不限 </a></li>
                         </ul>
-                    </div>
-                    <div class="widget price-range">
-                        <h4 class="widget-header">自定义价格区间</h4>
-                        <div class="block">
-                            <input id="ex2" type="text" class="span2" value="" data-slider-min="10"
-                                   data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
-                            <br/><b>-</b><br/>
-                            <input id="ex3" type="text" class="span2" value="" data-slider-min="10"
-                                   data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -143,19 +209,23 @@
                     <div class="row">
                         <div class="col-md-6">
                             <strong>排序：</strong>
-                            <select>
-                                <option>综合排序</option>
+                            <select id="sort" onchange="sortOnChange()">
                                 <option value="1">综合排序</option>
-                                <option value="2">低价优先</option>
-                                <option value="4">好房优先</option>
+                                <option value="2">价格降序</option>
+                                <option value="3">价格升序</option>
                             </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="view">
+                                <a style="font-size: small">共${page.pages}页 ${page.total}条记录</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="product-grid-list">
                     <div class="row mt-30">
-
-                        <c:forEach var="coreData" items="${coreDatas}">
+                        <c:if test="${fn:length(coreDatas)>0}" >
+                            <c:forEach var="coreData" items="${coreDatas}">
 
                             <div class="col-sm-12 col-lg-4 col-md-6">
                                 <div class="product-item bg-light">
@@ -168,7 +238,7 @@
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <h4 class="card-title"><a href="">${coreData.district}&nbsp;${coreData.community}&nbsp;${coreData.houseModel}</a></h4>
+                                            <h4 class="card-title"><span>${coreData.district}&nbsp;${coreData.community}&nbsp;${coreData.houseModel}</span></h4>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
                                                     <a href="">小区：${coreData.community}</a>
@@ -191,29 +261,31 @@
                                     </div>
                                 </div>
                             </div>
-
                         </c:forEach>
-
+                        </c:if>
+                        <c:if test="${fn:length(coreDatas)<=0}">
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;抱歉！！您的搜索没有结果哦！！</p>
+                        </c:if>
                     </div>
                 </div>
                 <div class="pagination justify-content-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
+                            <li class="page-item"><a class="page-link" id="prePage" style="cursor: pointer" onclick="getCoreDataByPage(1)" >首页</a></li>
                             <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
+                                <a class="page-link" style="cursor: pointer" onclick="getCoreDataByPage(${page.prePage})" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">${page.prePage}</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">${page.pageNum}</a></li>
-                            <li class="page-item"><a class="page-link" href="#">${page.nextPage}</a></li>
+                            <li class="page-item active"><a id="pageNum" class="page-link" style="cursor: pointer">${page.pageNum}</a></li>
                             <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+                                <a class="page-link" style="cursor: pointer" onclick="getCoreDataByPage(${page.nextPage})" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </li>
+                            <li class="page-item"><a class="page-link" style="cursor: pointer" onclick="getCoreDataByPage(${page.pages})">尾页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -234,9 +306,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="top-to">
-        <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
     </div>
 </footer>
 </body>
