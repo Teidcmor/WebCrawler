@@ -25,10 +25,6 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
 </head>
 
 <body class="body-wrapper">
@@ -95,35 +91,35 @@
                     <h1 class="product-title">${details.district}&nbsp;${details.community}&nbsp;${details.houseModel}</h1>
                     <div class="product-meta">
                         <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fa fa-location-arrow"></i> 信息来源：<a href="">蛋壳公寓</a></li>
+                            <li class="list-inline-item"><i class="fa fa-location-arrow"></i> 信息来源：<a >蛋壳公寓</a></li>
                         </ul>
                     </div>
                     <div id="carouselExampleIndicators" class="product-slider carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
+                            <c:forEach var="index" begin="1" end="${fn:length(details.pictures)}">
+                                <c:if test="${index==1}">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+                                </c:if>
+                                <c:if test="${index!=1}">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="${index}"></li>
+                                </c:if>
+                            </c:forEach>
 
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 
                         </ol>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="https://public.danke.com.cn/public-20190123-isz_FqsmPgvSxOShhOhWysBTxXDnuly8-roomPcDetail.jpg"   height="450px" alt="First slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://public.danke.com.cn/public-20190124-isz_FgNeeDgg-NzCyfqzn4uXr1S_zPXx-roomPcDetail.jpg"    height="450px" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://public.danke.com.cn/public-20190124-isz_FgNeeDgg-NzCyfqzn4uXr1S_zPXx-roomPcDetail.jpg"   height="450px" alt="Third slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://public.danke.com.cn/public-20190123-isz_FqsmPgvSxOShhOhWysBTxXDnuly8-roomPcDetail.jpg" height="450px" alt="First slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://public.danke.com.cn/public-20190123-isz_FqsmPgvSxOShhOhWysBTxXDnuly8-roomPcDetail.jpg"  height="450px" alt="First slide">
-                            </div>
+                            <c:forEach var="coreData" items="${details.pictures}" varStatus="index">
+                                <c:if test="${index.first}">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="${coreData}"   height="450px" alt="First slide">
+                                    </div>
+                                </c:if>
+                                <c:if test="${!index.first}">
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="${coreData}"   height="450px" alt="First slide">
+                                </div>
+                                </c:if>
+                            </c:forEach>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -137,29 +133,35 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="widget rate">
-                    <h5 class="widget-header text-center">What would you rate
-                        <br>
-                        this product</h5>
-                    <div class="starrr"></div>
-                </div>
                 <div class="widget disclaimer">
-                    <h5 class="widget-header">Safety Tips</h5>
+                    <h5 class="widget-header">位置信息：</h5>
                     <ul>
-                        <li>Meet seller at a public place</li>
-                        <li>Check the item before you buy</li>
-                        <li>Pay only after collecting the item</li>
-                        <li>Pay only after collecting the item</li>
+                        <li>市：${details.city}</li>
+                        <li>行政区：${details.district}</li>
+                        <li>街道：${details.region}</li>
+                        <li>小区：${details.community}</li>
                     </ul>
                 </div>
-                <!-- Coupon Widget -->
-                <div class="widget coupon text-center">
-                    <!-- Coupon description -->
-                    <p>Have a great product to post ? Share it with
-                        your fellow users.
-                    </p>
-                    <!-- Submii button -->
-                    <a href="" class="btn btn-transparent-white">Submit Listing</a>
+                <div class="widget disclaimer">
+                    <h5 class="widget-header">房间信息：</h5>
+                    <ul>
+                        <li>户型：${details.houseModel}</li>
+                        <li>朝向：${details.toward}</li>
+                        <li>面积：约${details.area}m²</li>
+                        <li>楼层：${details.floor}</li>
+                        <c:if test="${details.otherDetails!=null and details.otherDetails!=''}">
+                        <li>其他：${details.otherDetails}</li>
+                        </c:if>
+                    </ul>
+                </div>
+                <div class="widget disclaimer">
+                    <h5 class="widget-header">价格：</h5>
+                    <ul>
+                        <li>价格：${details.price}元/月</li>
+                        <c:if test="${details.preference!=null and details.preference!=''}">
+                            <li>优惠信息：${details.preference}元/月</li>
+                        </c:if>
+                    </ul>
                 </div>
 
             </div>
@@ -188,7 +190,9 @@
         </div>
     </div>
 </footer>
-
+<!-- JAVASCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>

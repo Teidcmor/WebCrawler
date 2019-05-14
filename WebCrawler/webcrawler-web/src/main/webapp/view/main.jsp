@@ -119,7 +119,7 @@
         <div class="row">
             <div class="col-md-12">
                 <nav class="navbar navbar-expand-lg  navigation">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand">
                         <!--<img src="images/logo.png" alt="">-->
                         租房信息爬取平台
                     </a>
