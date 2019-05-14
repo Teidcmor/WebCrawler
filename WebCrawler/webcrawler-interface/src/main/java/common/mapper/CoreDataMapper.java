@@ -12,6 +12,12 @@ import java.util.List;
 public interface CoreDataMapper {
 
     /**
+     * 通过id回去明细信息
+     * @param id
+     * @return
+     */
+    CoreData getCoreDataById(long id);
+    /**
      * 新增有效信息
      * @param coreData
      */

@@ -6,41 +6,29 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+<%String path = request.getContextPath();
+    String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <!-- SITE TITTLE -->
+    <base href="<%=basePath%>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calssimax</title>
+    <title>租房信息爬取平台</title>
 
-    <!-- PLUGINS CSS STYLE -->
-    <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-    <!-- Bootstrap -->
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Owl Carousel -->
-    <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-    <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
-    <!-- Fancy Box -->
-    <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-    <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
-    <!-- CUSTOM CSS -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
-    <!-- FAVICON -->
-    <link href="img/favicon.png" rel="shortcut icon">
+    <link href="css/style.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
 </head>
 
 <body class="body-wrapper">
@@ -51,12 +39,14 @@
             <div class="col-md-12">
                 <nav class="navbar navbar-expand-lg  navigation">
                     <a class="navbar-brand" href="index.html">
+                        <!--<img src="images/logo.png" alt="">-->
                         租房信息爬取平台
                     </a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                         <ul class="navbar-nav ml-auto mt-10">
                             <li class="nav-item">
-                                <a class="nav-link login-button" href="index.html">个人中心</a>
+                                <a class="nav-link login-button" id="personal" style="cursor: pointer">个人中心</a>
                             </li>
                         </ul>
                     </div>
@@ -71,21 +61,19 @@
             <div class="col-md-12">
                 <!-- Advance Search -->
                 <div class="advance-search">
-                    <form>
+                    <form id="searchForm" action="/coreData/getCoreDataPage.do" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <input type="text" class="form-control" id="inputtext4"
-                                       placeholder="市：例如 杭州">
+                                <input type="text" class="form-control" id="city" name="city" value="${queryCity}" placeholder="市：例如 杭州">
                             </div>
                             <div class="form-group col-md-3">
-                                <input type="text" class="form-control" id="inputCategory4" placeholder="行政区：例如 滨江区">
+                                <input type="text" class="form-control" id="district" name="district" value="${queryDistrict}" placeholder="行政区：例如 滨江区">
                             </div>
                             <div class="form-group col-md-3">
-                                <input type="text" class="form-control" id="inputLocation4" placeholder="街道：例如 浦沿">
+                                <input type="text" class="form-control" id="region"  name="region"  value="${queryRegion}" placeholder="街道：例如 浦沿">
                             </div>
                             <div class="form-group col-md-2">
-
-                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button id="search" type="submit" class="btn btn-primary">搜索</button>
                             </div>
                         </div>
                     </form>
@@ -104,7 +92,7 @@
             <!-- Left sidebar -->
             <div class="col-md-8">
                 <div class="product-details">
-                    <h1 class="product-title">浦沿&nbsp;大同公寓&nbsp;四室二卫 合</h1>
+                    <h1 class="product-title">${details.district}&nbsp;${details.community}&nbsp;${details.houseModel}</h1>
                     <div class="product-meta">
                         <ul class="list-inline">
                             <li class="list-inline-item"><i class="fa fa-location-arrow"></i> 信息来源：<a href="">蛋壳公寓</a></li>
@@ -112,11 +100,13 @@
                     </div>
                     <div id="carouselExampleIndicators" class="product-slider carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
+
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -190,43 +180,14 @@
             <div class="col-sm-6 col-12">
                 <!-- Copyright -->
                 <div class="copyright">
-                    <p>Copyright © 2016. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                    <p>租房信息爬取平台-作者：  <a href="https://github.com/Teidcmor"
+                                        target="_blank" title="温珍辉">温珍辉</a> -
+                        2019年05月10日-南昌大学-南昌大学软件工程专业</p>
                 </div>
-            </div>
-            <div class="col-sm-6 col-12">
-                <!-- Social Icons -->
-                <ul class="social-media-icons text-right">
-                    <li><a class="fa fa-facebook" href=""></a></li>
-                    <li><a class="fa fa-twitter" href=""></a></li>
-                    <li><a class="fa fa-pinterest-p" href=""></a></li>
-                    <li><a class="fa fa-vimeo" href=""></a></li>
-                </ul>
             </div>
         </div>
     </div>
-    <!-- Container End -->
-    <!-- To Top -->
-    <div class="top-to">
-        <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
-    </div>
 </footer>
-
-<!-- JAVASCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="plugins/tether/js/tether.min.js"></script>
-<script src="plugins/raty/jquery.raty-fa.js"></script>
-<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-<script src="plugins/slick-carousel/slick/slick.min.js"></script>
-<script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
-<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
-
-<script src="js/scripts.js"></script>
-
 
 </body>
 

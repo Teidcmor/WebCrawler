@@ -167,6 +167,22 @@ public class CoreDataControllerImpl {
     }
 
     /**
+     * 通过id获取租房详细信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/goDetails.do")
+    public ModelAndView goDetails(String id){
+        CoreDataQueryDTO queryDTO = new CoreDataQueryDTO();
+        queryDTO.setId(Long.valueOf(id));
+        ModelAndView modelAndView = new ModelAndView("details");
+        CoreData target = coreDataService.getDetails(queryDTO);
+        target.setPictures(target.getReserve2());
+        modelAndView.addObject("details",target);
+        return modelAndView;
+    }
+
+    /**
      * 获取session中的位置信息
      * @param session
      * @return

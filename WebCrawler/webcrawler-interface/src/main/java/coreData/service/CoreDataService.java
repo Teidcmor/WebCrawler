@@ -33,4 +33,11 @@ public interface CoreDataService {
      */
     PageInfo<CoreData> getCoreDataWithPaging(CoreDataQueryDTO queryDTO,int pageNum,String sort) throws Exception;
 
+    /**
+     * 查询详细信息
+     * @param queryDTO
+     * @return
+     */
+    CoreData getDetails(CoreDataQueryDTO queryDTO);
+
 }

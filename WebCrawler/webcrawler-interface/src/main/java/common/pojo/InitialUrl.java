@@ -52,10 +52,13 @@ public class InitialUrl {
     private String updateTM;
     /**
      * 备用字段1
+     * 已占用  区分手动添加的初始链接和后续爬取的链接
+     * 1 手动添加的链接
      */
     private String reserve1;
     /**
      * 备用字段2
+     * 已占用  标记链接类型，为1时是分页链接
      */
     private String reserve2;
     /**

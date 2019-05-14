@@ -44,6 +44,7 @@ public class BasicData {
     private String updateTM;
     /**
      * 备用字段1
+     * 已占用：数据获取来源URL
      */
     private String reserve1;
     /**

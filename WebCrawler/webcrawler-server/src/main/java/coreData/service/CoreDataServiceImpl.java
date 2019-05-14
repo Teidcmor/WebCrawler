@@ -69,4 +69,15 @@ public class CoreDataServiceImpl implements CoreDataService {
         return pageInfo;
     }
 
+    /**
+     * 查询详细信息
+     *
+     * @param queryDTO
+     * @return
+     */
+    public CoreData getDetails(CoreDataQueryDTO queryDTO) {
+        CoreData target = coreDataMapper.getCoreDataById(queryDTO.getId());
+        return target;
+
+    }
 }

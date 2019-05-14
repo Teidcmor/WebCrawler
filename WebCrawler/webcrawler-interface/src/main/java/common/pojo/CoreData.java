@@ -73,10 +73,12 @@ public class CoreData {
     private String updateTM;
     /**
      * 备用字段1
+     * 已占用：数据获取来源URL
      */
     private String reserve1;
     /**
      * 备用字段2
+     * 数据库未占用，从数据库读取数据时占用，用于存图片链接的原始值
      */
     private String reserve2;
     /**
@@ -179,6 +181,7 @@ public class CoreData {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl.split(",")[0];
+        this.setReserve2(pictureUrl);
     }
 
     public ArrayList<String> getPictures() {

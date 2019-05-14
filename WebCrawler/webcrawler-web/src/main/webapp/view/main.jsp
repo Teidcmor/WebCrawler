@@ -99,6 +99,12 @@
            })
        }
 
+       function goDetails(id) {
+           var value = id;
+           var path = "<%=basePath%>";
+           window.open(path+"coreData/goDetails.do?id="+id);
+       }
+
 
 
 
@@ -211,8 +217,8 @@
                             <strong>排序：</strong>
                             <select id="sort" onchange="sortOnChange()">
                                 <option value="1">综合排序</option>
-                                <option value="2">价格降序</option>
-                                <option value="3">价格升序</option>
+                                <option value="2">价格升序</option>
+                                <option value="3">价格降序</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -231,28 +237,27 @@
                                 <div class="product-item bg-light">
                                     <div class="card">
                                         <div class="thumb-content">
-                                            <a href="">
+                                            <a onclick="goDetails(${coreData.id})" style="cursor: pointer">
                                                 <img class="card-img-top img-fluid"
-                                                     src="${coreData.pictureUrl}"
-                                                     alt="Card image cap">
+                                                     src="${coreData.pictureUrl}">
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <h4 class="card-title"><span>${coreData.district}&nbsp;${coreData.community}&nbsp;${coreData.houseModel}</span></h4>
+                                            <h4 class="card-title" onclick="goDetails(${coreData.id})" style="cursor: pointer"><span>${coreData.district}&nbsp;${coreData.community}&nbsp;${coreData.houseModel}</span></h4>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
-                                                    <a href="">小区：${coreData.community}</a>
+                                                    <a>小区：${coreData.community}</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="">面积：约${coreData.area}㎡</a>
+                                                    <a>面积：约${coreData.area}㎡</a>
                                                 </li>
                                             </ul>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
-                                                    <a href="">朝向：${coreData.toward}</a>
+                                                    <a>朝向：${coreData.toward}</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="">户型：${coreData.houseModel}</a>
+                                                    <a>户型：${coreData.houseModel}</a>
                                                 </li>
                                             </ul>
                                             <p class="card-text">${coreData.price} 元/月</p>

@@ -33,6 +33,11 @@
 "%${}%"
         ]]>
         </select>-->
+
+    <select id="getCoreDataById" parameterType="long" resultMap="coreDataResultMap">
+        select * from t_core_data where id =#{id}
+    </select>
+
     <insert id="insertCoreData" parameterType="CoreData">
         <![CDATA[
         insert into t_core_data (city,district,region,community,area,floor,toward,house_Model,price,preference,picture_Url,other_Details,reserve1,reserve2,reserve3)

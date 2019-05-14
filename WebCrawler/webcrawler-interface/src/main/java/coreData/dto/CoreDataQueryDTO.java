@@ -2,6 +2,10 @@ package coreData.dto;
 
 public class CoreDataQueryDTO {
 
+    /**
+     * 主键ID
+     */
+    private long id;
 
     /**
      * 网页地址内容归属城市
@@ -37,6 +41,14 @@ public class CoreDataQueryDTO {
      * 排序
      */
     private String sort;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getSort() {
         return sort;
