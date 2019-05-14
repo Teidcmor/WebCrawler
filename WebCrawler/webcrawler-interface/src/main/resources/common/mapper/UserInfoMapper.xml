@@ -41,4 +41,8 @@
         update t_user set password =#{password} where id =#{id}
     </update>
 
+    <update id="updateUserSex" parameterType="UserInfo">
+        update t_user set reserve1 =#{reserve1} where id =#{id}
+    </update>
+
 </mapper>

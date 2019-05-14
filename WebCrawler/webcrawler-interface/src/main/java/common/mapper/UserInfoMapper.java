@@ -43,4 +43,10 @@ public interface UserInfoMapper {
      */
     void editUserPassword(UserInfo userInfo);
 
+    /**
+     * 修改用户性别
+     * @param userInfo
+     */
+    void updateUserSex(UserInfo userInfo);
+
 }

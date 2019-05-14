@@ -116,4 +116,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void updateUserPassword(UserInfo userInfo) {
         this.userInfoMapper.editUserPassword(userInfo);
     }
+
+    /**
+     * 修改用户性别
+     *
+     * @param userInfo
+     */
+    public void updateUserSex(UserInfo userInfo) {
+        this.userInfoMapper.updateUserSex(userInfo);
+    }
 }

@@ -52,4 +52,10 @@ public interface UserInfoService {
      */
     public void updateUserPassword(UserInfo userInfo);
 
+    /**
+     * 修改用户性别
+     * @param userInfo
+     */
+    public void updateUserSex(UserInfo userInfo);
+
 }

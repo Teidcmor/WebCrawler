@@ -25,6 +25,11 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- JAVASCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+    <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <script>
         function goPersonal() {
             var path = "<%=basePath%>";
@@ -197,9 +202,6 @@
         </div>
     </div>
 </footer>
-<!-- JAVASCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>

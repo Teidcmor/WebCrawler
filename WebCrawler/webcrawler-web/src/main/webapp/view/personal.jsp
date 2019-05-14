@@ -25,6 +25,36 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script>
+        /*修改密码方法*/
+        function changePassword() {
+            var result = confirm("密码已修改，是否保存？");
+            if(result)
+                $('#passwordForm').submit();
+
+        }
+
+        /*修改性别方法*/
+        function changeSex() {
+            var result = confirm("性别已修改，是否保存？");
+            if(result)
+                $('#sexForm').submit();
+        }
+
+        $(function () {
+            var value = ${userInfo.reserve1};
+            var target = "";
+            if(value==0)
+                target = "女";
+            else
+                target = "男";
+            $('#sex').val(target);
+        })
+
+    </script>
+
 </head>
 
 <body class="body-wrapper">
@@ -61,24 +91,30 @@
                     <div class="widget user-dashboard-profile">
                         <!-- User Image -->
                         <div class="profile-thumb">
-                            <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+                            <c:if test="${userInfo.reserve1==1}">
+                                <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+                            </c:if>
+                            <c:if test="${userInfo.reserve1!=1}">
+                                <img src="images/user/u2.jpg" alt="" class="rounded-circle">
+                            </c:if>
                         </div>
                         <!-- User Name -->
                         <h5 class="text-center">${userInfo.userName}</h5>
-                        <p>Joined February 06, 2017</p>
-                        <a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
+                        <c:if test="${userInfo.type==2}">
+                            <p>管理员</p>
+                        </c:if>
+                        <c:if test="${userInfo.type!=2}">
+                            <p>普通用户</p>
+                        </c:if>
                     </div>
                     <!-- Dashboard Links -->
                     <div class="widget user-dashboard-menu">
                         <ul>
-                            <li class="active" ><a href=""><i class="fa fa-user"></i> My Ads</a></li>
+                            <li class="active" ><a href=""><i class="fa fa-user"></i> 个人信息 </a></li>
                             <c:if test="${userInfo.type==2}">
-                            <li><a href=""><i class="fa fa-bookmark-o"></i> Favourite Ads <span>5</span></a></li>
-                            <li><a href=""><i class="fa fa-file-archive-o"></i>Archived Ads <span>12</span></a></li>
-                            <li><a href=""><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a></li>
-                            <li><a href=""><i class="fa fa-cog"></i> Logout</a></li>
-                            <li><a href=""><i class="fa fa-power-off"></i>Delete Account</a></li>
-                            </c:if>2
+                            <li><a href=""><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
+                            <li><a href=""><i class="fa fa-cog"></i> 用户管理 </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -86,185 +122,43 @@
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
                 <!-- Recently Favorited -->
                 <div class="widget dashboard-container my-adslist">
-                    <h3 class="widget-header">My Ads</h3>
+                    <h3 class="widget-header">个人信息：</h3>
                     <table class="table table-responsive product-dashboard-table">
-                        <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Product Title</th>
-                            <th class="text-center">Category</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                        </thead>
                         <tbody>
                         <tr>
 
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
+                            <td class="product-category"><span class="categories">用户名：</span></td>
                             <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div class="form-group col-md-3">
+                                    <input type="text" disabled="disabled"  class="form-control" style="width: 400px ;background-color: white" id="region" value="${userInfo.userName}" >
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="product-category"><span class="categories">密码：</span></td>
+                            <td class="action" data-title="Action">
+                                <div class="form-group col-md-3">
+                                    <form id="passwordForm" action="/user/changePassword.do" method="post">
+                                        <input type="password"  class="form-control" style="width: 400px" id="password"  name="password"  value="${userInfo.password}" onchange="changePassword()">
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                         <tr>
 
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-2.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Study Table Combo</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Feb 12, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>USA</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
+                            <td class="product-category"><span class="categories">性别：</span></td>
                             <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div class="form-group col-md-3">
+                                    <form id="sexForm" action="/user/changeSex.do" method="post">
+                                        <input type="text" class="form-control" style="width: 400px" id="sex"  name="sex"  onchange="changeSex()">
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-3.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
+                            <td class="product-category"><span class="categories"></span></td>
                             <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
 
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-4.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -297,7 +191,7 @@
     </div>
 </footer>
 <!-- JAVASCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
 <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 
