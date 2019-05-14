@@ -22,6 +22,25 @@ public interface UserInfoMapper {
      */
     void addUser(UserInfo userInfo);
 
+    /**
+     * 通过id获取用户信息
+     * @param id
+     * @return
+     */
+    UserInfo getUserInfoById(long id);
 
+    /**
+     * 设置用户账号状态
+     * 0 - 禁用
+     * 0 - 可用
+     * @param userInfo
+     */
+    void setUserStatus(UserInfo userInfo);
+
+    /**
+     * 修改用户密码
+     * @param userInfo
+     */
+    void editUserPassword(UserInfo userInfo);
 
 }

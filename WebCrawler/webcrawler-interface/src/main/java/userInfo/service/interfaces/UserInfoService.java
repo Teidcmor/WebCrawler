@@ -27,4 +27,29 @@ public interface UserInfoService {
      */
     public UserInfo getUserInfoByUserName(String userName) throws Exception;
 
+    /**
+     * 通过id获取用户信息
+     * @param id
+     * @return
+     */
+    public UserInfo getUserInfoById(long id);
+
+    /**
+     * 设置用户账号可用
+     * @param userInfo
+     */
+    public void setUserEnable(UserInfo userInfo);
+
+    /**
+     * 设置用户账号不可用
+     * @param userInfo
+     */
+    public void setUserUnEnable(UserInfo userInfo);
+
+    /**
+     * 修改用户密码
+     * @param userInfo
+     */
+    public void updateUserPassword(UserInfo userInfo);
+
 }

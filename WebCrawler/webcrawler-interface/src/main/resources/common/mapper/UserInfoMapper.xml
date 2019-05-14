@@ -23,9 +23,22 @@
         ]]>
     </select>
 
+    <select id="getUserInfoById" parameterType="long" resultMap="userInfoResultMap">
+        select * from  t_user where id =#{id}
+    </select>
+
     <insert id="addUser" parameterType="UserInfo">
         <![CDATA[
           insert into t_user(userName,password,reserve1,reserve2,reserve3) values (#{userName},#{password},#{reserve1},#{reserve2},#{reserve3})
         ]]>
     </insert>
+
+    <update id="setUserStatus" parameterType="UserInfo">
+        update t_user set enabled =#{enabled} where id =#{id}
+    </update>
+
+    <update id="editUserPassword" parameterType="UserInfo">
+        update t_user set password =#{password} where id =#{id}
+    </update>
+
 </mapper>

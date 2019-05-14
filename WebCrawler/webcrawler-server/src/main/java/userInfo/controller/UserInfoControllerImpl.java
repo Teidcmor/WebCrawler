@@ -6,6 +6,7 @@ import common.utils.CommonUtils;
 import common.utils.ConstantUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import userInfo.dto.UserInfoDTO;
 import userInfo.dto.UserInfoQueryDTO;
 import userInfo.service.interfaces.UserInfoService;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -56,5 +59,22 @@ public class UserInfoControllerImpl {
         modelAndView.addObject("errorMessage",ConstantUtils.LOGIN_FAILED);
         return modelAndView;
     }
+
+    /**
+     * 跳转个人中心页面
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/goPersonal.do")
+    public ModelAndView goPersonal(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("personal");
+        UserInfoDTO currentUser = (UserInfoDTO) session.getAttribute("currentUser");
+        UserInfo target = this.userInfoService.getUserInfoById(currentUser.getId());
+        modelAndView.addObject("userInfo",target);
+        return modelAndView;
+    }
+
+
+
 
 }

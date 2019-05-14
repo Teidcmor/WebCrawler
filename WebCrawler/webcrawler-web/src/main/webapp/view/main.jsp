@@ -105,7 +105,10 @@
            window.open(path+"coreData/goDetails.do?id="+id);
        }
 
-
+        function goPersonal() {
+            var path = "<%=basePath%>";
+            window.open(path+"user/goPersonal.do");
+        }
 
 
     </script>
@@ -127,7 +130,7 @@
 
                         <ul class="navbar-nav ml-auto mt-10">
                             <li class="nav-item">
-                                <a class="nav-link login-button" id="personal" style="cursor: pointer">个人中心</a>
+                                <a class="nav-link login-button" id="personal" style="cursor: pointer" onclick="goPersonal()">个人中心</a>
                             </li>
                         </ul>
                     </div>

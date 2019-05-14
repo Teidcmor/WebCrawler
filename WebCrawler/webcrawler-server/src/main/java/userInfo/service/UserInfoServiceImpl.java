@@ -72,4 +72,48 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfo getUserInfoByUserName(String userName) throws Exception {
         return this.userInfoMapper.getUserInfoByUserName(userName);
     }
+
+    /**
+     * 通过id获取用户信息
+     *
+     * @param id
+     * @return
+     */
+    public UserInfo getUserInfoById(long id) {
+        UserInfo userInfo = this.userInfoMapper.getUserInfoById(id);
+        return userInfo;
+    }
+
+    /**
+     * 设置用户账号可用
+     *
+     * @param userInfo 传入的参数中enable字段须先赋值为期望值
+     */
+    public void setUserEnable(UserInfo userInfo) {
+        //查询数据库中当前的状态
+        UserInfo target = this.userInfoMapper.getUserInfoById(userInfo.getId());
+        if("0".equals(target.getEnabled()))//如果当前状态为不可用，则修改数据库状态
+            this.userInfoMapper.setUserStatus(userInfo);
+    }
+
+    /**
+     * 设置用户账号不可用
+     *
+     * @param userInfo 传入的参数中enable字段须先赋值为期望值
+     */
+    public void setUserUnEnable(UserInfo userInfo) {
+        //查询数据库中当前的状态
+        UserInfo target = this.userInfoMapper.getUserInfoById(userInfo.getId());
+        if("1".equals(target.getEnabled()))//如果当前状态为可用，则修改数据库状态
+            this.userInfoMapper.setUserStatus(userInfo);
+    }
+
+    /**
+     * 修改用户密码
+     *
+     * @param userInfo
+     */
+    public void updateUserPassword(UserInfo userInfo) {
+        this.userInfoMapper.editUserPassword(userInfo);
+    }
 }
