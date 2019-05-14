@@ -19,38 +19,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>租房信息爬取平台</title>
+    <title>个人中心</title>
 
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <!-- JAVASCRIPTS -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+    <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+
+        function goPersonal() {
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/user/goPersonal.do';
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+    </script>
 
 </head>
 
 <body class="body-wrapper">
-
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg  navigation">
-                    <a class="navbar-brand" href="index.html">
-                        <!--<img src="images/logo.png" alt="">-->
-                        租房信息爬取平台
-                    </a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                        <ul class="navbar-nav ml-auto mt-10">
-                            <li class="nav-item">
-                                <a class="nav-link login-button" id="personal" style="cursor: pointer">个人中心</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-</section>
 <!--==================================
 =            User Profile            =
 ===================================-->
@@ -65,32 +60,30 @@
                     <div class="widget user-dashboard-profile">
                         <!-- User Image -->
                         <div class="profile-thumb">
-                            <img src="images/user/u2.jpg" alt="" class="rounded-circle">
+                            <c:if test="${currentUser.reserve1==1}">
+                                <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+                            </c:if>
+                            <c:if test="${currentUser.reserve1!=1}">
+                                <img src="images/user/u2.jpg" alt="" class="rounded-circle">
+                            </c:if>
                         </div>
                         <!-- User Name -->
-                        <h5 class="text-center">Samanta Doe</h5>
-                        <p>Joined February 06, 2017</p>
-                        <a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
+                        <h5 class="text-center">${currentUser.userName}</h5>
+                        <c:if test="${currentUser.type==1}">
+                            <p>管理员</p>
+                        </c:if>
+                        <c:if test="${currentUser.type!=1}">
+                            <p>普通用户</p>
+                        </c:if>
                     </div>
                     <!-- Dashboard Links -->
                     <div class="widget user-dashboard-menu">
                         <ul>
-                            <li><a href="dashboard-my-ads.html"><i class="fa fa-user"></i> My Ads</a></li>
-                            <li>
-                                <a href="dashboard-favourite-ads.html"><i class="fa fa-bookmark-o"></i> Favourite Ads <span>5</span></a>
-                            </li>
-                            <li class="active" >
-                                <a href="dashboard-archived-ads.html"><i class="fa fa-file-archive-o"></i>Archeved Ads <span>12</span></a>
-                            </li>
-                            <li>
-                                <a href="dashboard-pending-ads.html"><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a>
-                            </li>
-                            <li>
-                                <a href="logout.html"><i class="fa fa-cog"></i> Logout</a>
-                            </li>
-                            <li>
-                                <a href="delete-account.html"><i class="fa fa-power-off"></i>Delete Account</a>
-                            </li>
+                            <li ><a style="cursor: pointer" onclick="goPersonal()"><i class="fa fa-user"></i> 个人信息 </a></li>
+                            <c:if test="${currentUser.type==1}">
+                                <li class="active"><a style="cursor: pointer" ><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
+                                <li><a href=""><i class="fa fa-cog"></i> 用户管理 </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -283,11 +276,6 @@
         </div>
     </div>
 </footer>
-<!-- JAVASCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

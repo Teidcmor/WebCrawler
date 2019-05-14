@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public interface UserInfoMapper {
@@ -48,5 +50,12 @@ public interface UserInfoMapper {
      * @param userInfo
      */
     void updateUserSex(UserInfo userInfo);
+
+    /**
+     * 查询所有普通用户信息
+     * @return
+     */
+    List<UserInfo> getAllSimpleUser();
+
 
 }

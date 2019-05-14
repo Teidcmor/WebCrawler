@@ -24,7 +24,9 @@
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+    <!-- JAVASCRIPTS -->
+    <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+    <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script>
@@ -44,7 +46,7 @@
         }
 
         $(function () {
-            var value = ${userInfo.reserve1};
+            var value = ${currentUser.reserve1};
             var target = "";
             if(value==0)
                 target = "女";
@@ -52,6 +54,15 @@
                 target = "男";
             $('#sex').val(target);
         })
+
+        function goUserManage() {
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/admin/goUserManage.do';
+            document.body.appendChild(form);
+            form.submit();
+        }
 
     </script>
 
@@ -91,28 +102,28 @@
                     <div class="widget user-dashboard-profile">
                         <!-- User Image -->
                         <div class="profile-thumb">
-                            <c:if test="${userInfo.reserve1==1}">
+                            <c:if test="${currentUser.reserve1==1}">
                                 <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
                             </c:if>
-                            <c:if test="${userInfo.reserve1!=1}">
+                            <c:if test="${currentUser.reserve1!=1}">
                                 <img src="images/user/u2.jpg" alt="" class="rounded-circle">
                             </c:if>
                         </div>
                         <!-- User Name -->
-                        <h5 class="text-center">${userInfo.userName}</h5>
-                        <c:if test="${userInfo.type==2}">
+                        <h5 class="text-center">${currentUser.userName}</h5>
+                        <c:if test="${currentUser.type==1}">
                             <p>管理员</p>
                         </c:if>
-                        <c:if test="${userInfo.type!=2}">
+                        <c:if test="${currentUser.type!=1}">
                             <p>普通用户</p>
                         </c:if>
                     </div>
                     <!-- Dashboard Links -->
                     <div class="widget user-dashboard-menu">
                         <ul>
-                            <li class="active" ><a href=""><i class="fa fa-user"></i> 个人信息 </a></li>
-                            <c:if test="${userInfo.type==2}">
-                            <li><a href=""><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
+                            <li class="active" ><a style="cursor: pointer"><i class="fa fa-user"></i> 个人信息 </a></li>
+                            <c:if test="${currentUser.type==1}">
+                            <li><a onclick="goUserManage()" style="cursor: pointer"><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
                             <li><a href=""><i class="fa fa-cog"></i> 用户管理 </a></li>
                             </c:if>
                         </ul>
@@ -130,7 +141,7 @@
                             <td class="product-category"><span class="categories">用户名：</span></td>
                             <td class="action" data-title="Action">
                                 <div class="form-group col-md-3">
-                                    <input type="text" disabled="disabled"  class="form-control" style="width: 400px ;background-color: white" id="region" value="${userInfo.userName}" >
+                                    <input type="text" disabled="disabled"  class="form-control" style="width: 400px ;background-color: white" id="region" value="${currentUser.userName}" >
                                 </div>
                             </td>
                         </tr>
@@ -139,7 +150,7 @@
                             <td class="action" data-title="Action">
                                 <div class="form-group col-md-3">
                                     <form id="passwordForm" action="/user/changePassword.do" method="post">
-                                        <input type="password"  class="form-control" style="width: 400px" id="password"  name="password"  value="${userInfo.password}" onchange="changePassword()">
+                                        <input type="password"  class="form-control" style="width: 400px" id="password"  name="password"  value="${currentUser.password}" onchange="changePassword()">
                                     </form>
                                 </div>
                             </td>
@@ -190,11 +201,6 @@
         </div>
     </div>
 </footer>
-<!-- JAVASCRIPTS -->
-
-<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

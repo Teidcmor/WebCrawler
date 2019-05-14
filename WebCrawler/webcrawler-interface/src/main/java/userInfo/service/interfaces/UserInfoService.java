@@ -1,7 +1,10 @@
 package userInfo.service.interfaces;
 
+import com.github.pagehelper.PageInfo;
 import common.pojo.UserInfo;
 import userInfo.dto.UserInfoQueryDTO;
+
+import java.util.ArrayList;
 
 public interface UserInfoService {
 
@@ -57,5 +60,11 @@ public interface UserInfoService {
      * @param userInfo
      */
     public void updateUserSex(UserInfo userInfo);
+
+    /**
+     * 查询所有普通用户数据
+     * @return
+     */
+    public PageInfo<UserInfo> getAllSimpleUser();
 
 }

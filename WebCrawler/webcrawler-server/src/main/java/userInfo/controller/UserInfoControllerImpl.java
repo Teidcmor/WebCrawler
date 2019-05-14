@@ -50,8 +50,7 @@ public class UserInfoControllerImpl {
             modelAndView.setViewName("redirect:/coreData/goMain.do");
             UserInfo target = this.userInfoService.getUserInfoByUserName(queryDTO.getUserName());
             //获取用户信息保存session中
-            UserInfoDTO userInfoDTO = BeanUtils.copyObject(target,UserInfoDTO.class);
-            modelAndView.addObject("currentUser",userInfoDTO);
+            modelAndView.addObject("currentUser",target);
             return modelAndView;
         }
         //登录失败，重新加载登录页面，附带错误信息
@@ -69,10 +68,10 @@ public class UserInfoControllerImpl {
     public ModelAndView goPersonal(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("personal");
         //获取当前登录用户信息
-        UserInfoDTO currentUser = (UserInfoDTO) session.getAttribute("currentUser");
+        UserInfo currentUser = (UserInfo) session.getAttribute("currentUser");
         //通过id重新在数据库中查询当前登录用户的信息
         UserInfo target = this.userInfoService.getUserInfoById(currentUser.getId());
-        modelAndView.addObject("userInfo",target);
+        modelAndView.addObject("currentUser",target);
         return modelAndView;
     }
 
@@ -86,7 +85,7 @@ public class UserInfoControllerImpl {
     public ModelAndView changePassword(HttpSession session,String password){
         ModelAndView modelAndView = new ModelAndView("personal");
         //获取当前登录用户信息
-        UserInfoDTO currentUser = (UserInfoDTO) session.getAttribute("currentUser");
+        UserInfo currentUser = (UserInfo) session.getAttribute("currentUser");
         //创建用于保存修改信息的对象，将id和新密码赋值
         UserInfo userInfo = new UserInfo();
         userInfo.setId(currentUser.getId());
@@ -95,7 +94,7 @@ public class UserInfoControllerImpl {
         this.userInfoService.updateUserPassword(userInfo);
         //从数据库中查询修改后的用户信息
         userInfo = this.userInfoService.getUserInfoById(currentUser.getId());
-        modelAndView.addObject("userInfo",userInfo);
+        modelAndView.addObject("currentUser",userInfo);
         return modelAndView;
     }
 
@@ -109,7 +108,7 @@ public class UserInfoControllerImpl {
     public ModelAndView changeSex(HttpSession session,String sex){
         ModelAndView modelAndView = new ModelAndView("personal");
         //获取当前登录用户信息
-        UserInfoDTO currentUser = (UserInfoDTO) session.getAttribute("currentUser");
+        UserInfo currentUser = (UserInfo) session.getAttribute("currentUser");
         //创建用于保存修改信息的对象，将id和新性别赋值
         UserInfo userInfo = new UserInfo();
         userInfo.setId(currentUser.getId());
@@ -120,7 +119,7 @@ public class UserInfoControllerImpl {
             this.userInfoService.updateUserSex(userInfo);
         }
         userInfo = this.userInfoService.getUserInfoById(currentUser.getId());
-        modelAndView.addObject("userInfo",userInfo);
+        modelAndView.addObject("currentUser",userInfo);
         return modelAndView;
     }
 
@@ -133,9 +132,9 @@ public class UserInfoControllerImpl {
      */
     private String  getSex(String sex){
         if("男".equals(sex))
-            return "1";
+            return ConstantUtils.USER_SEX_MAN;
         else if("女".equals(sex))
-            return "0";
+            return ConstantUtils.USER_SEX_WUMAN;
         else
             return "";
     }

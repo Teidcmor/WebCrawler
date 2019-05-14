@@ -1,5 +1,7 @@
 package userInfo.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import common.mapper.UserInfoMapper;
 import common.pojo.UserInfo;
 import common.utils.BeanUtils;
@@ -13,6 +15,7 @@ import userInfo.dto.UserInfoQueryDTO;
 import userInfo.service.interfaces.UserInfoService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 
 @Service("userInfoService")
@@ -52,6 +55,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         if(queryDTO != null){
             try{
                 UserInfo userInfo = BeanUtils.copyObject(queryDTO,UserInfo.class);
+                //新创建的用户默认为普通用户
+                userInfo.setType(ConstantUtils.USER_TYPE_SIMPLE);
                 this.userInfoMapper.addUser(userInfo);
             }catch (Exception e){
                 logger.error("用户注册失败！",e.getMessage());
@@ -124,5 +129,17 @@ public class UserInfoServiceImpl implements UserInfoService {
      */
     public void updateUserSex(UserInfo userInfo) {
         this.userInfoMapper.updateUserSex(userInfo);
+    }
+
+    /**
+     * 查询所有普通用户数据
+     *
+     * @return
+     */
+    public PageInfo<UserInfo> getAllSimpleUser() {
+        PageHelper.startPage(1,ConstantUtils.USER_PAGE_SIZE);
+        ArrayList<UserInfo> list = (ArrayList<UserInfo>) this.userInfoMapper.getAllSimpleUser();
+        PageInfo<UserInfo> pageInfo = new PageInfo<UserInfo>(list);
+        return pageInfo;
     }
 }

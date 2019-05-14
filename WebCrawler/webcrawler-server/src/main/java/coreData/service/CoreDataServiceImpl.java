@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import common.mapper.CoreDataMapper;
 import common.pojo.CoreData;
 import common.utils.BeanUtils;
+import common.utils.ConstantUtils;
 import coreData.dto.CoreDataDTO;
 import coreData.dto.CoreDataQueryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +57,12 @@ public class CoreDataServiceImpl implements CoreDataService {
      * @return
      */
     public PageInfo<CoreData> getCoreDataWithPaging(CoreDataQueryDTO queryDTO, int pageNum,String sort) throws Exception {
-        PageHelper.startPage(pageNum,9);
         CoreData query = BeanUtils.copyObject(queryDTO,CoreData.class);
+        PageHelper.startPage(pageNum, ConstantUtils.CORE_DATA_PAGE_SIZE);
         ArrayList<CoreData> data = null;
-        if("1".equals(sort))//如果sort为1，选择默认排序方式
+        if(ConstantUtils.SORT_TYPE_1.equals(sort))//如果sort为1，选择默认排序方式
             data = (ArrayList<CoreData>) coreDataMapper.getCoreDataByPosition(query);
-        else if("2".equals(sort))//如果sort为2，选择降序排序方式
+        else if(ConstantUtils.SORT_TYPE_2.equals(sort))//如果sort为2，选择降序排序方式
             data = (ArrayList<CoreData>) coreDataMapper.getCoreDataByPositionSort(query);
         else //选择价格升序方式
             data = (ArrayList<CoreData>) coreDataMapper.getCoreDataByPositionSortDesc(query);

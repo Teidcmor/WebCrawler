@@ -45,4 +45,8 @@
         update t_user set reserve1 =#{reserve1} where id =#{id}
     </update>
 
+    <select id="getAllSimpleUser" resultMap="userInfoResultMap">
+        select * from t_user where type = #{0}
+    </select>
+
 </mapper>

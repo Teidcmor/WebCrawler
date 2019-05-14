@@ -37,4 +37,48 @@ public class ConstantUtils {
      */
     public static String CORE_DATA_SPIDER = "core_data_spider";
 
+    /**
+     * 管理员账户类型
+     */
+    public static String USER_TYPE_ADMIN ="1";
+    /**
+     * 普通用户类型
+     */
+    public static String USER_TYPE_SIMPLE = "0";
+
+    /**
+     * 用户性别：男
+     */
+    public static String USER_SEX_MAN = "1";
+
+    /**
+     * 用户性别：女
+     */
+    public static String USER_SEX_WUMAN = "0";
+
+    /**
+     * 主页面排序方式：默认排序
+     */
+    public static String SORT_TYPE_1 = "1";
+
+    /**
+     * 主页面排序方式：默认排序
+     */
+    public static String SORT_TYPE_2 = "2";
+
+    /**
+     * 主页面排序方式：默认排序
+     */
+    public static String SORT_TYPE_3 = "3";
+
+    /**
+     * 有效信息展示页面分页大小
+     */
+    public static int CORE_DATA_PAGE_SIZE = 9;
+
+    /**
+     * 用户展示页面分页大小
+     */
+    public static int USER_PAGE_SIZE = 9;
+
 }
