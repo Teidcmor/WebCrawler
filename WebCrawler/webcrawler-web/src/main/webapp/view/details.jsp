@@ -25,6 +25,13 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <script>
+        function goPersonal() {
+            var path = "<%=basePath%>";
+            window.open(path+"user/goPersonal.do");
+        }
+    </script>
+
 </head>
 
 <body class="body-wrapper">
@@ -42,7 +49,7 @@
 
                         <ul class="navbar-nav ml-auto mt-10">
                             <li class="nav-item">
-                                <a class="nav-link login-button" id="personal" style="cursor: pointer">个人中心</a>
+                                <a class="nav-link login-button" id="personal" style="cursor: pointer" onclick="goPersonal()">个人中心</a>
                             </li>
                         </ul>
                     </div>
