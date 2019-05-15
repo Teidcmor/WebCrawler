@@ -37,45 +37,89 @@
             var page = pageNum;
             if(page <=0 )
                 page = 1;
-            $.post("/coreData/changePages.do",{
+            /*$.post("/coreData/changePages.do",{
                 pageNum:page
             },function (data,status) {
                 document.write(data);
                 document.close();
-            });
+            });*/
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/coreData/changePages.do';
+            var pageInput = document.createElement("input");
+            pageInput.name="pageNum";
+            pageInput.value=page;
+            // 附加到Form
+            form.append(pageInput);
+            document.body.appendChild(form);
+            form.submit();
         }
 
         /*根据价格分段搜索功能*/
         function getCoreDataByPrice(price) {
             var p = price;
-            $.post("/coreData/getCoreDataByPrice.do",{
+            /*$.post("/coreData/getCoreDataByPrice.do",{
                 price:p
             },function (data,status) {
                 document.write(data);
                 document.close();
-            });
+            });*/
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/coreData/getCoreDataByPrice.do';
+            var priceInput = document.createElement("input");
+            priceInput.name="price";
+            priceInput.value=p;
+            // 附加到Form
+            form.append(priceInput);
+            document.body.appendChild(form);
+            form.submit();
         }
 
         /*根据房间面积分段搜索功能*/
         function getCoreDataByArea(area) {
             var p = area;
-            $.post("/coreData/getCoreDataByArea.do",{
+            /*$.post("/coreData/getCoreDataByArea.do",{
                 area:p
             },function (data,status) {
                 document.write(data);
                 document.close();
-            });
+            });*/
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/coreData/getCoreDataByArea.do';
+            var areaInput = document.createElement("input");
+            areaInput.name="area";
+            areaInput.value=p;
+            // 附加到Form
+            form.append(areaInput);
+            document.body.appendChild(form);
+            form.submit();
         }
 
         /*根据朝向分段搜索功能*/
         function getCoreDataByToward(toward) {
             var p = toward;
-            $.post("/coreData/getCoreDataByToward.do",{
+            /*$.post("/coreData/getCoreDataByToward.do",{
                 toward:p
             },function (data,status) {
                 document.write(data);
                 document.close();
-            });
+            });*/
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/coreData/getCoreDataByToward.do';
+            var towardInput = document.createElement("input");
+            towardInput.name="toward";
+            towardInput.value=p;
+            // 附加到Form
+            form.append(towardInput);
+            document.body.appendChild(form);
+            form.submit();
         }
 
         /*设置排序下拉框的当前值*/
@@ -91,12 +135,23 @@
         /*排序下拉框功能*/
        function sortOnChange() {
            var value = $('#sort').val();
-           $.post("/coreData//getCoreDataSort.do",{
+           /*$.post("/coreData//getCoreDataSort.do",{
                sort:value
            },function (data,status) {
                document.write(data);
                document.close();
-           })
+           })*/
+           var form = document.createElement("form");
+           form.target='_self';
+           form.method='POST';
+           form.action='/coreData//getCoreDataSort.do';
+           var sortInput = document.createElement("input");
+           sortInput.name="sort";
+           sortInput.value=value;
+           // 附加到Form
+           form.append(sortInput);
+           document.body.appendChild(form);
+           form.submit();
        }
 
        function goDetails(id) {

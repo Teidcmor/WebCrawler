@@ -55,19 +55,29 @@
         }
 
         /*禁用用户或解禁*/
-        function banUser(id,price,pageNum) {
+        function banUser(id,status,pageNum) {
             var i = id;
-            var p = price;
+            var p = status;
             var pag = pageNum;
-            $.post("/admin/banUser.do",{
-                id:i,
-                status:p,
-                pageNum:pag
-            },function (data,status) {
-                document.close();
-                document.write(data);
-                document.close();
-            });
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/admin/banUser.do';
+            var idInput = document.createElement("input");
+            idInput.name="id";
+            idInput.value=i;
+            var statusInput = document.createElement("input");
+            statusInput.name="status";
+            statusInput.value=p;
+            var pageInput = document.createElement("input");
+            pageInput.name="pageNum";
+            pageInput.value=pag;
+            // 附加到Form
+            form.append(idInput);
+            form.append(statusInput);
+            form.append(pageInput);
+            document.body.appendChild(form);
+            form.submit();
         }
     </script>
 
