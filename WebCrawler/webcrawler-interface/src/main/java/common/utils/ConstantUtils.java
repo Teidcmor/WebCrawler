@@ -57,6 +57,16 @@ public class ConstantUtils {
     public static String USER_SEX_WUMAN = "0";
 
     /**
+     * 用户账号可用
+     */
+    public static String USER_ENABLE = "1";
+
+    /**
+     * 用户账号不可用
+     */
+    public static String USER_UNENABLE = "0";
+
+    /**
      * 主页面排序方式：默认排序
      */
     public static String SORT_TYPE_1 = "1";
@@ -79,6 +89,6 @@ public class ConstantUtils {
     /**
      * 用户展示页面分页大小
      */
-    public static int USER_PAGE_SIZE = 9;
+    public static int USER_PAGE_SIZE = 5;
 
 }

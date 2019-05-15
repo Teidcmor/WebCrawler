@@ -46,7 +46,7 @@
     </update>
 
     <select id="getAllSimpleUser" resultMap="userInfoResultMap">
-        select * from t_user where type = #{0}
+        select * from t_user where type = ${'0'}
     </select>
 
 </mapper>

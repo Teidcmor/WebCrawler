@@ -62,9 +62,9 @@ public interface UserInfoService {
     public void updateUserSex(UserInfo userInfo);
 
     /**
-     * 查询所有普通用户数据
+     * 分页查询所有普通用户数据
      * @return
      */
-    public PageInfo<UserInfo> getAllSimpleUser();
+    public PageInfo<UserInfo> getAllSimpleUser(int pageNum);
 
 }

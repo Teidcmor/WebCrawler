@@ -97,7 +97,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void setUserEnable(UserInfo userInfo) {
         //查询数据库中当前的状态
         UserInfo target = this.userInfoMapper.getUserInfoById(userInfo.getId());
-        if("0".equals(target.getEnabled()))//如果当前状态为不可用，则修改数据库状态
+        if(ConstantUtils.USER_UNENABLE.equals(target.getEnabled()))//如果当前状态为不可用，则修改数据库状态
             this.userInfoMapper.setUserStatus(userInfo);
     }
 
@@ -109,7 +109,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void setUserUnEnable(UserInfo userInfo) {
         //查询数据库中当前的状态
         UserInfo target = this.userInfoMapper.getUserInfoById(userInfo.getId());
-        if("1".equals(target.getEnabled()))//如果当前状态为可用，则修改数据库状态
+        if(ConstantUtils.USER_ENABLE.equals(target.getEnabled()))//如果当前状态为可用，则修改数据库状态
             this.userInfoMapper.setUserStatus(userInfo);
     }
 
@@ -136,8 +136,8 @@ public class UserInfoServiceImpl implements UserInfoService {
      *
      * @return
      */
-    public PageInfo<UserInfo> getAllSimpleUser() {
-        PageHelper.startPage(1,ConstantUtils.USER_PAGE_SIZE);
+    public PageInfo<UserInfo> getAllSimpleUser(int pageNum) {
+        PageHelper.startPage(pageNum,ConstantUtils.USER_PAGE_SIZE);
         ArrayList<UserInfo> list = (ArrayList<UserInfo>) this.userInfoMapper.getAllSimpleUser();
         PageInfo<UserInfo> pageInfo = new PageInfo<UserInfo>(list);
         return pageInfo;

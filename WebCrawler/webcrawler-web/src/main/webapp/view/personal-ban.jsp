@@ -41,6 +41,34 @@
             form.submit();
         }
 
+        /*分页功能*/
+        function changePage(pageNum) {
+            var page = pageNum;
+            if(page <=0 )
+                page = 1;
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/admin/changePage.do?pageNum='+page;
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        /*禁用用户或解禁*/
+        function banUser(id,price,pageNum) {
+            var i = id;
+            var p = price;
+            var pag = pageNum;
+            $.post("/admin/banUser.do",{
+                id:i,
+                status:p,
+                pageNum:pag
+            },function (data,status) {
+                document.close();
+                document.write(data);
+                document.close();
+            });
+        }
     </script>
 
 </head>
@@ -81,8 +109,8 @@
                         <ul>
                             <li ><a style="cursor: pointer" onclick="goPersonal()"><i class="fa fa-user"></i> 个人信息 </a></li>
                             <c:if test="${currentUser.type==1}">
-                                <li class="active"><a style="cursor: pointer" ><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
-                                <li><a href=""><i class="fa fa-cog"></i> 用户管理 </a></li>
+                                <li class="active"><a style="cursor: pointer" ><i class="fa fa-cog"></i> 用户管理 </a></li>
+                                <li><a href=""><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -91,165 +119,83 @@
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
                 <!-- Recently Favorited -->
                 <div class="widget dashboard-container my-adslist">
-                    <h3 class="widget-header">My Ads</h3>
+                    <h3 class="widget-header">账号管理：<a style="font-size: small;float: right">共${page.pages}页 ${page.total}条记录</a></h3>
                     <table class="table table-responsive product-dashboard-table">
                         <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Product Title</th>
-                            <th class="text-center">Category</th>
-                            <th class="text-center">Action</th>
+                            <th>#</th>
+                            <th>用户信息</th>
+                            <th class="text-center">状态</th>
+                            <th class="text-center">功能</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="user" items="${users}" varStatus="index">
                         <tr>
 
                             <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
+                                <span>${index.index+1}</span>
                             </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
+                            <td class="product-details" style="width: 300px">
+                                <span class="add-id"><strong>用户名:</strong> ${user.userName}</span>
+                                <c:if test="${user.reserve1==0}">
+                                    <span><strong>性别: </strong><time>女</time> </span>
+                                </c:if>
+                                <c:if test="${user.reserve1!=0}">
+                                    <span><strong>性别: </strong><time>男</time> </span>
+                                </c:if>
+                            </td>
+                            <c:if test="${user.enabled==0}">
+                                <td class="product-category"><span class="categories">已禁用</span></td>
+                            </c:if>
+                            <c:if test="${user.enabled!=0}">
+                                <td class="product-category"><span class="categories">可用</span></td>
+                            </c:if>
                             <td class="action" data-title="Action">
-                                <div class="">
+                                <div class="" >
                                     <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-clipboard"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
+                                        <c:if test="${user.enabled==0}">
+                                            <li class="list-inline-item">
+                                                <a class="edit" style="cursor: pointer" onclick="banUser(${user.id},1,${page.pageNum})" >
+                                                    <i class="fa fa-unlock" ></i>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${user.enabled!=0}">
+                                            <li class="list-inline-item">
+                                                <a class="delete"  style="cursor: pointer" onclick="banUser(${user.id},0,${page.pageNum})">
+                                                    <i class="fa fa-unlock-alt"></i>
+                                                </a>
+                                            </li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-2.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Study Table Combo</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Feb 12, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>USA</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-clipboard"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-3.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-clipboard"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-4.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-clipboard"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a class="edit" href="">
-                                                <i class="fa fa-clipboard"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
-
+                </div>
+                <div class="pagination justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" id="prePage" style="cursor: pointer" onclick="changePage(1)" >首页</a></li>
+                            <li class="page-item">
+                                <a class="page-link" style="cursor: pointer" onclick="changePage(${page.prePage})" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a id="pageNum" class="page-link" style="cursor: pointer">${page.pageNum}</a></li>
+                            <li class="page-item">
+                                <a class="page-link" style="cursor: pointer" onclick="changePage(${page.nextPage})" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" style="cursor: pointer" onclick="changePage(${page.pages})">尾页</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

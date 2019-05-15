@@ -181,16 +181,6 @@
                         </ul>
                     </div>
 
-                    <%--<div class="widget category-list">
-                        <h4 class="widget-header">房间朝向：</h4>
-                        <ul class="category-list">
-                            <li><a id="toward1" style="cursor: pointer" onclick="getCoreDataByToward('1')">南 </a></li>
-                            <li><a id="toward2" style="cursor: pointer" onclick="getCoreDataByToward('2')">北 </a></li>
-                            <li><a id="toward3" style="cursor: pointer" onclick="getCoreDataByToward('3')">东 </a></li>
-                            <li><a id="toward4" style="cursor: pointer" onclick="getCoreDataByToward('4')">西 </a></li>
-                            <li><a id="toward" style="cursor: pointer" onclick="getCoreDataByToward(0)">不限 </a></li>
-                        </ul>
-                    </div>--%>
                     <div class="widget category-list">
                         <h4 class="widget-header">房间朝向：</h4>
                         <ul class="category-list">

@@ -25,9 +25,10 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!-- JAVASCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
     <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 
     <script>
         /*修改密码方法*/
@@ -69,28 +70,6 @@
 </head>
 
 <body class="body-wrapper">
-
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg  navigation">
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                        <ul class="navbar-nav ml-auto mt-10">
-                            <li class="nav-item">
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-</section>
-<!--==================================
-=            User Profile            =
-===================================-->
 <section class="dashboard section">
     <!-- Container Start -->
     <div class="container">
@@ -124,7 +103,7 @@
                             <li class="active" ><a style="cursor: pointer"><i class="fa fa-user"></i> 个人信息 </a></li>
                             <c:if test="${currentUser.type==1}">
                             <li><a onclick="goUserManage()" style="cursor: pointer"><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
-                            <li><a href=""><i class="fa fa-cog"></i> 用户管理 </a></li>
+                            <li><a  style="cursor: pointer"><i class="fa fa-cog"></i> 用户管理 </a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -141,7 +120,7 @@
                             <td class="product-category"><span class="categories">用户名：</span></td>
                             <td class="action" data-title="Action">
                                 <div class="form-group col-md-3">
-                                    <input type="text" disabled="disabled"  class="form-control" style="width: 400px ;background-color: white" id="region" value="${currentUser.userName}" >
+                                    <input type="text" disabled="disabled"  class="form-control" style="width: 300px ;background-color: white" id="region" value="${currentUser.userName}" >
                                 </div>
                             </td>
                         </tr>
@@ -150,7 +129,7 @@
                             <td class="action" data-title="Action">
                                 <div class="form-group col-md-3">
                                     <form id="passwordForm" action="/user/changePassword.do" method="post">
-                                        <input type="password"  class="form-control" style="width: 400px" id="password"  name="password"  value="${currentUser.password}" onchange="changePassword()">
+                                        <input type="password"  class="form-control" style="width: 300px" id="password"  name="password"  value="${currentUser.password}" onchange="changePassword()">
                                     </form>
                                 </div>
                             </td>
@@ -161,7 +140,7 @@
                             <td class="action" data-title="Action">
                                 <div class="form-group col-md-3">
                                     <form id="sexForm" action="/user/changeSex.do" method="post">
-                                        <input type="text" class="form-control" style="width: 400px" id="sex"  name="sex"  onchange="changeSex()">
+                                        <input type="text" class="form-control" style="width: 300px" id="sex"  name="sex"  onchange="changeSex()">
                                     </form>
                                 </div>
                             </td>
