@@ -89,12 +89,43 @@
 
 
 
+        /*跳转主页面*/
+        function goMain() {
+            var form = document.createElement("form");
+            form.action="/coreData/goMain.do";
+            form.target="_self";
+            form.method="POST";
+            document.body.appendChild(form);
+            form.submit();
+        }
+
     </script>
 
 </head>
 
 <body class="body-wrapper">
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg  navigation">
+                    <a class="navbar-brand" onclick="goMain()" style="cursor: pointer">
+                        <!--<img src="images/logo.png" alt="">-->
+                        租房信息爬取平台
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+                        <ul class="navbar-nav ml-auto mt-10">
+                            <li class="nav-item">
+                                <a class="nav-link login-button" id="personal" style="cursor: pointer" onclick="goPersonal()">个人中心</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
 <!--==================================
 =            User Profile            =
 ===================================-->
