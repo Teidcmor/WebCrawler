@@ -40,46 +40,11 @@ public class SysParamServiceImpl implements SysParamService {
     }
 
     /**
-     * 开启爬虫程序
+     * 修改系统参数值
+     *
+     * @param sysParam
      */
-    public void setSpiderEnable() {
-        SysParam sysParam = new SysParam();
-        sysParam.setParamName(ConstantUtils.SPIDER_ENABLE);
-        sysParam.setParamValue("1");
-        sysParamMapper.updateSysParamByName(sysParam);
-        SysParamContainerUtils.editSysParam(sysParam);
-    }
-
-    /**
-     * 关闭爬虫程序
-     */
-    public void setSpiderUnEanble() {
-        SysParam sysParam = new SysParam();
-        sysParam.setParamName(ConstantUtils.SPIDER_ENABLE);
-        sysParam.setParamValue("0");
-        sysParamMapper.updateSysParamByName(sysParam);
-        SysParamContainerUtils.editSysParam(sysParam);
-    }
-
-    /**
-     * 基础数据处理定时任务生效
-     */
-    public void setBasicSpiderEnable() {
-        SysParam sysParam = new SysParam();
-        sysParam.setParamName(ConstantUtils.CORE_DATA_SPIDER);
-        sysParam.setParamValue("1");
-        sysParamMapper.updateSysParamByName(sysParam);
-        SysParamContainerUtils.editSysParam(sysParam);
-    }
-
-    /**
-     * 基础数据处理定时任务失效
-     */
-    public void setBasicSpiderUnEnable() {
-        SysParam sysParam = new SysParam();
-        sysParam.setParamName(ConstantUtils.CORE_DATA_SPIDER);
-        sysParam.setParamValue("0");
-        sysParamMapper.updateSysParamByName(sysParam);
-        SysParamContainerUtils.editSysParam(sysParam);
+    public void updateSysParam(SysParam sysParam) {
+        this.sysParamMapper.updateSysParamByName(sysParam);
     }
 }

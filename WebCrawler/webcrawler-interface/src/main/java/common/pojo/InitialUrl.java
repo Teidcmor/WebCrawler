@@ -1,6 +1,8 @@
 package common.pojo;
 
 
+import common.utils.CommonUtils;
+
 public class InitialUrl {
 
     /**
@@ -171,9 +173,9 @@ public class InitialUrl {
     }
 
     public boolean isNull(){
-        if(this.url!=null)
-            return false;
-        return true;
+        if(CommonUtils.isNull(this.url))
+            return true;
+        return false;
     }
 
 }

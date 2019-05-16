@@ -32,6 +32,26 @@
 
     <script>
 
+        /*更新系统参数*/
+        function updateSysParam(name,value) {
+            var paramName = name;
+            var paramValue = value;
+            var form = document.createElement("form");
+            form.action="/spider/updateSysParam.do";
+            form.target="_self";
+            form.method="POST";
+            var nameInput = document.createElement("input");
+            nameInput.value=paramName;
+            nameInput.name="id";
+            var valueInput = document.createElement("input");
+            valueInput.name="value";
+            valueInput.value=paramValue;
+            form.append(nameInput);
+            form.append(valueInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+
         /*跳转用户管理页面*/
         function goUserManage() {
             var form = document.createElement("form");
@@ -51,6 +71,24 @@
             document.body.appendChild(form);
             form.submit();
         }
+
+        /*新增URL*/
+        function addNewUrl() {
+            var city = $('#city').val();
+            var url = $('#url').val();
+            $.post("/spider/addNewUrl.do",{
+                city:city,
+                url:url
+            },function (data,status) {
+                if(status=="success")
+                    alert(data);
+                else
+                    alert("新增失败！！");
+            });
+        }
+
+
+
     </script>
 
 </head>
@@ -102,15 +140,13 @@
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
                 <div class="widget change-password">
                     <h3 class="widget-header user">新增链接</h3>
-                    <form action="#">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="city" placeholder="市：例如 杭州">
+                            <input type="text" class="form-control"  id="city" placeholder="市：例如 杭州">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="url" placeholder="URL:例如 www.baidu.com">
+                            <input type="text" class="form-control" id="url" placeholder="URL:例如 www.baidu.com">
                         </div>
-                        <button class="btn btn-transparent" > 提 &nbsp;&nbsp;交 </button>
-                    </form>
+                        <button class="btn btn-transparent" onclick="addNewUrl()" > 提 &nbsp;&nbsp;交 </button>
                 </div>
                 <!-- Recently Favorited -->
                 <div class="widget dashboard-container my-adslist">
@@ -146,14 +182,14 @@
                                     <ul class="list-inline justify-content-center">
                                         <c:if test="${sysParam.paramValue==0}">
                                         <li class="list-inline-item">
-                                            <a  class="view" >
+                                            <a  class="view" style="cursor: pointer" onclick="updateSysParam(${sysParam.id},1)" >
                                                 <i class="fa fa-check fa-2x"></i>
                                             </a>
                                         </li>
                                         </c:if>
                                         <c:if test="${sysParam.paramValue!=0}">
                                         <li class="list-inline-item">
-                                            <a class="delete" >
+                                            <a class="delete" style="cursor: pointer" onclick="updateSysParam(${sysParam.id},0)">
                                                 <i class="fa fa-times fa-2x"></i>
                                             </a>
                                         </li>
@@ -163,35 +199,7 @@
                             </td>
                         </tr>
                         </c:forEach>
-                        <%--<tr>
 
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>--%>
                         </tbody>
                     </table>
 

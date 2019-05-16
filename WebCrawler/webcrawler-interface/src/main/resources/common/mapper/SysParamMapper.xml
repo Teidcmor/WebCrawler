@@ -30,7 +30,7 @@
     <!--更新已使用过的基础信息-->
     <update id="updateSysParamByName" parameterType="SysParam">
         <![CDATA[
-        update T_SYS_PARAMTER set PARAM_VALUE = #{paramValue} where PARAM_NAME =#{paramName}
+        update T_SYS_PARAMTER set PARAM_VALUE = #{paramValue} where id =#{id}
         ]]>
     </update>
 

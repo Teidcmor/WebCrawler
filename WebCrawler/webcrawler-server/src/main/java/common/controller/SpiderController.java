@@ -2,10 +2,12 @@ package common.controller;
 
 import common.pojo.InitialUrl;
 import common.pojo.SysParam;
+import common.utils.CommonUtils;
 import initialUrl.service.interfaces.InitialUrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import sysParam.service.interfaces.SysParamService;
 
@@ -43,13 +45,35 @@ public class SpiderController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/addNewUrl.do")
-    public ModelAndView addNewUrl(String city,String url) throws Exception {
+    @RequestMapping(value = "/addNewUrl.do" ,produces ="application/text;charset=utf-8")
+    @ResponseBody
+    public String addNewUrl(String city,String url) throws Exception {
+        if(CommonUtils.isNull(city)|| CommonUtils.isNull(url))
+            return "请输入完整信息！！";
+        try{
+            InitialUrl initialUrl = new InitialUrl();
+            initialUrl.setCity(city);
+            initialUrl.setUrl(url);
+            this.initialUrlService.addNewUrl(initialUrl);
+        }catch (Exception e){
+            return "新增失败！！";
+        }
+        return "新增成功！！";
+    }
+
+    /**
+     * 修改系统参数值
+     * @param id
+     * @param value
+     * @return
+     */
+    @RequestMapping(value = "/updateSysParam.do")
+    public ModelAndView updateSysParam(String id,String value){
         ModelAndView modelAndView = new ModelAndView("personal-controller");
-        InitialUrl initialUrl = new InitialUrl();
-        initialUrl.setCity(city);
-        initialUrl.setUrl(url);
-        this.initialUrlService.addNewUrl(initialUrl);
+        SysParam target = new SysParam();
+        target.setId(Long.valueOf(id));
+        target.setParamValue(value);
+        this.sysParamService.updateSysParam(target);
         ArrayList<SysParam> sysParams = this.sysParamService.getAllSysParam();
         modelAndView.addObject("sysParams",sysParams);
         return modelAndView;

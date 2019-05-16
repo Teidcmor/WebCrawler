@@ -19,25 +19,13 @@ public interface SysParamService {
      */
     public SysParam getSysParamByName(String name);
 
-    /**
-     * 开启爬虫程序
-     */
-    public void  setSpiderEnable();
 
     /**
-     * 关闭爬虫程序
+     * 修改系统参数值
+     * @param sysParam
      */
-    public void setSpiderUnEanble();
+    void updateSysParam(SysParam sysParam);
 
-    /**
-     * 基础数据处理定时任务生效
-     */
-    public void setBasicSpiderEnable();
-
-    /**
-     * 基础数据处理定时任务失效
-     */
-    public void setBasicSpiderUnEnable();
 
 
 }
