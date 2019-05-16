@@ -36,15 +36,17 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @param queryDTO
      * @return 成功：true 失败 false
      */
-    public boolean login(UserInfoQueryDTO queryDTO) throws Exception {
+    public String login(UserInfoQueryDTO queryDTO) throws Exception {
         if(queryDTO != null){
             UserInfo target = this.userInfoMapper.getUserInfoByUserName(queryDTO.getUserName());
             if(target == null)
-                return false;
+                return ConstantUtils.LOGIN_FAILED;
+            if(ConstantUtils.USER_UNENABLE.equals(target.getEnabled()))
+                return ConstantUtils.LOGIN_FAILED_LOCK;
             if(CommonUtils.stringEquals(target.getPassword(),MD5Utils.convertMD5(queryDTO.getPassword())))
-                return true;
+                return ConstantUtils.SUCCESS;
         }
-        return false;
+        return ConstantUtils.LOGIN_FAILED;
     }
 
     /**

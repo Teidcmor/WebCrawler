@@ -13,7 +13,7 @@ public interface UserInfoService {
      * @param queryDTO
      * @return 成功：true 失败 false
      */
-    boolean login(UserInfoQueryDTO queryDTO) throws Exception;
+    String login(UserInfoQueryDTO queryDTO) throws Exception;
 
     /**
      * 用户注册

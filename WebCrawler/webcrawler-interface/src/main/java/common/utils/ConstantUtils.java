@@ -17,7 +17,12 @@ public class ConstantUtils {
     /**
      * 登录失败返回值
      */
-    public static String LOGIN_FAILED = "用户名或密码错误";
+    public static String LOGIN_FAILED = "用户名或密码错误！";
+    /**
+     * 账号锁定
+     */
+    public static String LOGIN_FAILED_LOCK = "用户已锁定，请联系管理员解锁！";
+
     /**
      * 注册失败返回值
      */

@@ -47,7 +47,8 @@ public class UserInfoControllerImpl {
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     public ModelAndView login(UserInfoQueryDTO queryDTO) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        if(this.userInfoService.login(queryDTO)){//登录成功
+        String result = this.userInfoService.login(queryDTO);
+        if(ConstantUtils.SUCCESS.equals(result)){//登录成功
             modelAndView.setViewName("redirect:/coreData/goMain.do");
             UserInfo target = this.userInfoService.getUserInfoByUserName(queryDTO.getUserName());
             //获取用户信息保存session中
@@ -56,7 +57,7 @@ public class UserInfoControllerImpl {
         }
         //登录失败，重新加载登录页面，附带错误信息
         modelAndView.setViewName("userInfo/login");
-        modelAndView.addObject("errorMessage",ConstantUtils.LOGIN_FAILED);
+        modelAndView.addObject("errorMessage",result);
         return modelAndView;
     }
 
