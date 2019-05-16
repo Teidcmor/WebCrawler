@@ -56,11 +56,22 @@
             $('#sex').val(target);
         })
 
+        /*跳转用户管理页面*/
         function goUserManage() {
             var form = document.createElement("form");
             form.target='_self';
             form.method='POST';
             form.action='/admin/goUserManage.do';
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        /*跳转爬虫控制页面*/
+        function goSpiderController() {
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/spider/goSpiderController.do';
             document.body.appendChild(form);
             form.submit();
         }
@@ -102,8 +113,8 @@
                         <ul>
                             <li class="active" ><a style="cursor: pointer"><i class="fa fa-user"></i> 个人信息 </a></li>
                             <c:if test="${currentUser.type==1}">
-                            <li><a onclick="goUserManage()" style="cursor: pointer"><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
-                            <li><a  style="cursor: pointer"><i class="fa fa-cog"></i> 用户管理 </a></li>
+                            <li><a onclick="goUserManage()" style="cursor: pointer"><i class="fa fa-cog"></i> 用户管理 </a></li>
+                            <li><a onclick="goSpiderController()" style="cursor: pointer"><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -145,7 +156,13 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="visibility: hidden">
+                            <td class="product-category"><span class="categories"></span></td>
+                            <td class="action" data-title="Action">
+
+                            </td>
+                        </tr>
+                        <tr style="visibility: hidden">
                             <td class="product-category"><span class="categories"></span></td>
                             <td class="action" data-title="Action">
 

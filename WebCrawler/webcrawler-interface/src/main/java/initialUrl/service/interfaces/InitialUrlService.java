@@ -48,4 +48,11 @@ public interface InitialUrlService {
      */
     void insertUrl(InitialUrl initialUrl)throws Exception;
 
+    /**
+     * 管理员手动添加URL
+     * @param city
+     * @param url
+     */
+    void addNewUrl(InitialUrl initialUrl) throws Exception;
+
 }

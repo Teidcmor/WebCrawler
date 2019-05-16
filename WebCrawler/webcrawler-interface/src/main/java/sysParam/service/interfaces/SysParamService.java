@@ -39,4 +39,5 @@ public interface SysParamService {
      */
     public void setBasicSpiderUnEnable();
 
+
 }

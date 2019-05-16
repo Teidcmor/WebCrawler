@@ -92,4 +92,15 @@ public class InitialUrlServiceImpl implements InitialUrlService {
         List<InitialUrl> list = this.initialUrlMapper.getInitialUrl();
         return list;
     }
+
+    /**
+     * 管理员手动添加URL
+     *
+     * @param city
+     * @param url
+     */
+    public void addNewUrl(InitialUrl initialUrl) throws Exception {
+        initialUrl.setReserve1("1");
+        this.insertUrl(initialUrl);
+    }
 }

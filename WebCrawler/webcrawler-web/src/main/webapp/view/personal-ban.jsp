@@ -32,11 +32,21 @@
 
     <script>
 
+        /*跳转个人信息页面*/
         function goPersonal() {
             var form = document.createElement("form");
             form.target='_self';
             form.method='POST';
             form.action='/user/goPersonal.do';
+            document.body.appendChild(form);
+            form.submit();
+        }
+        /*跳转爬虫控制页面*/
+        function goSpiderController() {
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/spider/goSpiderController.do';
             document.body.appendChild(form);
             form.submit();
         }
@@ -120,7 +130,7 @@
                             <li ><a style="cursor: pointer" onclick="goPersonal()"><i class="fa fa-user"></i> 个人信息 </a></li>
                             <c:if test="${currentUser.type==1}">
                                 <li class="active"><a style="cursor: pointer" ><i class="fa fa-cog"></i> 用户管理 </a></li>
-                                <li><a href=""><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
+                                <li><a onclick="goSpiderController()" style="cursor: pointer"><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -135,8 +145,9 @@
                         <tr>
                             <th>#</th>
                             <th>用户信息</th>
+                            <th class="text-center"></th>
                             <th class="text-center">状态</th>
-                            <th class="text-center">功能</th>
+                            <th class="text-center">设置/th>
                         </tr>
                         </thead>
                         <tbody>
@@ -155,6 +166,7 @@
                                     <span><strong>性别: </strong><time>男</time> </span>
                                 </c:if>
                             </td>
+                            <td class="action" data-title="Action"></td>
                             <c:if test="${user.enabled==0}">
                                 <td class="product-category"><span class="categories">已禁用</span></td>
                             </c:if>
@@ -167,14 +179,14 @@
                                         <c:if test="${user.enabled==0}">
                                             <li class="list-inline-item">
                                                 <a class="edit" style="cursor: pointer" onclick="banUser(${user.id},1,${page.pageNum})" >
-                                                    <i class="fa fa-unlock" ></i>
+                                                    <i class="fa fa-unlock fa-2x" ></i>
                                                 </a>
                                             </li>
                                         </c:if>
                                         <c:if test="${user.enabled!=0}">
                                             <li class="list-inline-item">
                                                 <a class="delete"  style="cursor: pointer" onclick="banUser(${user.id},0,${page.pageNum})">
-                                                    <i class="fa fa-unlock-alt"></i>
+                                                    <i class="fa fa-unlock-alt fa-2x"></i>
                                                 </a>
                                             </li>
                                         </c:if>

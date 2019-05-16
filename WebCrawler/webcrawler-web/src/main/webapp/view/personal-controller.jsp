@@ -25,32 +25,38 @@
     <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- JAVASCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+    <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+
+        /*跳转用户管理页面*/
+        function goUserManage() {
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/admin/goUserManage.do';
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        /*跳转个人信息页面*/
+        function goPersonal() {
+            var form = document.createElement("form");
+            form.target='_self';
+            form.method='POST';
+            form.action='/user/goPersonal.do';
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
 </head>
 
 <body class="body-wrapper">
 
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg  navigation">
-                    <a class="navbar-brand" href="index.html">
-                        <!--<img src="images/logo.png" alt="">-->
-                        租房信息爬取平台
-                    </a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                        <ul class="navbar-nav ml-auto mt-10">
-                            <li class="nav-item">
-                                <a class="nav-link login-button" id="personal" style="cursor: pointer">个人中心</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-</section>
 <!--==================================
 =            User Profile            =
 ===================================-->
@@ -65,51 +71,99 @@
                     <div class="widget user-dashboard-profile">
                         <!-- User Image -->
                         <div class="profile-thumb">
-                            <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+                            <c:if test="${currentUser.reserve1==1}">
+                                <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+                            </c:if>
+                            <c:if test="${currentUser.reserve1!=1}">
+                                <img src="images/user/u2.jpg" alt="" class="rounded-circle">
+                            </c:if>
                         </div>
                         <!-- User Name -->
-                        <h5 class="text-center">Samanta Doe</h5>
-                        <p>Joined February 06, 2017</p>
-                        <a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
+                        <h5 class="text-center">${currentUser.userName}</h5>
+                        <c:if test="${currentUser.type==1}">
+                            <p>管理员</p>
+                        </c:if>
+                        <c:if test="${currentUser.type!=1}">
+                            <p>普通用户</p>
+                        </c:if>
                     </div>
                     <!-- Dashboard Links -->
                     <div class="widget user-dashboard-menu">
                         <ul>
-                            <li><a href="dashboard-my-ads.html"><i class="fa fa-user"></i> My Ads</a></li>
-                            <li class="active"  >
-                                <a href="dashboard-favourite-ads.html"><i class="fa fa-bookmark-o"></i> Favourite Ads <span>5</span></a>
-                            </li>
-                            <li>
-                                <a href="dashboard-archived-ads.html"><i class="fa fa-file-archive-o"></i>Archeved Ads <span>12</span></a>
-                            </li>
-                            <li>
-                                <a href="dashboard-pending-ads.html"><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a>
-                            </li>
-                            <li>
-                                <a href="logout.html"><i class="fa fa-cog"></i> Logout</a>
-                            </li>
-                            <li>
-                                <a href="delete-account.html"><i class="fa fa-power-off"></i>Delete Account</a>
-                            </li>
+                            <li ><a style="cursor: pointer" onclick="goPersonal()"><i class="fa fa-user"></i> 个人信息 </a></li>
+                            <c:if test="${currentUser.type==1}">
+                                <li ><a style="cursor: pointer" onclick="goUserManage()" ><i class="fa fa-cog"></i> 用户管理 </a></li>
+                                <li class="active"><a  style="cursor: pointer" ><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+                <div class="widget change-password">
+                    <h3 class="widget-header user">新增链接</h3>
+                    <form action="#">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="city" placeholder="市：例如 杭州">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="url" placeholder="URL:例如 www.baidu.com">
+                        </div>
+                        <button class="btn btn-transparent" > 提 &nbsp;&nbsp;交 </button>
+                    </form>
+                </div>
                 <!-- Recently Favorited -->
                 <div class="widget dashboard-container my-adslist">
-                    <h3 class="widget-header">Favourite Ads</h3>
+                    <h3 class="widget-header">爬虫控制</h3>
                     <table class="table table-responsive product-dashboard-table">
-                        <thead>
+                        <thead >
                         <tr>
-                            <th>Image</th>
-                            <th>Product Title</th>
-                            <th class="text-center">Category</th>
-                            <th class="text-center">Action</th>
+                            <th>#</th>
+                            <th>参数名</th>
+                            <th class="text-center"></th>
+                            <th class="text-center">当前状态</th>
+                            <th class="text-center">设置</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="sysParam" items="${sysParams}" varStatus="index">
                         <tr>
+
+                            <td class="product-thumb">
+                                <span >${index.index+1}</span></td>
+                            <td class="product-details" style="width: 300px">
+                                <h3 class="title">${sysParam.reserve1}</h3>
+                            </td>
+                            <td class="action" data-title="Action"></td>
+                            <c:if test="${sysParam.paramValue==0}">
+                                <td class="product-category"><span class="categories">关闭</span></td>
+                            </c:if>
+                            <c:if test="${sysParam.paramValue!=0}">
+                                <td class="product-category"><span class="categories">开启</span></td>
+                            </c:if>
+                            <td class="action" data-title="Action">
+                                <div class="">
+                                    <ul class="list-inline justify-content-center">
+                                        <c:if test="${sysParam.paramValue==0}">
+                                        <li class="list-inline-item">
+                                            <a  class="view" >
+                                                <i class="fa fa-check fa-2x"></i>
+                                            </a>
+                                        </li>
+                                        </c:if>
+                                        <c:if test="${sysParam.paramValue!=0}">
+                                        <li class="list-inline-item">
+                                            <a class="delete" >
+                                                <i class="fa fa-times fa-2x"></i>
+                                            </a>
+                                        </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                        <%--<tr>
 
                             <td class="product-thumb">
                                 <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
@@ -137,127 +191,12 @@
                                     </ul>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-2.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Study Table Combo</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Feb 12, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>USA</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-3.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-4.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="product-thumb">
-                                <img width="80px" height="auto" src="images/products/products-1.jpg" alt="image description"></td>
-                            <td class="product-details">
-                                <h3 class="title">Macbook Pro 15inch</h3>
-                                <span class="add-id"><strong>Ad ID:</strong> ng3D5hAMHPajQrM</span>
-                                <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                <span class="status active"><strong>Status</strong>Active</span>
-                                <span class="location"><strong>Location</strong>Dhaka,Bangladesh</span>
-                            </td>
-                            <td class="product-category"><span class="categories">Laptops</span></td>
-                            <td class="action" data-title="Action">
-                                <div class="">
-                                    <ul class="list-inline justify-content-center">
-                                        <li class="list-inline-item">
-                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="delete" href="">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                        </tr>--%>
                         </tbody>
                     </table>
 
                 </div>
+
             </div>
         </div>
         <!-- Row End -->
@@ -283,10 +222,7 @@
         </div>
     </div>
 </footer>
-<!-- JAVASCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
 
 </body>
 
