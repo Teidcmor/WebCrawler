@@ -16,6 +16,20 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            var massage = "${errorMessage}";
+            if(massage!=""){
+                $('#errorMessage').html(massage);
+            }
+        })
+    </script>
 </head>
 <body style="background-color: #aceaf2">
 <div class="container" style="margin-left: 39%;margin-top: 14%">
@@ -25,7 +39,7 @@
             <div class="control-group">
                 <label for="inputEmail" class="sr-only">UserName</label>
                 <div class="controls">
-                    <input type="text" id="inputEmail" name="userName" class="form-control" placeholder="UserName" required autofocus>
+                    <input type="text" id="inputEmail" name="userName" class="form-control" placeholder="UserName" required autofocus><a style="color: red" id="errorMessage"></a>
                 </div>
             </div>
             <div class="control-group">

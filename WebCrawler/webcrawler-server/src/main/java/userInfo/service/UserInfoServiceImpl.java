@@ -10,12 +10,14 @@ import common.utils.ConstantUtils;
 import common.utils.MD5Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import userInfo.dto.UserInfoQueryDTO;
 import userInfo.service.interfaces.UserInfoService;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -52,7 +54,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @return 成功：ConstantUtils.SUCCESS
      *          失败：ConstantUtils.REGISTER_FAILED
      */
-    public String resister(UserInfoQueryDTO queryDTO) throws Exception {
+    public String resister(UserInfoQueryDTO queryDTO)  {
         if(queryDTO != null){
             try{
                 UserInfo userInfo = BeanUtils.copyObject(queryDTO,UserInfo.class);
@@ -61,7 +63,11 @@ public class UserInfoServiceImpl implements UserInfoService {
                 userInfo.setPassword(MD5Utils.convertMD5(userInfo.getPassword()));
                 //默认性别为男性，这里必须有默认值，否则在个人中心页面会报错
                 userInfo.setReserve1("1");
-                this.userInfoMapper.addUser(userInfo);
+                UserInfo target = this.userInfoMapper.getUserInfoByUserName(userInfo.getUserName());
+                if(target==null){
+                    this.userInfoMapper.addUser(userInfo);
+                }else
+                    return ConstantUtils.REGISTER_FAILED;
             }catch (Exception e){
                 logger.error("用户注册失败！",e.getMessage());
                 e.printStackTrace();
