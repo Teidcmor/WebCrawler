@@ -4,6 +4,7 @@ import common.pojo.UserInfo;
 import common.utils.BeanUtils;
 import common.utils.CommonUtils;
 import common.utils.ConstantUtils;
+import common.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,14 +83,14 @@ public class UserInfoControllerImpl {
      * @return
      */
     @RequestMapping(value = "/changePassword.do")
-    public ModelAndView changePassword(HttpSession session,String password){
+    public ModelAndView changePassword(HttpSession session,String password) throws Exception {
         ModelAndView modelAndView = new ModelAndView("personal");
         //获取当前登录用户信息
         UserInfo currentUser = (UserInfo) session.getAttribute("currentUser");
         //创建用于保存修改信息的对象，将id和新密码赋值
         UserInfo userInfo = new UserInfo();
         userInfo.setId(currentUser.getId());
-        userInfo.setPassword(password);
+        userInfo.setPassword(MD5Utils.convertMD5(password));
         //调用service层方法修改密码
         this.userInfoService.updateUserPassword(userInfo);
         //从数据库中查询修改后的用户信息

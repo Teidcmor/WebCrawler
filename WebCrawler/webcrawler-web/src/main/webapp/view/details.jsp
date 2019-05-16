@@ -35,18 +35,27 @@
             var path = "<%=basePath%>";
             window.open(path+"user/goPersonal.do");
         }
+        /*跳转主页面*/
+        function goMain() {
+            var form = document.createElement("form");
+            form.action="/coreData/goMain.do";
+            form.target="_self";
+            form.method="POST";
+            document.body.appendChild(form);
+            form.submit();
+        }
+
     </script>
 
 </head>
 
 <body class="body-wrapper">
-
 <section>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <nav class="navbar navbar-expand-lg  navigation">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" onclick="goMain()" style="cursor: pointer">
                         <!--<img src="images/logo.png" alt="">-->
                         租房信息爬取平台
                     </a>

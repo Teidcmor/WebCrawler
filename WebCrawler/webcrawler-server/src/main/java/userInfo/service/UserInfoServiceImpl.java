@@ -7,6 +7,7 @@ import common.pojo.UserInfo;
 import common.utils.BeanUtils;
 import common.utils.CommonUtils;
 import common.utils.ConstantUtils;
+import common.utils.MD5Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             UserInfo target = this.userInfoMapper.getUserInfoByUserName(queryDTO.getUserName());
             if(target == null)
                 return false;
-            if(CommonUtils.stringEquals(target.getPassword(),queryDTO.getPassword()))
+            if(CommonUtils.stringEquals(target.getPassword(),MD5Utils.convertMD5(queryDTO.getPassword())))
                 return true;
         }
         return false;
@@ -57,6 +58,9 @@ public class UserInfoServiceImpl implements UserInfoService {
                 UserInfo userInfo = BeanUtils.copyObject(queryDTO,UserInfo.class);
                 //新创建的用户默认为普通用户
                 userInfo.setType(ConstantUtils.USER_TYPE_SIMPLE);
+                userInfo.setPassword(MD5Utils.convertMD5(userInfo.getPassword()));
+                //默认性别为男性，这里必须有默认值，否则在个人中心页面会报错
+                userInfo.setReserve1("1");
                 this.userInfoMapper.addUser(userInfo);
             }catch (Exception e){
                 logger.error("用户注册失败！",e.getMessage());
