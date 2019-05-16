@@ -45,6 +45,16 @@
             form.submit();
         }
 
+        /*退出登录*/
+        function out() {
+            var form = document.createElement("form");
+            form.action="/root/toLogin.do";
+            form.target="_self";
+            form.method="POST";
+            document.body.appendChild(form);
+            form.submit();
+        }
+
     </script>
 
 </head>
@@ -63,7 +73,10 @@
 
                         <ul class="navbar-nav ml-auto mt-10">
                             <li class="nav-item">
-                                <a class="nav-link login-button" id="personal" style="cursor: pointer" onclick="goPersonal()">个人中心</a>
+                                <span class="nav-link add-button" id="personal" style="cursor: pointer" onclick="goPersonal()">个人中心</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link login-button" style="cursor: pointer" onclick="out()"></i> 退出登录</a>
                             </li>
                         </ul>
                     </div>
