@@ -177,7 +177,7 @@ public class CoreDataControllerImpl {
         queryDTO.setId(Long.valueOf(id));
         ModelAndView modelAndView = new ModelAndView("details");
         CoreData target = coreDataService.getDetails(queryDTO);
-        target.setPictures(target.getReserve2());
+        target.setPictures();
         modelAndView.addObject("details",target);
         return modelAndView;
     }

@@ -22,7 +22,7 @@ public class BasicDataSpiderTask {
     @Autowired
     private BasicDataMapper basicDataMapper;
     String enable;
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     public void test() {
         //获取基础数据处理开关参数，如果关闭，不执行后续操作
         initEnable();

@@ -46,5 +46,6 @@ public class SysParamServiceImpl implements SysParamService {
      */
     public void updateSysParam(SysParam sysParam) {
         this.sysParamMapper.updateSysParamByName(sysParam);
+        SysParamContainerUtils.editSysParam(sysParam);
     }
 }

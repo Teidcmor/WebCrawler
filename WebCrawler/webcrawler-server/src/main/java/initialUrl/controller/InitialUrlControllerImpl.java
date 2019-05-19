@@ -40,7 +40,7 @@ public class InitialUrlControllerImpl {
     /**
      * 开启爬虫程序
      */
-    @RequestMapping(value = "/spiderBegin", method = RequestMethod.GET)
+    @RequestMapping(value = "/spiderBegin.do")
     public ModelAndView spiderBegin() throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
         ArrayList<InitialUrl> urls = (ArrayList<InitialUrl>) this.initialUrlService.getAllInitialUrl();
@@ -49,6 +49,7 @@ public class InitialUrlControllerImpl {
             InitialUrl initialUrl = (InitialUrl) iterator.next();
             InitialUrlThread thread = new InitialUrlThread(initialUrl);
             ThreadPoolUtils.getPoolExecutor().submit(thread);
+            logger.error("大小size="+ThreadPoolUtils.getPoolSize()+"是否为空"+ThreadPoolUtils.isThreadPoolEmpty());
         }
         return modelAndView;
     }

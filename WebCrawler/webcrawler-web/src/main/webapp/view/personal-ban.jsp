@@ -192,7 +192,7 @@
                             <th>用户信息</th>
                             <th class="text-center"></th>
                             <th class="text-center">状态</th>
-                            <th class="text-center">设置/th>
+                            <th class="text-center">设置</th>
                         </tr>
                         </thead>
                         <tbody>

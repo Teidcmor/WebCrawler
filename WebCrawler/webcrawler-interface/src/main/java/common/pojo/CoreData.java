@@ -78,13 +78,17 @@ public class CoreData {
     private String reserve1;
     /**
      * 备用字段2
-     * 数据库未占用，从数据库读取数据时占用，用于存图片链接的原始值
      */
     private String reserve2;
     /**
      * 备注字段3
      */
     private String reserve3;
+
+    /**
+     * 新增字段，数据库为同步。从数据库读取数据时占用，用于存图片链接的原始值
+     */
+    private String reserve4;
 
     public long getId() {
         return id;
@@ -180,8 +184,8 @@ public class CoreData {
     }
 
     public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl.split(",")[0];
-        this.setReserve2(pictureUrl);
+        this.pictureUrl = pictureUrl;
+        this.setReserve4(pictureUrl.split(",")[0]);
     }
 
     public ArrayList<String> getPictures() {
@@ -192,8 +196,8 @@ public class CoreData {
      * 需要手动触发
      * @param pictures
      */
-    public void setPictures(String pictures) {
-        String[] target = pictures.split(",");
+    public void setPictures() {
+        String[] target = pictureUrl.split(",");
         ArrayList<String > list = new ArrayList<String>();
         for(String str:target){
             list.add(str);
@@ -247,5 +251,13 @@ public class CoreData {
 
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
+    }
+
+    public String getReserve4() {
+        return reserve4;
+    }
+
+    public void setReserve4(String reserve4) {
+        this.reserve4 = reserve4;
     }
 }

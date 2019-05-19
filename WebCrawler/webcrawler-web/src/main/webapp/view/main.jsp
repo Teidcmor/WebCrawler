@@ -175,6 +175,16 @@
             window.open(path+"user/goPersonal.do");
         }
 
+        /*开启爬虫*/
+        function spiderBegin() {
+            var form = document.createElement("form");
+            form.action="/initialUrl/spiderBegin.do";
+            form.target="_self";
+            form.method="POST";
+            document.body.appendChild(form);
+            form.submit();
+        }
+
 
     </script>
 
@@ -196,6 +206,9 @@
                         <ul class="navbar-nav ml-auto mt-10">
                             <li class="nav-item">
                                 <span class="nav-link add-button " id="personal" style="cursor: pointer" onclick="goPersonal()">个人中心</span>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link add-button " id="spider" style="cursor: pointer" onclick="spiderBegin()">test</span>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link login-button" style="cursor: pointer" onclick="out()"></i> 退出登录</a>
@@ -300,7 +313,7 @@
                                         <div class="thumb-content">
                                             <a onclick="goDetails(${coreData.id})" style="cursor: pointer">
                                                 <img class="card-img-top img-fluid"
-                                                     src="${coreData.pictureUrl}">
+                                                     src="${coreData.reserve4}">
                                             </a>
                                         </div>
                                         <div class="card-body">

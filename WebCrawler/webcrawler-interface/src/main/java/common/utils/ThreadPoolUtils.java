@@ -18,4 +18,11 @@ public class ThreadPoolUtils {
         return poolExecutor;
     }
 
+    public static boolean isThreadPoolEmpty(){
+        return poolExecutor.getQueue().isEmpty();
+    }
+
+    public static int getPoolSize(){
+        return poolExecutor.getQueue().size();
+    }
 }
