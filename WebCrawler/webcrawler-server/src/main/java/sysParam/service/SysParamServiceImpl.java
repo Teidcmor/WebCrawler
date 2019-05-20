@@ -4,6 +4,7 @@ import common.container.SysParamContainerUtils;
 import common.mapper.SysParamMapper;
 import common.pojo.SysParam;
 import common.utils.ConstantUtils;
+import common.utils.ThreadPoolUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,18 @@ public class SysParamServiceImpl implements SysParamService {
      */
     public void updateSysParam(SysParam sysParam) {
         this.sysParamMapper.updateSysParamByName(sysParam);
-        SysParamContainerUtils.editSysParam(sysParam);
+        SysParam target = this.getSysParamById(sysParam.getId());
+        SysParamContainerUtils.editSysParam(target);
+    }
+
+    /**
+     * 通过id查询系统参数信息
+     *
+     * @param id
+     * @return
+     */
+    public SysParam getSysParamById(long id) {
+        SysParam target = this.sysParamMapper.getSysParamById(id);
+        return target;
     }
 }

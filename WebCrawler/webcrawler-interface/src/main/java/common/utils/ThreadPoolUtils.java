@@ -22,7 +22,4 @@ public class ThreadPoolUtils {
         return poolExecutor.getQueue().isEmpty();
     }
 
-    public static int getPoolSize(){
-        return poolExecutor.getQueue().size();
-    }
 }

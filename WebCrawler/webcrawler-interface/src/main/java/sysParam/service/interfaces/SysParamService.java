@@ -26,6 +26,11 @@ public interface SysParamService {
      */
     void updateSysParam(SysParam sysParam);
 
-
+    /**
+     * 通过id查询系统参数信息
+     * @param id
+     * @return
+     */
+    SysParam getSysParamById(long id);
 
 }

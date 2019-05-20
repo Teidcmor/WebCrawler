@@ -24,7 +24,7 @@ public class RootInterceptor implements HandlerInterceptor {
             return false;
         }
         //如果普通用户访问了管理员权限下的内容，驳回
-        if(requestUrl.contains("/admin")){
+        if(requestUrl.contains("/admin")||requestUrl.contains("spider")){
             if(ConstantUtils.USER_TYPE_SIMPLE.equals(currentUser.getType()))
                 return false;
         }

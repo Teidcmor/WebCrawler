@@ -34,4 +34,9 @@
         ]]>
     </update>
 
+    <!--通过id查询系统参数信息-->
+    <select id="getSysParamById" parameterType="long" resultMap="sysParamResultMap">
+        select * from T_SYS_PARAMTER where id=#{id}
+    </select>
+
 </mapper>

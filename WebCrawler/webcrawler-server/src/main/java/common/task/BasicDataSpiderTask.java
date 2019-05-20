@@ -2,7 +2,6 @@ package common.task;
 
 import common.container.SysParamContainerUtils;
 import common.mapper.BasicDataMapper;
-import common.mapper.CoreDataMapper;
 import common.pojo.BasicData;
 import common.spider.CoreDataSpider;
 import common.utils.CommonUtils;

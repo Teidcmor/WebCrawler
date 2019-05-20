@@ -57,7 +57,7 @@ public class SysParamContainerUtils implements ApplicationListener {
      * @param sysParam
      */
     public static void editSysParam(SysParam sysParam){
-        if(sysParam.getParamName()!=null&&sysParam.getParamValue()!=null){
+         if(sysParam.getParamName()!=null&&sysParam.getParamValue()!=null){
             sysParamContainer.put(sysParam.getParamName(),sysParam.getParamValue());
         }
     }

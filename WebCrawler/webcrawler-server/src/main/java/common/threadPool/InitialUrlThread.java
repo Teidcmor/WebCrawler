@@ -1,6 +1,7 @@
 package common.threadPool;
 
 import common.container.HisUrlContainerUtils;
+import common.container.SysParamContainerUtils;
 import common.pojo.HisUrl;
 import common.pojo.InitialUrl;
 import common.spider.BasicDataSpider;
@@ -60,8 +61,8 @@ public class InitialUrlThread implements Runnable {
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void run() {
-        //如果没有为这两个对象赋值，后续程序无法运行，直接返回
-        if(this.initialUrlService==null||this.hisUrlService==null)
+        //如果系统参数关闭，停止爬取
+        if("0".equals(SysParamContainerUtils.getParamValueByParamName(ConstantUtils.SPIDER_ENABLE)))
             return;
         if(this.initialUrl != null){
             try{
