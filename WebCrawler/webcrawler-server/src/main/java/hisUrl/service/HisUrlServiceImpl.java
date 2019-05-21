@@ -42,7 +42,6 @@ public class HisUrlServiceImpl implements HisUrlService {
                 throw new RuntimeException();
             }
         }
-
     }
 
     /**

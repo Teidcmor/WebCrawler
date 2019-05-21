@@ -29,8 +29,10 @@ public class SysParamContainerUtils implements ApplicationListener {
      * 初始化系统参数表缓存map
      */
     private void sysParamContainerInit(){
+        //如果自动注入依赖失败，手动注入
         if(sysParamMapper == null )
             sysParamMapper = SpringContextUtils.getAppContext().getBean(SysParamMapper.class);
+        //获取所有系统参数
         ArrayList<SysParam> sysParams = sysParamMapper.getAllSysParam();
         Iterator iterator = sysParams.iterator();
         while (iterator.hasNext()){

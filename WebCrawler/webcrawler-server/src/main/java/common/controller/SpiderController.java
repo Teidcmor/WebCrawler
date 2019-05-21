@@ -24,7 +24,6 @@ public class SpiderController {
 
     Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
-
     //初始URL模块service层
     @Autowired
     private InitialUrlService initialUrlService;
@@ -41,13 +40,14 @@ public class SpiderController {
     @RequestMapping(value = "/goSpiderController.do")
     public ModelAndView goSpiderController(){
         ModelAndView modelAndView = new ModelAndView("personal-controller");
+        //查询所有系统参数信息提供给前台展示
         ArrayList<SysParam> sysParams = this.sysParamService.getAllSysParam();
         modelAndView.addObject("sysParams",sysParams);
         return modelAndView;
     }
 
     /**
-     * 新增UEL功能
+     * 新增URL功能
      * @param city
      * @param url
      * @return
@@ -56,6 +56,7 @@ public class SpiderController {
     @RequestMapping(value = "/addNewUrl.do" ,produces ="application/text;charset=utf-8")
     @ResponseBody
     public String addNewUrl(String city,String url) throws Exception {
+        //输入框信息输入不完整,返回提示信息
         if(CommonUtils.isNull(city)|| CommonUtils.isNull(url))
             return "请输入完整信息！！";
         try{
@@ -81,6 +82,7 @@ public class SpiderController {
         SysParam target = new SysParam();
         target.setId(Long.valueOf(id));
         target.setParamValue(value);
+        //先将修改信息提交数据库,在重新在数据库中查询出最新的信息展示在前台
         this.sysParamService.updateSysParam(target);
         ArrayList<SysParam> sysParams = this.sysParamService.getAllSysParam();
         modelAndView.addObject("sysParams",sysParams);

@@ -19,7 +19,6 @@ import java.util.List;
 @Transactional
 public class CoreDataServiceImpl implements CoreDataService {
 
-
     @Autowired
     private CoreDataMapper coreDataMapper;
 

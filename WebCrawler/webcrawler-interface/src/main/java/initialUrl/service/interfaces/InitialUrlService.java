@@ -50,8 +50,7 @@ public interface InitialUrlService {
 
     /**
      * 管理员手动添加URL
-     * @param city
-     * @param url
+     * @param initialUrl
      */
     void addNewUrl(InitialUrl initialUrl) throws Exception;
 

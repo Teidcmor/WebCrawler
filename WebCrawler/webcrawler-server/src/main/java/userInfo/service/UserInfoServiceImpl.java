@@ -34,16 +34,17 @@ public class UserInfoServiceImpl implements UserInfoService {
      * 用户登录
      *
      * @param queryDTO
-     * @return 成功：true 失败 false
+     * @return
      */
     public String login(UserInfoQueryDTO queryDTO) throws Exception {
         if(queryDTO != null){
+            //通过登录信息在数据库中查询记录
             UserInfo target = this.userInfoMapper.getUserInfoByUserName(queryDTO.getUserName());
-            if(target == null)
+            if(target == null)//查询结果为空,返回用户名或密码错误
                 return ConstantUtils.LOGIN_FAILED;
-            if(ConstantUtils.USER_UNENABLE.equals(target.getEnabled()))
+            if(ConstantUtils.USER_UNENABLE.equals(target.getEnabled()))//账号锁定提示账号已禁用
                 return ConstantUtils.LOGIN_FAILED_LOCK;
-            if(CommonUtils.stringEquals(target.getPassword(),MD5Utils.convertMD5(queryDTO.getPassword())))
+            if(CommonUtils.stringEquals(target.getPassword(),MD5Utils.convertMD5(queryDTO.getPassword())))//密码匹配则通过,否则返回用户名或密码错误
                 return ConstantUtils.SUCCESS;
         }
         return ConstantUtils.LOGIN_FAILED;

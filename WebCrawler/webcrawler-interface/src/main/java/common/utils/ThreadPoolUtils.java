@@ -13,11 +13,19 @@ public class ThreadPoolUtils {
         poolExecutor = new ThreadPoolExecutor(0, 5, 0L, TimeUnit.MINUTES, new LinkedBlockingQueue());
     }
 
+    /**
+     * 获取线程池对象
+     * @return
+     */
     public static ThreadPoolExecutor getPoolExecutor()
     {
         return poolExecutor;
     }
 
+    /**
+     * 判断线程池内是否还有线程
+     * @return
+     */
     public static boolean isThreadPoolEmpty(){
         return poolExecutor.getQueue().isEmpty();
     }

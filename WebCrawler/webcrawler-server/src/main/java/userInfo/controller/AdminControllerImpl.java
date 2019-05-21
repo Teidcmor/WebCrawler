@@ -37,6 +37,11 @@ public class AdminControllerImpl {
         return modelAndView;
     }
 
+    /**
+     * 用户管理页面分页功能
+     * @param pageNum
+     * @return
+     */
     @RequestMapping(value = "/changePage.do")
     public ModelAndView changePage(String pageNum){
         ModelAndView modelAndView = new ModelAndView("personal-ban");

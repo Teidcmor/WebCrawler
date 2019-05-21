@@ -74,11 +74,11 @@ public class InitialUrlServiceImpl implements InitialUrlService {
      * @param initialUrl
      */
     public void insertUrl(InitialUrl initialUrl) throws Exception {
+        //如果信息的url在初始队里和历史队列里都不存在
         if(initialUrl!=null && !initialUrl.isNull() && !InitialUrlContainerUtils.contains(initialUrl.getUrl())&& !HisUrlContainerUtils.isContains(initialUrl.getUrl())){
             this.initialUrlMapper.insertUrl(initialUrl);
             InitialUrlContainerUtils.addInitialUrl(initialUrl);
         }
-
     }
 
     /**
@@ -96,8 +96,7 @@ public class InitialUrlServiceImpl implements InitialUrlService {
     /**
      * 管理员手动添加URL
      *
-     * @param city
-     * @param url
+     * @param initialUrl
      */
     public void addNewUrl(InitialUrl initialUrl) throws Exception {
         initialUrl.setReserve1("1");

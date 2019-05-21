@@ -159,7 +159,7 @@
                             <li class="active" ><a style="cursor: pointer"><i class="fa fa-user"></i> 个人信息 </a></li>
                             <c:if test="${currentUser.type==1}">
                             <li><a onclick="goUserManage()" style="cursor: pointer"><i class="fa fa-cog"></i> 用户管理 </a></li>
-                            <li><a onclick="goSpiderController()" style="cursor: pointer"><i class="fa fa-bolt"></i> 爬虫控制 </a></li>
+                            <li><a onclick="goSpiderController()" style="cursor: pointer">&nbsp;<i class="fa fa-bolt"></i> 爬虫控制 </a></li>
                             </c:if>
                         </ul>
                     </div>

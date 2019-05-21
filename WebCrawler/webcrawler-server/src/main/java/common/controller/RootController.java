@@ -17,8 +17,6 @@ import java.util.Enumeration;
 @RequestMapping(value = "/root")
 public class RootController {
 
-
-
     @RequestMapping(value = "/toLogin.do")
     public ModelAndView toLogin(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("userInfo/login");

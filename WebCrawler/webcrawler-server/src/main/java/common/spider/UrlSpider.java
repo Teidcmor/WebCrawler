@@ -25,7 +25,6 @@ public class UrlSpider {
 
     Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
-
     public UrlSpider(InitialUrl url,String str){
         initialUrl = url;
         entity = str;
@@ -45,7 +44,6 @@ public class UrlSpider {
                 contentUrlSpider();
             }
         }
-
     }
 
     /**
@@ -149,5 +147,4 @@ public class UrlSpider {
             return true;
         return false;
     }
-
 }

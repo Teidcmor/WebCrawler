@@ -27,10 +27,12 @@ public class CoreDataControllerImpl {
     @RequestMapping(value = "/goMain.do")
     public ModelAndView goMain() throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
+        //初次跳转主页面时,为页面上价格,朝向,面积,排序方式等几个查询条件富裕初值,并且保存在session中
         modelAndView.addObject("querySort","1");
         modelAndView.addObject("queryPrice","0");
         modelAndView.addObject("queryArea","0");
         modelAndView.addObject("queryToward","0");
+        //分页查询有效信息,默认分类方式为数据库顺序
         PageInfo<CoreData> pageInfo = coreDataService.getCoreDataWithPaging(new CoreDataQueryDTO(),1,"1");
         ArrayList<CoreData> target = (ArrayList<CoreData>) pageInfo.getList();
         modelAndView.addObject("page",pageInfo);
@@ -50,6 +52,7 @@ public class CoreDataControllerImpl {
         ModelAndView modelAndView = new ModelAndView("main");
         CoreDataQueryDTO queryDTO = this.getCoreDataInSession(session);
         if(coreDataQueryDTO!=null){
+            //把前台的搜索信息都保存在session中
             modelAndView.addObject("queryCity",coreDataQueryDTO.getCity());
             modelAndView.addObject("queryRegion",coreDataQueryDTO.getRegion());
             modelAndView.addObject("queryDistrict",coreDataQueryDTO.getDistrict());
@@ -79,7 +82,9 @@ public class CoreDataControllerImpl {
     @RequestMapping(value = "/changePages.do")
     public ModelAndView changePages(String pageNum,HttpSession session) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
+        //获取七个查询条件中的历史查询记录,即session中保存的记录
         CoreDataQueryDTO queryDTO = this.getCoreDataInSession(session);
+        //根据查询条件分页查询所需信息
         PageInfo<CoreData> pageInfo = coreDataService.getCoreDataWithPaging(queryDTO,Integer.valueOf(pageNum),queryDTO.getSort());
         ArrayList<CoreData> target = (ArrayList<CoreData>) pageInfo.getList();
         modelAndView.addObject("page",pageInfo);
@@ -97,9 +102,12 @@ public class CoreDataControllerImpl {
     @RequestMapping(value = "/getCoreDataByPrice.do")
     public ModelAndView getCoreDataByPrice(String price,HttpSession session) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
+        //获取上一次输入的搜索条件
         CoreDataQueryDTO queryDTO = this.getCoreDataInSession(session);
+        //把最新的价格条件更新到session中
         modelAndView.addObject("queryPrice",price);
         queryDTO.setPrice(Integer.valueOf(price));
+        //按所有查询条件分页查询有效信息
         PageInfo<CoreData> pageInfo = coreDataService.getCoreDataWithPaging(queryDTO,1,queryDTO.getSort());
         ArrayList<CoreData> target = (ArrayList<CoreData>) pageInfo.getList();
         modelAndView.addObject("page",pageInfo);
@@ -117,9 +125,12 @@ public class CoreDataControllerImpl {
     @RequestMapping(value = "/getCoreDataByArea.do")
     public ModelAndView getCoreDataByArea(String area,HttpSession session) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
+        //获取上一次输入的搜索条件
         CoreDataQueryDTO queryDTO = this.getCoreDataInSession(session);
+        //把最新的面积条件更新到session中
         modelAndView.addObject("queryArea",area);
         queryDTO.setArea(Integer.valueOf(area));
+        //根据当前最新的条件分页查询有效信息
         PageInfo<CoreData> pageInfo = coreDataService.getCoreDataWithPaging(queryDTO,1,queryDTO.getSort());
         ArrayList<CoreData> target = (ArrayList<CoreData>) pageInfo.getList();
         modelAndView.addObject("page",pageInfo);
@@ -137,9 +148,12 @@ public class CoreDataControllerImpl {
     @RequestMapping(value = "/getCoreDataByToward.do")
     public ModelAndView getCoreDataByToward(String toward,HttpSession session) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
+        //获取上一次输入的搜索条件
         CoreDataQueryDTO queryDTO = this.getCoreDataInSession(session);
+        //把最新的朝向搜索条件更新到session中
         modelAndView.addObject("queryToward",toward);
         queryDTO.setToward(this.getToward(toward));
+        //根据当前最新的搜索条件分页查询有效信息
         PageInfo<CoreData> pageInfo = coreDataService.getCoreDataWithPaging(queryDTO,1,queryDTO.getSort());
         ArrayList<CoreData> target = (ArrayList<CoreData>) pageInfo.getList();
         modelAndView.addObject("page",pageInfo);
@@ -157,8 +171,11 @@ public class CoreDataControllerImpl {
     @RequestMapping(value = "/getCoreDataSort.do")
     public ModelAndView getCoreDataSort(String sort,HttpSession session) throws Exception {
         ModelAndView modelAndView = new ModelAndView("main");
+        //获取上次输入的搜索信息
         CoreDataQueryDTO queryDTO = this.getCoreDataInSession(session);
+        //把最新选择的排序方式更新到session中
         modelAndView.addObject("querySort",sort);
+        //根据当前最新的搜索条件分页查询有效信息
         PageInfo<CoreData> pageInfo = coreDataService.getCoreDataWithPaging(queryDTO,1,sort);
         ArrayList<CoreData> target = (ArrayList<CoreData>) pageInfo.getList();
         modelAndView.addObject("page",pageInfo);
@@ -176,14 +193,17 @@ public class CoreDataControllerImpl {
         CoreDataQueryDTO queryDTO = new CoreDataQueryDTO();
         queryDTO.setId(Long.valueOf(id));
         ModelAndView modelAndView = new ModelAndView("details");
+        //通过id查询详细的有效信息
         CoreData target = coreDataService.getDetails(queryDTO);
+        //图片链接原本是通过逗号分隔,存在一个字段中,调用这个方法是将逗号去掉,保存在一个list中.
+        //只有当前功能--展示详情的时候会需要展示所有的图片信息,所以把这个方法单独抽取出来
         target.setPictures();
         modelAndView.addObject("details",target);
         return modelAndView;
     }
 
     /**
-     * 获取session中的位置信息
+     * 获取session中的搜索信息
      * @param session
      * @return
      */

@@ -66,7 +66,6 @@ public class CoreDataSpider {
         }
         String pictureUrls = str.substring(1);
         coreData.setPictureUrl(pictureUrls);
-
     }
 
     /**
@@ -143,7 +142,5 @@ public class CoreDataSpider {
                 }
             }
         }
-
     }
-
 }

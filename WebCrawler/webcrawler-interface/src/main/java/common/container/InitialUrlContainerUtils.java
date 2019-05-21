@@ -24,14 +24,17 @@ public class InitialUrlContainerUtils implements ApplicationListener {
      * 初始化缓存容器
      */
     private void initInitialUrlContainer(){
+        //如果自动注入失败，手动注入
         if(this.initialUrlMapper == null)
             this.initialUrlMapper = SpringContextUtils.getAppContext().getBean(InitialUrlMapper.class);
+        //查询初始信息表所有记录
         ArrayList<InitialUrl> list = (ArrayList<InitialUrl>) this.initialUrlMapper.getAllInitialUrl();
         Iterator iterator = list.iterator();
         while (iterator.hasNext()){
             InitialUrl target = (InitialUrl) iterator.next();
             String url = target.getUrl();
             if(!CommonUtils.isNull(url)){
+                //url为key，本身pojo做value
                 initialUrlContainer.put(url,target); } } }
     /**
      * 新增初始URL到缓存

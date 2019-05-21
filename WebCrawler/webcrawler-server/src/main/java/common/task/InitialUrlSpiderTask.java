@@ -25,7 +25,6 @@ public class InitialUrlSpiderTask {
     @Autowired
     private InitialUrlService initialUrlService;
 
-
     @Scheduled(cron = "0 0/3 * * * ?")
     public void start() throws Exception {
         //如果线程池内没有任务在运行
@@ -38,7 +37,6 @@ public class InitialUrlSpiderTask {
             }
         }
     }
-
 
     private void doSpider() throws Exception {
     ArrayList<InitialUrl> urls = null;
@@ -65,6 +63,4 @@ public class InitialUrlSpiderTask {
         else
             return false;
     }
-
-
 }
